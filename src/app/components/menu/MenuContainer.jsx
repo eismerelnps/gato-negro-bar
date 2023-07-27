@@ -8,7 +8,7 @@ import { gilda_display } from "@/fonts/gilda_display";
 
 export default function MenuContainer() {
   return (
-    <div className="relative top-16">
+    <div className=" ">
       {products.map((product) => (
         <div key={"ggg"} className="">
           <h1

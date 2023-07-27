@@ -19,8 +19,12 @@ export const MenuCard = ({
    
       <div className=" lg:basis-1/2 basis-full p-5 text-center">
         <div className="flex flex-row mb-4">
-          <p className={`${quicksand.className} "basis-1/2 text-5"`}>{name}</p>
-          <p className={`${gilda_display.className} basis-1/2 text-end text-green-600`}>{price}</p>
+          <p className={`${quicksand.className} basis-1/2 text-xl`}>{name}</p>
+          <div className="basis-1/2 text-end">
+          <p className={`${gilda_display.className}  text-green-600 text-lg font-bold`}>{price}</p>
+          <span className={`${quicksand.className} text-green-950`}>CUP</span>
+          </div>
+          
         </div>
         <hr />
       </div>
