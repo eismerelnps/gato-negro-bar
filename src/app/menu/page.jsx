@@ -7,7 +7,7 @@ import MenuContainer from '../components/menu/MenuContainer'
 
 export default function page() {
   return (
-    <div className="relative top-16">
+    <div className="mt-16">
       {/* <NavBar /> */}
       <div>
         <Image
