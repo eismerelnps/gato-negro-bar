@@ -14,8 +14,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
        <link rel="icon" href="/gato_negro_logo.png" />
       <body className={`${inter.className}`}>
-        
-         
+        <header>
+          <NavBar />
+        </header>
+      
         {children}
         </body>
     </html>
