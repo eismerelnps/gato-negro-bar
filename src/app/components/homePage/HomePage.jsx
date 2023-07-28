@@ -52,78 +52,114 @@ const about_us = [
 export const HomePage = () => {
   return (
     <>
-      <div className="mt-16 p-3 bg-slate-100">
-        <section className="flex flex-rows border-dotted border-4">
-          <Image
-            className="float-right me-2"
-            src={banner_rounded_2}
-            width={200}
-            height={200}
-            alt="Gato Negro Logo"
-          />
-
-          <div className="">
-            <h1 className={`${francois_one.className} text-end text-4xl m-3`}>
-              GATO NEGRO
-            </h1>
-
-            <h4
-              className={`${gilda_display.className} text-end text-slate-800`}
-            >
-              Delicias <br /> Hechas a Mano 🥐
-            </h4>
-          </div>
-        </section>
-
-        <section className="flex flex-rows m-3">
-          <article className="basis-4/5 w-6">
-            <p className={`${gilda_display.className} text-slate-950`}>
-              Sumérgete en un mundo de sabores y aromas exquisitos en nuestro
-              acogedor rincón en Alamar. Nuestra pasión por la buena comida y
-              las experiencias inolvidables nos ha llevado a crear un espacio
-              donde cada visita es un verdadero festín para tu paladar.
-            </p>
-          </article>
-          <article className="basis-1/5 "></article>
-        </section>
-
-
-        <Link
-        href={'/menu'}
-        >
-        <div className="bg-slate-800 h-16 mb-3  hover:bg-slate-950 rounded-e-full">
-          <div className="flex flex-rows items-center justify-center">
-            <h2 className={`${francois_one.className} text-slate-50 text-xl`}>
-              VEA NUETRO MENU
-            </h2>
-
-            <ArrowTopRightOnSquareIcon
-              className="block h-6 w-6 m-4 text-slate-50"
-              aria-hidden="true"
+      <div className="mt-16  bg-white">
+        <div className="p-6">
+          <section className=" flex flex-rows border-dotted border-4">
+            <Image
+              className="float-right me-2"
+              src={banner_rounded_2}
+              width={200}
+              height={200}
+              alt="Gato Negro Logo"
             />
-          </div>
-          </div>
-        </Link>
-        
-        
 
-        <div className="bg-slate-800 h-16 hover:bg-slate-950 mb-3 rounded-e-full">
+            <div className="">
+              <h1 className={`${francois_one.className} text-end text-4xl`}>
+                GATO NEGRO
+              </h1>
+
+              <h4
+                className={`${gilda_display.className} text-end text-slate-800`}
+              >
+                🥐 Delicias <br /> Hechas a Mano
+              </h4>
+            </div>
+          </section>
+
+          <section className="flex flex-rows m-3">
+            <article className="basis-4/5 w-6">
+              <p className={`${gilda_display.className} text-slate-950`}>
+                Sumérgete en un mundo de sabores y aromas exquisitos en nuestro
+                acogedor rincón en Alamar. Nuestra pasión por la buena comida y
+                las experiencias inolvidables nos ha llevado a crear un espacio
+                donde cada visita es un verdadero festín para tu paladar.
+              </p>
+            </article>
+            <article className="basis-1/5 "></article>
+          </section>
+        </div>
+
+        <div
+          className="
+            bg-black h-16 mb-3
+            border  border-s-slate-100 border-y-slate-950 border-e-slate-950    
+            
+            
+            "
+        >
+          {/* <Link href={"/menu"}></Link> */}
           <div className="flex flex-rows items-center justify-center">
-            <h2 className={`${francois_one.className} text-slate-50 text-xl`}>
+            <div className="basis-1/3 hover:bg-slate-50 h-auto hover:rounded-full p-1">
+              <div className="flex justify-center">
+                <Link href={"/menu"}>
+                  <h2
+                    className={`${francois_one.className} text-slate-50 text-lg hover:text-black`}
+                  >
+                    {" "}
+                    MENU
+                  </h2>
+                </Link>
+              </div>
+            </div>
+            <div className="basis-1/3 text-center ">
+              <div className="flex justify-center">
+                <ArrowTopRightOnSquareIcon
+                  className="block h-6 w-6 m-4 text-slate-50"
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+            <div className="basis-1/3 hover:bg-slate-50 h-auto hover:rounded-full p-1">
+              <Link href={"#"} className="hover:text-black ">
+                <h2
+                  className={`${francois_one.className}  text-slate-50 text-lg hover:text-black`}
+                >
+                  HAZ TU PEDIDO
+                </h2>
+              </Link>
+            </div>
+          </div>
+          {/* </Link> */}
+        </div>
+
+        {/* <div
+          className="
+          bg-blue-50 h-16 mb-3
+          border  border-s-slate-100 border-y-slate-950 border-e-slate-950    
+          hover:bg-slate-100  
+       
+        "
+        >
+          <div
+            className="flex flex-rows items-center justify-center
+          "
+          >
+            <h2
+              className={`${francois_one.className} 
+              text-slate-950 text-xl
+            
+            `}
+            >
               HAZ TU PEDIDO YA
             </h2>
 
             <ArrowTopRightOnSquareIcon
-              className="block h-6 w-6 m-4 text-slate-50"
+              className="block h-6 w-6 m-4 text-slate-950"
               aria-hidden="true"
             />
           </div>
-        </div>
-
-
-
-
-        <div className="">
+        </div> */}
+        <div className="bg-slate-100 p-6">
           <section className="m-3 p-3">
             <h2 className={`${francois_one.className}  text-slate-800`}>
               NUESTROS HORARIO
@@ -171,7 +207,24 @@ export const HomePage = () => {
           </p> */}
         </section>
 
-        <section className="">
+        <div className="my-4">
+          <h1 className={`${francois_one.className}  bg-black inline p-1 m-1 text-slate-50 text-2xl`}>Lorem</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
+            reiciendis repellat voluptatem veniam quo sit veritatis molestias
+            nisi obcaecati. Quod eius quia culpa ipsam dolore laudantium
+            doloribus obcaecati magni in!
+          </p>
+          <Image
+              className=""
+              src={banner_rounded_2}
+              width={200}
+              height={200}
+              alt="Gato Negro Cafeteria"
+            />
+        </div>
+
+        <section className="my-4">
           {about_us.map((about) => (
             <article key={about.id}>
               <h1
