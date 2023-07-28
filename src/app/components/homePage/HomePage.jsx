@@ -12,6 +12,8 @@ import banner_vertical from "../../../../public/banner_vertical.jpg";
 import React from "react";
 import Link from "next/link";
 
+
+
 const about_us = [
   {
     name: "Sobre Nosotros",
@@ -99,19 +101,16 @@ export const HomePage = () => {
         >
           {/* <Link href={"/menu"}></Link> */}
           <div className="flex flex-rows items-center justify-center">
-            <div className="basis-1/3 hover:bg-slate-50 h-auto hover:rounded-full p-1">
-              <div className="flex justify-center">
-                <Link href={"/menu"}>
-                  <h2
-                    className={`${francois_one.className} text-slate-50 text-lg hover:text-black`}
-                  >
-                    {" "}
-                    MENU
-                  </h2>
-                </Link>
-              </div>
+            <div className="basis-1/3  hover:bg-slate-50 h-auto hover:rounded-full p-1">
+              <Link href={"/menu"} className="hover:text-black ">
+                <h2
+                  className={`${francois_one.className} text-center text-slate-50 text-lg hover:text-black`}
+                >
+                  MENU
+                </h2>
+              </Link>
             </div>
-            <div className="basis-1/3 text-center ">
+            <div className="basis-8 text-center ">
               <div className="flex justify-center">
                 <ArrowTopRightOnSquareIcon
                   className="block h-6 w-6 m-4 text-slate-50"
@@ -122,7 +121,7 @@ export const HomePage = () => {
             <div className="basis-1/3 hover:bg-slate-50 h-auto hover:rounded-full p-1">
               <Link href={"#"} className="hover:text-black ">
                 <h2
-                  className={`${francois_one.className}  text-slate-50 text-lg hover:text-black`}
+                  className={`${francois_one.className} text-center  text-slate-50 text-lg hover:text-black`}
                 >
                   HAZ TU PEDIDO
                 </h2>
@@ -207,22 +206,29 @@ export const HomePage = () => {
           </p> */}
         </section>
 
-        <div className="my-4">
-          <h1 className={`${francois_one.className}  bg-black inline p-1 m-1 text-slate-50 text-2xl`}>Lorem</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-            reiciendis repellat voluptatem veniam quo sit veritatis molestias
-            nisi obcaecati. Quod eius quia culpa ipsam dolore laudantium
-            doloribus obcaecati magni in!
-          </p>
-          <Image
+        <section className="my-4">
+          <article>
+            <h1
+              className={`${francois_one.className} text-slate-800 text-center text-4xl m-3`}
+            >
+              SOBRE NOSOTROS
+            </h1>
+            <i class="fa fa-facebook" aria-hidden="true"></i>
+            <p className={`${quicksand.className}  m-8 text-slate-950`}>
+            En Cafetería Gato Negro de Alamar, nuestra historia es una mezcla de pasión por la gastronomía y el deseo de crear un espacio acogedor donde cada cliente se sienta como en casa. Desde nuestros humildes comienzos, hemos evolucionado para convertirnos en un destino culinario imprescindible en la comunidad de Alamar.
+            </p>
+            <div className="flex justify-center">
+            <Image
               className=""
-              src={banner_rounded_2}
-              width={200}
-              height={200}
+              src={banner_vertical}
+              width={280}
+              height={280}
               alt="Gato Negro Cafeteria"
             />
-        </div>
+            </div>
+            
+          </article>
+        </section>
 
         <section className="my-4">
           {about_us.map((about) => (

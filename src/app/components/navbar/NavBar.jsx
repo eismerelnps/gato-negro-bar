@@ -21,7 +21,7 @@ function classNames(...classes) {
 
 export default function NavBar() {
   return (
-    <nav className="fixed top-0 w-full bg-white  z-50">
+    <nav className="fixed top-0 w-full bg-slate-50  z-50">
       <Disclosure as="nav" className="">
         {({ open }) => (
           <>
@@ -53,16 +53,16 @@ export default function NavBar() {
                     
                   </div>
 
-                  <div className="hidden sm:ml-6 sm:block w-100">
-                    <div className="flex space-x-4 ">
+                  <div className="w-full  hidden sm:ml-6 sm:block w-100">
+                    <div className="flex justify-end space-x-4 ">
                       {navigation.map((item) => (
                         <Link
                           key={item.name}
                           href={item.href}
                           className={classNames(
                             item.current
-                              ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-red hover:text-white",
+                              ? "bg-slate-950 text-slate-50"
+                              : "text-slate-950 hover:bg-slate-950 hover:text-slate-50",
                             "rounded-md px-3 py-2 text-sm font-medium"
                           )}
                           aria-current={item.current ? "page" : undefined}
@@ -85,25 +85,25 @@ export default function NavBar() {
                     </div>
                   </div>
                 </div>
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  {/* <button
+                {/* <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <button
                                     type="button"
                                     className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                                 >
                                     <span className="sr-only">View notifications</span>
                                     <BellIcon className="h-6 w-6" aria-hidden="true" />
-                                </button> */}
+                                </button> 
 
-                  {/* Profile dropdown */}
+                  // Profile dropdown 
                   <Menu as="div" className="relative ml-3">
                     <div>
                       <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="sr-only ">Open user menu</span>
-                        {/* <img
+                         <img
                         className="h-8 w-8 rounded-full"
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt=""
-                      /> */}
+                      /> 
                       </Menu.Button>
                     </div>
                     <Transition
@@ -158,7 +158,7 @@ export default function NavBar() {
                       </Menu.Items>
                     </Transition>
                   </Menu>
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -172,7 +172,7 @@ export default function NavBar() {
                     className={classNames(
                       item.current
                         ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        : "text-slate-950 hover:bg-slate-950 hover:text-slate-50",
                       "block rounded-md px-3 py-2 text-base font-medium"
                     )}
                     aria-current={item.current ? "page" : undefined}
