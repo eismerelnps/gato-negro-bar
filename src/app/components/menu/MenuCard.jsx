@@ -17,7 +17,7 @@ export const MenuCard = ({
   //console.log(name);
   return (
    
-      <div className=" lg:basis-1/2 basis-full p-5 text-center">
+      <div className=" lg:basis-1/2 basis-full p-5 text-start">
         <div className="flex flex-row mb-4">
           <p className={`${quicksand.className} basis-1/2 text-xl`}>{name}</p>
           <div className="basis-1/2 text-end">
