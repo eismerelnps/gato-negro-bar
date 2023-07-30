@@ -1,5 +1,3 @@
 export const fetchProducts = (url) => {
-  return fetch(url, {
-    cache: "no-store",
-  }).then((res) => res.json());
+  return fetch(url, { next: { revalidate: 10000 } }).then((res) => res.json());
 };
