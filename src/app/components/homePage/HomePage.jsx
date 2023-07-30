@@ -2,17 +2,20 @@ import { francois_one } from "@/fonts/francois_one";
 import { gilda_display } from "@/fonts/gilda_display";
 import { quicksand } from "@/fonts/quicksand";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
+import { LockClosed, LockOpen } from "heroicons-react";
+
 import Image from "next/image";
 
 import banner_rounded from "../../../../public/banner_rounded.png";
 import banner_rounded_2 from "../../../../public/banner_rounded_2.png";
-
+import huella_gato_negro from "../../../../public/huella_gato_negro.png";
 import banner_vertical from "../../../../public/banner_vertical.jpg";
 
 import React from "react";
 import Link from "next/link";
-
-
+import { fetchProducts } from "@/helpers/fetchProducts";
+import ServiceClosed from "../service/ServiceClosed";
+import ServiceOpen from "../service/ServiceOpen";
 
 const about_us = [
   {
@@ -51,215 +54,198 @@ const about_us = [
   },
 ];
 
-export const HomePage = () => {
+import hamburger_bg_black from "../../../../public/wallpapers/hamburger_bg_black.jpg";
+import black_cat_bg_white from "../../../../public/wallpapers/black_cat_bg_white.jpg";
+import black_cat_black from "../../../../public/wallpapers/black_cat_black.jpg";
+import black_cat from "../../../../public/wallpapers/black_cat.jpg";
+import black_cat_2 from "../../../../public/wallpapers/black_cat_2.jpg";
+import pizza from "../../../../public/wallpapers/pizza.jpg";
+import pizza_2 from "../../../../public/wallpapers/pizza_2.jpg";
+import InOffer from "../inOffer/InOffer";
+
+export async function HomePage() {
+  // const service = await fetchProducts(
+  //    "https://gato-negro-backend.onrender.com/api/v1/app"
+  //"http://localhost:8787/api/v1/app"
+  //);
+
+  const service = false;
   return (
     <>
-      <div className="mt-16  bg-white">
-        <div className="p-6">
-          <section className=" flex flex-rows border-dotted border-4">
-            <Image
-              className="float-right me-2"
-              src={banner_rounded_2}
-              width={200}
-              height={200}
-              alt="Gato Negro Logo"
-            />
-
-            <div className="">
-              <h1 className={`${francois_one.className} text-end text-4xl`}>
-                GATO NEGRO
-              </h1>
-
-              <h4
-                className={`${gilda_display.className} text-end text-slate-800`}
-              >
-                🥐 Delicias <br /> Hechas a Mano
-              </h4>
-            </div>
-          </section>
-
-          <section className="flex flex-rows m-3">
-            <article className="basis-4/5 w-6">
-              <p className={`${gilda_display.className} text-slate-950`}>
-                Sumérgete en un mundo de sabores y aromas exquisitos en nuestro
-                acogedor rincón en Alamar. Nuestra pasión por la buena comida y
-                las experiencias inolvidables nos ha llevado a crear un espacio
-                donde cada visita es un verdadero festín para tu paladar.
-              </p>
-            </article>
-            <article className="basis-1/5 "></article>
-          </section>
-        </div>
-
-        <div
-          className="
-            bg-black h-16 mb-3
-            border  border-s-slate-100 border-y-slate-950 border-e-slate-950    
-            
-            
-            "
-        >
-          {/* <Link href={"/menu"}></Link> */}
-          <div className="flex flex-rows items-center justify-center">
-            <div className="basis-1/3  hover:bg-slate-50 h-auto hover:rounded-full p-1">
-              <Link href={"/menu"} className="hover:text-black ">
-                <h2
-                  className={`${francois_one.className} text-center text-slate-50 text-lg hover:text-black`}
-                >
-                  MENU
-                </h2>
-              </Link>
-            </div>
-            <div className="basis-8 text-center ">
-              <div className="flex justify-center">
-                <ArrowTopRightOnSquareIcon
-                  className="block h-6 w-6 m-4 text-slate-50"
-                  aria-hidden="true"
-                />
-              </div>
-            </div>
-            <div className="basis-1/3 hover:bg-slate-50 h-auto hover:rounded-full p-1">
-              <Link href={"#"} className="hover:text-black ">
-                <h2
-                  className={`${francois_one.className} text-center  text-slate-50 text-lg hover:text-black`}
-                >
-                  HAZ TU PEDIDO
-                </h2>
-              </Link>
-            </div>
-          </div>
-          {/* </Link> */}
-        </div>
-
-        {/* <div
-          className="
-          bg-blue-50 h-16 mb-3
-          border  border-s-slate-100 border-y-slate-950 border-e-slate-950    
-          hover:bg-slate-100  
-       
-        "
-        >
-          <div
-            className="flex flex-rows items-center justify-center
-          "
-          >
-            <h2
-              className={`${francois_one.className} 
-              text-slate-950 text-xl
-            
-            `}
+      <div className=" mt-16 ">
+        <div className=" ">
+          <Image
+            className=""
+            src={black_cat_2}
+            width={1200}
+            height={1000}
+            alt="Gato Negro Logo"
+          />
+          <div className="  absolute top-16 right-0  ">
+            <h4
+              className={`${francois_one.className} mt-2 text-end text-xl text-slate-50`}
             >
-              HAZ TU PEDIDO YA
-            </h2>
+              🥐 Delicias Hechas a Mano
+            </h4>
 
-            <ArrowTopRightOnSquareIcon
-              className="block h-6 w-6 m-4 text-slate-950"
-              aria-hidden="true"
-            />
+            <p
+              className={`${quicksand.className} ms-44 me-2 mt-2  text-end  text-xs  text-slate-50`}
+            >
+              Sumérgete en un mundo de sabores y aromas exquisitos en nuestro
+              acogedor rincón en Alamar. Nuestra pasión por la buena comida y
+              las experiencias inolvidables nos ha llevado a crear un espacio
+              donde cada visita es un verdadero festín para tu paladar.
+            </p>
           </div>
-        </div> */}
-        <div className="bg-slate-100 p-6">
+        </div>
+
+        <div>{service ? <ServiceOpen /> : <ServiceClosed />}</div>
+
+        <div className="bg-slate-100  p-6">
           <section className="m-3 p-3">
-            <h2 className={`${francois_one.className}  text-slate-800`}>
-              NUESTROS HORARIO
+            <h2
+              className={`${francois_one.className}  text-slate-800 text-xl `}
+            >
+              NUESTRO HORARIO
             </h2>
-            <h4>Todos los días</h4>
-            <span>07:30 AM - 11:00 PM</span>
+            <h4 className={`${quicksand.className}  text-slate-800 `}>
+              Todos los días
+            </h4>
+            <span className={`${gilda_display.className}  text-slate-800`}>
+              07:30 AM - 11:00 PM
+            </span>
           </section>
 
           <section className="m-3 p-3">
-            <h2 className={`${francois_one.className}  text-slate-800`}>
+            <h2 className={`${francois_one.className}  text-slate-800 text-xl`}>
               Contáctanos
             </h2>
-            <h4>Haz tu pedido desde casa</h4>
-            <span>(+53) 50505050 </span>
-            <span>(+53) 50505050 </span>
+            <h4 className={`${quicksand.className}  text-slate-800`}>
+              Haz tu pedido desde casa
+            </h4>
+            <span className={`${gilda_display.className}  text-slate-800`}>
+              (+53) 50505050{" "}
+            </span>
+            <span className={`${gilda_display.className}  text-slate-800`}>
+              (+53) 50505050{" "}
+            </span>
           </section>
 
           <section className="m-3 p-3">
-            <h2 className={`${francois_one.className}  text-slate-800`}>
+            <h2 className={`${francois_one.className}  text-slate-800 text-xl`}>
               Donde radicamos
             </h2>
             {/* <h4>Haz tu pedido desde casa</h4> */}
-            <span>Calle 162 / Ave 5ta y 5ta A </span>
-            <span>Alamar / La Habana del Este </span>
+            <span className={`${gilda_display.className}  text-slate-800`}>
+              Calle 162 / Ave 5ta y 5ta A{" "}
+            </span>
+            <span className={`${gilda_display.className}  text-slate-800`}>
+              Alamar / La Habana del Este{" "}
+            </span>
           </section>
 
           <section></section>
         </div>
       </div>
+      <div
+        className="
+            bg-neutral-700 h-16 mb-3
+            border  border-s-slate-100 border-y-slate-950 border-e-slate-950    
+            
+            
+            "
+      >
+        <div className="flex flex-rows items-center justify-center">
+          <div className="basis-1/3 border border-slate-50 rounded hover:bg-slate-50 h-auto hover:rounded-full p-1">
+            <Link href={"/menu"} className="hover:text-black ">
+              <h2
+                className={`${francois_one.className} text-center text-slate-50 text-lg hover:text-black`}
+              >
+                MENU
+              </h2>
+            </Link>
+          </div>
+          <div className="basis-8 text-center ">
+            <div className="flex justify-center">
+              <ArrowTopRightOnSquareIcon
+                className="block h-6 w-6 m-4 text-slate-50"
+                aria-hidden="true"
+              />
+            </div>
+          </div>
+          <div className="basis-1/3 border border-slate-50 rounded hover:bg-slate-50 h-auto hover:rounded-full p-1">
+            <Link href={"#"} className="hover:text-black ">
+              <h2
+                className={`${francois_one.className} text-center  text-slate-50 text-lg hover:text-black`}
+              >
+                HAZ TU PEDIDO
+              </h2>
+            </Link>
+          </div>
+        </div>
+      </div>
 
-      <div className="p-6 bg-slate-50">
-        <section className="">
-          {/* <h1
-            className={`${francois_one.className} text-slate-800 text-center text-4xl m-3`}
-          >
-            SOBRE NOSOTROS
-          </h1>
+      <>
+        <InOffer />
+      </>
 
-          <p className={`${quicksand.className} text-slate-950`}>
-            En Cafetería Gato Negro de Alamar, nuestra historia es una mezcla de
-            pasión por la gastronomía y el deseo de crear un espacio acogedor
-            donde cada cliente se sienta como en casa. Desde nuestros humildes
-            comienzos, hemos evolucionado para convertirnos en un destino
-            culinario imprescindible en la comunidad de Alamar.
-          </p> */}
-        </section>
-
+      <div className="p-4 bg-slate-50">
         <section className="my-4">
           <article>
             <h1
-              className={`${francois_one.className} text-slate-800 text-center text-4xl m-3`}
+              className={`${francois_one.className} text-slate-800  text-4xl `}
             >
               SOBRE NOSOTROS
             </h1>
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-            <p className={`${quicksand.className}  m-8 text-slate-950`}>
-            En Cafetería Gato Negro de Alamar, nuestra historia es una mezcla de pasión por la gastronomía y el deseo de crear un espacio acogedor donde cada cliente se sienta como en casa. Desde nuestros humildes comienzos, hemos evolucionado para convertirnos en un destino culinario imprescindible en la comunidad de Alamar.
+            <i className="fa fa-facebook" aria-hidden="true"></i>
+            <p
+              className={`${gilda_display.className} text-lg m-8 text-slate-950`}
+            >
+              En Cafetería Gato Negro de Alamar, nuestra historia es una mezcla
+              de pasión por la gastronomía y el deseo de crear un espacio
+              acogedor donde cada cliente se sienta como en casa. Desde nuestros
+              humildes comienzos, hemos evolucionado para convertirnos en un
+              destino culinario imprescindible en la comunidad de Alamar.
             </p>
             <div className="flex justify-center">
-            <Image
-              className=""
-              src={banner_vertical}
-              width={280}
-              height={280}
-              alt="Gato Negro Cafeteria"
-            />
+              <Image
+                className="blur-sm hover:blur-none rounded-xl"
+                src={pizza_2}
+                width={280}
+                height={280}
+                alt="Gato Negro Cafeteria"
+              />
             </div>
-            
           </article>
         </section>
-
         <section className="my-4">
-          {about_us.map((about) => (
-            <article key={about.id}>
-              <h1
-                className={`${francois_one.className} text-slate-800 text-center text-4xl m-3`}
-              >
-                {about.name}
-              </h1>
-
-              <p className={`${quicksand.className} text-slate-950`}>
-                {about.description}
-              </p>
-            </article>
-          ))}
-
-          {/* <h1
-            className={`${francois_one.className} text-slate-800 text-center text-4xl m-3`}
-          >
-            SOBRE NOSOTROS
-          </h1>
-
-          <p className={`${quicksand.className} text-slate-950`}>
-            En Cafetería Gato Negro de Alamar, nuestra historia es una mezcla de
-            pasión por la gastronomía y el deseo de crear un espacio acogedor
-            donde cada cliente se sienta como en casa. Desde nuestros humildes
-            comienzos, hemos evolucionado para convertirnos en un destino
-            culinario imprescindible en la comunidad de Alamar.
-          </p> */}
+          <article>
+            <h1
+              className={`${francois_one.className} text-slate-800  text-4xl `}
+            >Nuestra Misión
+            </h1>
+            <i className="fa fa-facebook" aria-hidden="true"></i>
+            <p
+              className={`${gilda_display.className} text-lg m-8 text-slate-950`}
+            >
+              Nuestra misión es simple: deleitar los paladares de nuestros
+              clientes con sabores auténticos y experiencias inolvidables. Nos
+              esforzamos por superar las expectativas en cada plato que
+              servimos, utilizando ingredientes frescos y de la más alta calidad
+              para crear delicias que enamoren a todos.,
+            </p>
+            <div className="flex justify-center">
+              <Image
+                className="blur-sm hover:blur-none rounded-xl"
+                src={hamburger_bg_black}
+                width={280}
+                height={280}
+                alt="Gato Negro Cafeteria"
+              />
+            </div>
+          </article>
         </section>
       </div>
     </>
   );
-};
+}
