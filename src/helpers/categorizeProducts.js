@@ -1,21 +1,19 @@
 export const categorizeProducts = (products) => {
-    const categorizedProducts = products.reduce((acc, product) => {
-      const category = product.category;
-      if (!acc[category]) {
-        acc[category] = [];
-      }
-      acc[category].push(product);
-      return acc;
-    }, {});
-  
-    return Object.entries(categorizedProducts).map(([category, items]) => ({
+  const categorizedProducts = products.reduce((acc, product) => {
+    const category = product.category;
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(product);
+    return acc;
+  }, {});
+
+  const sortedCategories = Object.entries(categorizedProducts)
+    .map(([category, items]) => ({
       category,
       items,
-    }));
-  }
-  
-//   const products = [/* ... (tu array de productos) ... */];
-//   const categorizedProducts = categorizeProducts(products);
-  
-//   console.log(categorizedProducts);
-  
+    }))
+    .sort((a, b) => a.category.localeCompare(b.category)); // sort by category name
+
+  return sortedCategories;
+};
