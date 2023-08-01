@@ -10,7 +10,7 @@ import { categorizeProducts } from "@/helpers/categorizeProducts";
 
 
 export default async function MenuContainer() {
-  const products = await fetchProducts('https://gato-negro-backend.onrender.com/api/v1/products');
+  const products = await fetchProducts('https://gato-negro-backend.onrender.com/api/v1/products', { cache: 'no-store' });
   const categoricedProducts = categorizeProducts(products);
 
 
@@ -28,7 +28,7 @@ export default async function MenuContainer() {
           <br /> 
           <div className="flex flex-wrap sm:flex-col lg:flex-row">
             {product.items.map((item) => (
-              <MenuCard key={"12"} {...item} />
+              <MenuCard key={"12"} items={item}/>
             ))}
             <br className="bg-white" />
           </div>  

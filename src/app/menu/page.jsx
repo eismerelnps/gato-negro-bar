@@ -1,25 +1,11 @@
-import React from 'react'
-import NavBar from '../components/navbar/NavBar'
-import Image from 'next/image'
-import MenuContainer from '../components/menu/MenuContainer'
-
-
+import React, { Suspense } from "react";
+import MenuContainer from "../components/menu/MenuContainer";
+import Skeleton from "../components/skeleton/Skeleton";
 
 export default function page() {
   return (
-    <div className="mt-16">
-      {/* <NavBar /> */}
-      <div>
-        <Image
-        src={'/cover.jpg'}
-        alt='gato-negro-image'
-        width={500}
-        height={500}
-        />
-      </div> 
-      <div className=''>
-       <MenuContainer />
-      </div>
-    </div>
-  )
+    <Suspense fallback={<Skeleton />}>
+      <MenuContainer />
+    </Suspense>
+  );
 }
