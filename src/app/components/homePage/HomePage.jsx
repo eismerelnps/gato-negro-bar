@@ -63,22 +63,19 @@ import pizza from "../../../../public/wallpapers/pizza.jpg";
 import pizza_2 from "../../../../public/wallpapers/pizza_2.jpg";
 import InOffer from "../inOffer/InOffer";
 
-export async function HomePage() {
-  // const service = await fetchProducts(
-  //    "https://gato-negro-backend.onrender.com/api/v1/app"
-  //"http://localhost:8787/api/v1/app"
-  //);
+export  function HomePage() {
+  //const {open} = await fetchProducts('https://gato-negro-backend.onrender.com/api/v1/app', '');
+const open = true;
 
-  const service = false;
   return (
     <>
       <div className=" mt-16 ">
-        <div className=" ">
+        <div className="bg-black ">
           <Image
             className=""
             src={black_cat_2}
-            width={1200}
-            height={1000}
+            width={768}
+            height={350}
             alt="Gato Negro Logo"
           />
           <div className="  absolute top-16 right-0  ">
@@ -89,7 +86,7 @@ export async function HomePage() {
             </h4>
 
             <p
-              className={`${quicksand.className} ms-44 me-2 mt-2  text-end  text-xs  text-slate-50`}
+              className={`${quicksand.className} ms-44 me-2 mt-2  text-end  text-xs xl:text-2xl xl:ms-96 text-slate-50`}
             >
               Sumérgete en un mundo de sabores y aromas exquisitos en nuestro
               acogedor rincón en Alamar. Nuestra pasión por la buena comida y
@@ -99,7 +96,7 @@ export async function HomePage() {
           </div>
         </div>
 
-        <div>{service ? <ServiceOpen /> : <ServiceClosed />}</div>
+        <div>{open ? <ServiceOpen /> : <ServiceClosed />}</div>
 
         <div className="bg-slate-100  p-6">
           <section className="m-3 p-3">
@@ -159,7 +156,7 @@ export async function HomePage() {
           <div className="basis-1/3 border border-slate-50 rounded hover:bg-slate-50 h-auto hover:rounded-full p-1">
             <Link href={"/menu"} className="hover:text-black ">
               <h2
-                className={`${francois_one.className} text-center text-slate-50 text-lg hover:text-black`}
+                className={`${francois_one.className} text-center text-slate-50 text-xs hover:text-black`}
               >
                 MENU
               </h2>
@@ -176,7 +173,7 @@ export async function HomePage() {
           <div className="basis-1/3 border border-slate-50 rounded hover:bg-slate-50 h-auto hover:rounded-full p-1">
             <Link href={"#"} className="hover:text-black ">
               <h2
-                className={`${francois_one.className} text-center  text-slate-50 text-lg hover:text-black`}
+                className={`${francois_one.className} text-center  text-slate-50 text-xs hover:text-black`}
               >
                 HAZ TU PEDIDO
               </h2>
@@ -189,9 +186,9 @@ export async function HomePage() {
         <InOffer />
       </>
 
-      <div className="p-4 bg-slate-50">
-        <section className="my-4">
-          <article>
+      <div className="p-4 my-4 bg-slate-50">
+        <section className="flex flex-col md:flex-row">
+          <article className="md:basis-1/2 basis-full ">
             <h1
               className={`${francois_one.className} text-slate-800  text-4xl `}
             >
@@ -217,9 +214,7 @@ export async function HomePage() {
               />
             </div>
           </article>
-        </section>
-        <section className="my-4">
-          <article>
+          <article className="md:basis-1/2 basis-full">
             <h1
               className={`${francois_one.className} text-slate-800  text-4xl `}
             >Nuestra Misión
@@ -245,6 +240,7 @@ export async function HomePage() {
             </div>
           </article>
         </section>
+        
       </div>
     </>
   );
