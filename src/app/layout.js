@@ -1,3 +1,4 @@
+
 import Script from "next/script";
 import { Footer } from "./components/footer/Footer";
 import NavBar from "./components/navbar/NavBar";
@@ -13,6 +14,8 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const user = "eismer";
+
   return (
     <html lang="es">
       <head>
@@ -29,16 +32,20 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
 
-      <body className={`${inter.className}`}>
-        <header>
-          <NavBar />
-        </header>
-
-        {children}
-        <footer className="">
-          <Footer />
-        </footer>
-      </body>
+      
+        <body className={`${inter.className}`}>
+        
+          <header>
+            <NavBar />
+          </header>
+         
+          {children}
+         
+          <footer className="">
+            <Footer />
+          </footer>
+        </body>
+     
     </html>
   );
 }
