@@ -21,7 +21,7 @@ function classNames(...classes) {
 
 export default function NavBar() {
   return (
-    <nav className="fixed top-0 w-full bg-slate-50  z-50">
+    <nav className="fixed top-0 w-full bg-slate-50  z-40">
       <Disclosure as="nav" className="">
         {({ open }) => (
           <>
