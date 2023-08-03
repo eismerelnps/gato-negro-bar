@@ -9,15 +9,83 @@ import { francois_one } from "@/fonts/francois_one";
 import { quicksand } from "@/fonts/quicksand";
 import { gilda_display } from "@/fonts/gilda_display";
 
-import { PencilSquareIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
+import {
+  PencilSquareIcon,
+  PlusCircleIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline";
+
 import { METHODS } from "http";
 
 import { useState, useEffect } from "react";
 import Example from "../dialog/Dialog";
+import Form from "../dialog/Form";
+import DialogConfirm from "../dialog/DialogConfirm";
 
 export default function AdminPage({ products }) {
-  //const [products, setProducts] = useState([]);
   const [showDialog, setOpenDialog] = useState(false);
+
+  const [confirmDialog, setConfirmDialog] = useState({
+    body: "",
+    buttonAction: "",
+    openConfirmDialog: false,
+    title: "",
+    itemToDelete: '',
+  });
+
+  const resetConfirmDialog = () => {
+    setConfirmDialog({
+      openConfirmDialog: false,
+      title: "",
+      body: "",
+    });
+  };
+
+  const { body, buttonAction, openConfirmDialog, title, itemToDelete } = confirmDialog;
+
+//funcion que hace un peticion al backend para eliminar un producto
+const handleDeleteProduct = ( ) => {
+ // e.preventDefault();
+
+  //console.log(formValues);
+
+  fetch(`https://gato-negro-backend.onrender.com/api/v1/products/897967779`, {
+    method: "POST",
+     body: JSON.stringify({}),
+    //   role: "user",
+    //   logged: false,
+    //   username: username,
+    //   password: password,
+    //   email: email,
+    //   number: number,
+    //   cart: { count: 0, items: [] },
+    //   wishList: { count: 0, items: [] },
+    //}),
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "*/*",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YzQwOWRhOTVmMTEzNTUzMTI2ZDY4NiIsInVzZXJuYW1lIjoiRWlzbWVyIiwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE2OTA5MTY4NzcsImV4cCI6MTY5MDkyMDQ3N30.0bJCFd842gAEZOT6loKeUyAIiwH6AbNs3pi3k5jQIL8"
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+       console.log(data);
+
+     // setOpenDialog(false);
+    })
+
+    // .then(() => {
+    //   navigate("/signin", {
+    //     replace: true,
+    //   });
+    // })
+
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 
   const [item, setItem] = useState({
     _id: "",
@@ -120,7 +188,6 @@ export default function AdminPage({ products }) {
       rating: rating,
       reviews: reviews,
     });
-
     setOpenDialog(true);
   };
   const handleAddProduct = () => {
@@ -163,25 +230,25 @@ export default function AdminPage({ products }) {
       <hr />
       <div className="my-2 ">
         <h1
-          className={` ${francois_one.className} sticky top-16  text-2xl text-slate-950 text-center m-4 bg-slate-100 border border-slate-950 rounded-xl`}
+          className={` ${francois_one.className} sticky top-16  text-2xl text-slate-950 text-center m-4 bg-slate-100 border border-slate-950 rounded-xl z-30`}
         >
           Productos Actuales
         </h1>
         {categoricedProducts.map((product) => (
-          <div key={"ggg"} className="">
+          <div key={product.category} className="">
             <div
-              className={`${francois_one.className} text-2xl text-slate-950 text-center m-4 b`}
+              className={`${francois_one.className}sticky top-24  text-2xl text-slate-950 text-center m-4 sticky top-18`}
             >
               <span
                 className={`${quicksand.className} text-sm text-slate-950 text-center `}
               >
                 Categoría:
               </span>
-              <p
+              <h1
                 className={`${francois_one.className} text-2xl text-slate-950 text-center `}
               >
                 {product.category}
-              </p>
+              </h1>
             </div>
             <br />
             <div className="flex flex-wrap sm:flex-col lg:flex-row">
@@ -249,35 +316,61 @@ export default function AdminPage({ products }) {
                         {description}
                       </p>
                     </div>
-                    <div
-                      className="flex justify-center items-center  border border-red-500 rounded-xl bg-red-50  hover:bg-red-100 text-red-500 my-2 rounded-xl"
-                      onClick={() =>
-                        handleOpenEdit(
-                          _id,
-                          category,
-                          name,
-                          description,
-                          currency,
-                          price,
-                          offerPrice,
-                          stocked,
-                          inOffer,
-                          image,
-                          rating,
-                          reviews
-                        )
-                      }
-                    >
-                      <PencilSquareIcon
-                        className="block h-6 w-6 m-4 "
-                        aria-hidden="true"
-                      />
-                      <p
-                        className={`${gilda_display.className} text-sm text-center  text-center `}
+                    <div className="flex flex-row justify-end space-x-5">
+                      <div
+                        className="basis-1/5 items-center flex flex-col justify-center border border-red-500 rounded-xl bg-red-50  hover:bg-red-100 text-red-500 my-2  px-2 rounded-xl"
+                        onClick={() =>
+                          handleOpenEdit(
+                            _id,
+                            category,
+                            name,
+                            description,
+                            currency,
+                            price,
+                            offerPrice,
+                            stocked,
+                            inOffer,
+                            image,
+                            rating,
+                            reviews,
+                            <Form item={item} setOpenDialog={setOpenDialog} />
+                          )
+                        }
                       >
-                        Editar
-                      </p>
+                        <PencilSquareIcon
+                          className="block h-6 w-6 m-2 "
+                          aria-hidden="true"
+                        />
+                        <p
+                          className={`${gilda_display.className} text-sm text-center  text-center `}
+                        >
+                          Editar
+                        </p>
+                      </div>
+                      <div
+                        onClick={() =>
+                          setConfirmDialog({
+                            body: "Una vez elimines este producto ya no será posible deshacer la operación",
+                            buttonAction: handleDeleteProduct,
+                            openConfirmDialog: true,
+                            title: "Eliminar Producto",
+                            itemToDelete: {_id}
+                          })
+                        }
+                        className="basis-1/5 items-center  border border-red-500 rounded-xl bg-red-50  hover:bg-red-100 flex flex-col justify-center text-red-500 my-2 px-2 rounded-xl"
+                      >
+                        <TrashIcon
+                          className="block h-6 w-6 m-2  text-center"
+                          aria-hidden="true"
+                        />
+                        <p
+                          className={`${gilda_display.className} text-sm text-center  text-center `}
+                        >
+                          Eliminar
+                        </p>
+                      </div>
                     </div>
+
                     <hr />
                   </div>
                 )
@@ -292,6 +385,15 @@ export default function AdminPage({ products }) {
           showDialog={showDialog}
           setOpenDialog={setOpenDialog}
           item={item}
+        />
+      )}
+      {confirmDialog && (
+        <DialogConfirm
+          open={openConfirmDialog}
+          title={title}
+          body={body}
+          buttonAction={buttonAction}
+          setOpen={resetConfirmDialog}
         />
       )}
     </div>
