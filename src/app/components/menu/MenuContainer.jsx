@@ -21,7 +21,7 @@ export default async function MenuContainer() {
         {categoricedProducts.map((product) => (
         <div key={"ggg"} className="">
           <h1
-            className={`${francois_one.className} text-2xl text-slate-950 text-center m-4 b`}
+            className={`${francois_one.className} sticky top-16 text-2xl text-slate-950 text-center m-4 b`}
           >
             {product.category}
           </h1>
