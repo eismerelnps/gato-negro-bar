@@ -3,7 +3,6 @@ import React from "react";
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import { useFetch } from "@/helpers/fetch/useFetch";
 
 // fuentes usadas en el componente
 import { francois_one } from "@/fonts/francois_one";

@@ -10,7 +10,7 @@ import { categorizeProducts } from "@/helpers/categorizeProducts";
 
 
 export default async function MenuContainer() {
-  const products = await fetchProducts('https://gato-negro-backend.onrender.com/api/v1/products', { cache: 'no-store' });
+  const products = await fetchProducts('https://gato-negro-backend.onrender.com/api/v1/products');
   const categoricedProducts = categorizeProducts(products);
 
 
