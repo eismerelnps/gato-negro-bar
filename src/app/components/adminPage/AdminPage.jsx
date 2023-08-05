@@ -1,13 +1,11 @@
+//ESTE COMPONENTE HAY QUE REESTRUCTURARLO Y DIVIDIR LA LOGICA DEL JSX
 "use client";
-import React, { Suspense } from "react";
-import Skeleton from "../skeleton/Skeleton";
-import MenuContainer from "../menu/MenuContainer";
-import { fetchProducts } from "@/helpers/fetchProducts";
-import { categorizeProducts } from "@/helpers/categorizeProducts";
-
+import React from "react";
 import { francois_one } from "@/fonts/francois_one";
 import { quicksand } from "@/fonts/quicksand";
 import { gilda_display } from "@/fonts/gilda_display";
+
+import { categorizeProducts } from "@/helpers/categorizeProducts";
 
 import {
   PencilSquareIcon,
@@ -15,77 +13,36 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 
-import { METHODS } from "http";
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Example from "../dialog/Dialog";
 import Form from "../dialog/Form";
-import DialogConfirm from "../dialog/DialogConfirm";
+import DeleteProduct from "./DeleteProduct";
 
 export default function AdminPage({ products }) {
-  const [showDialog, setOpenDialog] = useState(false);
-
-  const [confirmDialog, setConfirmDialog] = useState({
-    body: "",
-    buttonAction: "",
-    openConfirmDialog: false,
-    title: "",
-    itemToDelete: '',
+  const [showDialog, setOpenDialog] = useState({
+    showDialogOpen: false,
+    operation: "",
   });
-
-  const resetConfirmDialog = () => {
-    setConfirmDialog({
-      openConfirmDialog: false,
-      title: "",
-      body: "",
+  const resetDialog = () => {
+    setOpenDialog({
+      showDialog: false,
+      operation: "",
     });
   };
 
-  const { body, buttonAction, openConfirmDialog, title, itemToDelete } = confirmDialog;
+  const { showDialogOpen, operation } = showDialog;
 
-//funcion que hace un peticion al backend para eliminar un producto
-const handleDeleteProduct = ( ) => {
- // e.preventDefault();
-
-  //console.log(formValues);
-
-  fetch(`https://gato-negro-backend.onrender.com/api/v1/products/897967779`, {
-    method: "POST",
-     body: JSON.stringify({}),
-    //   role: "user",
-    //   logged: false,
-    //   username: username,
-    //   password: password,
-    //   email: email,
-    //   number: number,
-    //   cart: { count: 0, items: [] },
-    //   wishList: { count: 0, items: [] },
-    //}),
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "*/*",
-      "Accept-Encoding": "gzip, deflate, br",
-      "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YzQwOWRhOTVmMTEzNTUzMTI2ZDY4NiIsInVzZXJuYW1lIjoiRWlzbWVyIiwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE2OTA5MTY4NzcsImV4cCI6MTY5MDkyMDQ3N30.0bJCFd842gAEZOT6loKeUyAIiwH6AbNs3pi3k5jQIL8"
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-       console.log(data);
-
-     // setOpenDialog(false);
-    })
-
-    // .then(() => {
-    //   navigate("/signin", {
-    //     replace: true,
-    //   });
-    // })
-
-    .catch((error) => {
-      console.log(error);
+  const [showDeleteDialog, setOpenDeleteDialog] = useState({
+    openDelete: false,
+    itemToDelete: "",
+  });
+  const resetDeleteDialog = () => {
+    setOpenDeleteDialog({
+      openDelete: false,
+      itemToDelete: "",
     });
-};
-
+  };
+  const { openDelete, itemToDelete } = showDeleteDialog;
 
   const [item, setItem] = useState({
     _id: "",
@@ -188,7 +145,10 @@ const handleDeleteProduct = ( ) => {
       rating: rating,
       reviews: reviews,
     });
-    setOpenDialog(true);
+    setOpenDialog({
+      showDialogOpen: true,
+      operation: "EDIT",
+    })
   };
   const handleAddProduct = () => {
     setItem({
@@ -205,17 +165,22 @@ const handleDeleteProduct = ( ) => {
       rating: null,
       reviews: [""],
     });
-    setOpenDialog(true);
+    setOpenDialog({
+      showDialogOpen: true,
+      operation: "ADD",
+    })
   };
 
   return (
     <div className="mt-16  ">
-      <div className=" border border-red-500 rounded-xl bg-red-50  hover:bg-red-100 text-red-500  flex flex-col items-center justify-center m-4  ">
+      <div
+        className=" border border-red-500 rounded-xl bg-red-50  hover:bg-red-100 text-red-500  flex flex-col items-center justify-center m-4  "
+        onClick={handleAddProduct}
+      >
         <div className="">
           <PlusCircleIcon
             id="plusCircleIcon"
-            onClick={handleAddProduct}
-            className="block h-10 w-12 m-4 "
+            className="block h-8 w-8  "
             aria-hidden="true"
           />
         </div>
@@ -228,16 +193,16 @@ const handleDeleteProduct = ( ) => {
         </div>
       </div>
       <hr />
-      <div className="my-2 ">
+      <div className="mt-2 ">
         <h1
-          className={` ${francois_one.className} sticky top-16  text-2xl text-slate-950 text-center m-4 bg-slate-100 border border-slate-950 rounded-xl z-30`}
+          className={` ${francois_one.className} sticky top-16  text-xl text-slate-950 text-center mx-4  bg-white  border border-slate-300 rounded-t-xl  z-30`}
         >
-          Productos Actuales
+          Productos en Oferta
         </h1>
         {categoricedProducts.map((product) => (
           <div key={product.category} className="">
             <div
-              className={`${francois_one.className}sticky top-24  text-2xl text-slate-950 text-center m-4 sticky top-18`}
+              className={`${francois_one.className} sticky top-20  text-2xl text-slate-950 text-center mx-4 mb-4 bg-white border border-slate-300 rounded-b-xl z-20 `}
             >
               <span
                 className={`${quicksand.className} text-sm text-slate-950 text-center `}
@@ -245,7 +210,7 @@ const handleDeleteProduct = ( ) => {
                 Categoría:
               </span>
               <h1
-                className={`${francois_one.className} text-2xl text-slate-950 text-center `}
+                className={`${francois_one.className} text-xl text-slate-950 text-center `}
               >
                 {product.category}
               </h1>
@@ -269,9 +234,9 @@ const handleDeleteProduct = ( ) => {
                 }) => (
                   <div
                     key={_id}
-                    className=" lg:basis-1/2 basis-full p-5 text-start"
+                    className=" lg:basis-1/2 basis-full m-4 rounded-xl p-5 text-start bg-slate-100"
                   >
-                    <div className="flex flex-row mb-4">
+                    <div className="flex flex-row mb-4 ">
                       <div className="basis-3/4">
                         <p
                           className={`${quicksand.className}  text-xl text-blue-950`}
@@ -333,34 +298,35 @@ const handleDeleteProduct = ( ) => {
                             image,
                             rating,
                             reviews,
-                            <Form item={item} setOpenDialog={setOpenDialog} />
+                            <Form
+                              item={item}
+                             
+                            />
                           )
                         }
                       >
                         <PencilSquareIcon
-                          className="block h-6 w-6 m-2 "
+                          className="block h-4 w-4  "
                           aria-hidden="true"
                         />
                         <p
-                          className={`${gilda_display.className} text-sm text-center  text-center `}
+                          className={`${gilda_display.className} text-sm text-center `}
                         >
                           Editar
                         </p>
                       </div>
                       <div
+                        // onClick={ () => handleDeleteProduct(_id)}
                         onClick={() =>
-                          setConfirmDialog({
-                            body: "Una vez elimines este producto ya no será posible deshacer la operación",
-                            buttonAction: handleDeleteProduct,
-                            openConfirmDialog: true,
-                            title: "Eliminar Producto",
-                            itemToDelete: {_id}
+                          setOpenDeleteDialog({
+                            openDelete: true,
+                            itemToDelete: { _id },
                           })
                         }
                         className="basis-1/5 items-center  border border-red-500 rounded-xl bg-red-50  hover:bg-red-100 flex flex-col justify-center text-red-500 my-2 px-2 rounded-xl"
                       >
                         <TrashIcon
-                          className="block h-6 w-6 m-2  text-center"
+                          className="block h-4 w-6  text-center"
                           aria-hidden="true"
                         />
                         <p
@@ -380,20 +346,19 @@ const handleDeleteProduct = ( ) => {
           </div>
         ))}
       </div>
-      {showDialog && (
+      {showDialogOpen && (
         <Example
-          showDialog={showDialog}
-          setOpenDialog={setOpenDialog}
+          showDialog={showDialogOpen}
+          setOpenDialog={resetDialog}
           item={item}
+          operation={operation}
         />
       )}
-      {confirmDialog && (
-        <DialogConfirm
-          open={openConfirmDialog}
-          title={title}
-          body={body}
-          buttonAction={buttonAction}
-          setOpen={resetConfirmDialog}
+      {openDelete && (
+        <DeleteProduct
+          open={openDelete}
+          setOpen={resetDeleteDialog}
+          id={itemToDelete._id}
         />
       )}
     </div>

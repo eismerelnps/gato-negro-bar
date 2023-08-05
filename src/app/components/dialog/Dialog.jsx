@@ -5,10 +5,15 @@ import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { francois_one } from "@/fonts/francois_one";
 import { quicksand } from "@/fonts/quicksand";
 import { gilda_display } from "@/fonts/gilda_display";
-import Input from "./Input";
+
 import Form from "./Form";
 
-export default function Example({ showDialog, setOpenDialog, item }) {
+export default function Example({
+  showDialog,
+  setOpenDialog,
+  item,
+  operation,
+}) {
   //console.log(item);
   //   const [open, setOpen] = useState(true)
 
@@ -58,17 +63,17 @@ export default function Example({ showDialog, setOpenDialog, item }) {
                         <Dialog.Title
                           as="h3"
                           className={`${francois_one.className} text-lg leading-6 font-medium text-gray-900`}
-                        >
-                          {name}
-                        </Dialog.Title>
+                        ></Dialog.Title>
                         <div className="mt-2">
-                          <Form item={item} setOpenDialog={setOpenDialog} />
-
+                          <Form
+                            item={item}
+                            setOpenDialog={setOpenDialog}
+                            operation={operation}
+                          />
+                          ,
                           <p
                             className={`${quicksand.className} text-sm text-gray-500`}
-                          >
-                            {name}
-                          </p>
+                          ></p>
                           {/* <p
                             className={`${quicksand.className} text-sm text-gray-500`}
                           >
