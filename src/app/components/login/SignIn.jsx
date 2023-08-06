@@ -26,13 +26,12 @@ import Modal from "../dialog/Modal";
 */
 
 export default function SignIn() {
-  const url = "https://gato-negro-backend.onrender.com/api/v1/users/logins";
+  const url = "https://gato-negro-backend.onrender.com/api/v1/users/login";
 
   const router = useRouter();
   const { dispatch } = useContext(AppContext);
 
   const [loading, setLoading] = useState(false);
-  const [feedBack, setFeedBack] = useState(false);
   const [alert, setAlert] = useState({
     alertType: "",
     alertMessage: "",
@@ -56,19 +55,10 @@ export default function SignIn() {
 
   const { username, password } = formValues;
 
-  const startFeedback = (e) => {
-    setLoading(true);
-    // setBackDropChildren({
-    //   children: <CircularProgress color="inherit" />,
-    // });
-  };
-
   const handleSignIn = (e) => {
     setLoading(true);
-    // // startFeedback();
-    //console.log("singin");
+
     e.preventDefault();
-    //  console.log(formValues)
 
     fetch(url, {
       method: "POST",
@@ -84,7 +74,6 @@ export default function SignIn() {
     })
       .then((response) => response.json())
       .then((data) => {
-        //console.log(data);
         setLoading(false);
         setAlert({
           alertType: "success",
@@ -102,11 +91,8 @@ export default function SignIn() {
           };
           dispatch(action);
 
-          //const lastPath = localStorage.getItem("lastPath") || "/";
           router.replace("/");
         }
-
-        //setOpenDialog(false);
       })
       .catch((error) => {
         setLoading(false);
@@ -115,26 +101,15 @@ export default function SignIn() {
           alertMessage: "Se ha producido un error al iniciar sesión.",
           showAlert: true,
         });
-        // setBackDropChildren({
-        //   children: <Alert severity="error">An error has occurred</Alert>,
-        // });
-        // console.log("error:");
-        console.log(error);
       });
   };
 
   return (
     <>
       {loading && <BackDrop />}
-      {showAlert && <Modal message={alertMessage} open={showAlert} setOpen={resetAlert} />}
-      {/* {alert && (
-        <Alert
-          type={alertType}
-          message={alertMessage}
-          show={showAlert}
-          setShow={setShow}
-        />
-      )} */}
+      {showAlert && (
+        <Modal message={alertMessage} open={showAlert} setOpen={resetAlert} />
+      )}
       {/*
           This example requires updating your template:
   
@@ -223,7 +198,7 @@ export default function SignIn() {
             No tienes cuenta
             <a
               href="/signup"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              className="font-semibold ms-2 leading-6 text-indigo-600 hover:text-indigo-500"
             >
               Crearte una
             </a>

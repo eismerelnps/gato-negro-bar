@@ -20,7 +20,7 @@ export default function Example({
   //   const cancelButtonRef = useRef(null)
 
   return (
-    <div className="mt-16 z-50">
+    <div className="mt-16 z-30">
       <Transition.Root show={showDialog} as={Fragment}>
         <Dialog
           as="div"

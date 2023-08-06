@@ -49,6 +49,8 @@ const about_us = [
 ];
 
 import cover from "../../../../public/cover.jpg";
+import home_gato_negro from "../../../../public/home_gato_negro.jpeg";
+
 import banner_rounded from "../../../../public/banner_rounded.png";
 import banner_rounded_2 from "../../../../public/banner_rounded_2.png";
 import huella_gato_negro from "../../../../public/huella_gato_negro.png";
@@ -202,7 +204,7 @@ export function HomePage() {
             <p
               className={`${gilda_display.className} text-lg m-8 text-slate-950`}
             >
-              En Cafetería Gato Negro de Alamar, nuestra historia es una mezcla
+              En Cafetería &quot;Gato Negro&quot; de Alamar, nuestra historia es una mezcla
               de pasión por la gastronomía y el deseo de crear un espacio
               acogedor donde cada cliente se sienta como en casa. Desde nuestros
               humildes comienzos, hemos evolucionado para convertirnos en un
@@ -211,7 +213,7 @@ export function HomePage() {
             <div className="flex justify-center">
               <Image
                 className="blur-sm hover:blur-none rounded-xl"
-                src={pizza_2}
+                src={cover}
                 width={280}
                 height={280}
                 alt="Gato Negro Cafeteria"
@@ -254,7 +256,7 @@ export function HomePage() {
             <p
               className={`${gilda_display.className} text-lg m-8 text-slate-950`}
             >
-              Visite nuestra cafetería "Gato Negro", ubicada frente al IPU
+              Visite nuestra cafetería &quot;Gato Negro&quot;, ubicada frente al IPU
               Lázaro Peña, donde le ofrecemos una variedad de productos: panes
               en bolsas, galletas, confituras importadas, panes elaborados,
               pizzas, espaguetis, bebidas y muchas otras opciones que serán de
@@ -262,8 +264,8 @@ export function HomePage() {
             </p>
             <div className="flex justify-center">
               <Image
-                className="blur-sm hover:blur-none rounded-xl"
-                src={cover}
+                className="blur-24 hover:blur-none rounded-xl"
+                src={home_gato_negro}
                 width={280}
                 height={280}
                 alt="Gato Negro Cafeteria"

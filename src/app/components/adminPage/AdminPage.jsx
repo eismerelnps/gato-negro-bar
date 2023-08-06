@@ -17,8 +17,29 @@ import { useState } from "react";
 import Example from "../dialog/Dialog";
 import Form from "../dialog/Form";
 import DeleteProduct from "./DeleteProduct";
+import BackDrop from "../backDrop/BackDrop";
+import Modal from "../dialog/Modal";
 
 export default function AdminPage({ products }) {
+
+  
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState({
+    alertType: "",
+    alertMessage: "",
+    showAlert: false,
+  });
+  const resetAlert = () => {
+    setAlert({
+      alertType: "",
+      alertMessage: "",
+      showAlert: false,
+    });
+  };
+  const { alertType, alertMessage, showAlert } = alert;
+
+
+
   const [showDialog, setOpenDialog] = useState({
     showDialogOpen: false,
     operation: "",
@@ -132,6 +153,10 @@ export default function AdminPage({ products }) {
 
   return (
     <div className="mt-16  ">
+      {loading && <BackDrop />}
+      {showAlert && (
+        <Modal message={alertMessage} open={showAlert} setOpen={resetAlert} />
+      )}
       <div
         className=" border border-red-500 rounded-xl bg-red-50  hover:bg-red-100 text-red-500  flex flex-col items-center justify-center m-4  "
         onClick={handleAddProduct}

@@ -11,6 +11,8 @@ import { gilda_display } from "@/fonts/gilda_display";
 import { ArrowCircleDown } from "heroicons-react";
 import { AppContext } from "../appContext/AppContext";
 import { useRouter } from "next/navigation";
+import BackDrop from "../backDrop/BackDrop";
+import Modal from "../dialog/Modal";
 
 export default function DeleteProduct({
   open,
@@ -27,10 +29,27 @@ export default function DeleteProduct({
   const { user } = useContext(AppContext);
   const { token } = user;
 
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState({
+    alertType: "",
+    alertMessage: "",
+    showAlert: false,
+  });
+  const resetAlert = () => {
+    setAlert({
+      alertType: "",
+      alertMessage: "",
+      showAlert: false,
+    });
+  };
+  const { alertType, alertMessage, showAlert } = alert;
+
+
+
   //funcion que hace un peticion al backend para eliminar un producto
   const handleDelete = (id) => {
     setOpen();
-
+    setLoading(true);
     fetch(`${url}/${id}`, {
       method: "DELETE",
       body: JSON.stringify({}),
@@ -46,6 +65,12 @@ export default function DeleteProduct({
       .then((data) => {
         console.log(data);
         router.refresh()
+        setLoading(false);
+        setAlert({
+          alertType: "success",
+          alertMessage: data.message,
+          showAlert: true,
+        });
         // setOpenDialog(false);
       })
 
@@ -57,10 +82,23 @@ export default function DeleteProduct({
 
       .catch((error) => {
         console.log(error);
+        setLoading(false);
+        setAlert({
+          alertType: "error",
+          alertMessage:
+            "Se ha producido un error al crear el producto. Por favor, inténtelo de nuevo. Si el problema persiste, póngase en contacto con la administración.",
+          showAlert: true,
+        });
       });
   };
 
   return (
+    <>
+     {loading && <BackDrop />}
+      {showAlert && (
+        <Modal message={alertMessage} open={showAlert} setOpen={resetAlert} />
+      )}
+    
     <Transition.Root show={open} as={Fragment}>
       <Dialog
         as="div"
@@ -141,5 +179,6 @@ export default function DeleteProduct({
         </div>
       </Dialog>
     </Transition.Root>
+    </>
   );
 }
