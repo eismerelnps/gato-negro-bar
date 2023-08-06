@@ -1,30 +1,38 @@
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
-import React from "react";
+import React, { useContext } from "react";
 
 import { francois_one } from "@/fonts/francois_one";
 import { quicksand } from "@/fonts/quicksand";
 import { gilda_display } from "@/fonts/gilda_display";
+import { AppContext } from "../appContext/AppContext";
+import { useRouter } from "next/navigation";
 
 export default function EditProduct({ product }) {
+  const router = useRouter();
+  const url = "https://gato-negro-backend.onrender.com/api/v1/products";
+
+  const { user } = useContext(AppContext);
+  const { token } = user;
+
   const handleEdit = (e) => {
     e.preventDefault();
     const { _id } = product;
 
-    fetch(`https://gato-negro-backend.onrender.com/api/v1/products/${_id}`, {
+    fetch(`${url}/${_id}`, {
       method: "PUT",
       body: JSON.stringify(product),
       headers: {
         "Content-Type": "application/json",
         Accept: "*/*",
         "Accept-Encoding": "gzip, deflate, br",
-        Authorization:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YzQwOWRhOTVmMTEzNTUzMTI2ZDY4NiIsInVzZXJuYW1lIjoiRWlzbWVyIiwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE2OTEyNjUyODMsImV4cCI6MTY5MTI2ODg4M30.AjpcdQPmwC5qVFs9PaHSN-KXmlAlcJ-6MI2WPfnBI3Y",
+        Authorization: token,
       },
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        setShowModal(true);
+        router.refresh()
+        //setShowModal(true);
         // setOpenDialog(false);
       })
 

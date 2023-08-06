@@ -1,6 +1,9 @@
-export default async function page({ children }) {
-  //const { id } = params;
-  //const menu = await fetchMenu();
+import { PrivateRoute } from "../components/routes/PrivateRoute";
 
-  return <div className="mt-16">{children}</div>;
+export default async function page({ children }) {
+  return (
+    <div className="mt-16">
+      <PrivateRoute>{children}</PrivateRoute>
+    </div>
+  );
 }

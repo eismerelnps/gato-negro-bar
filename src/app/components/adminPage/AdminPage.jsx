@@ -76,47 +76,6 @@ export default function AdminPage({ products }) {
   // };
   const categoricedProducts = categorizeProducts(products);
 
-  const handleSignUp = (e) => {
-    e.preventDefault();
-
-    //console.log(formValues);
-
-    fetch(url, {
-      method: "PUT",
-      body: JSON.stringify({
-        role: "user",
-        logged: false,
-        username: username,
-        password: password,
-        email: email,
-        number: number,
-        cart: { count: 0, items: [] },
-        wishList: { count: 0, items: [] },
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-        "Accept-Encoding": "gzip, deflate, br",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data);
-
-        setOpenDialog(false);
-      })
-
-      .then(() => {
-        navigate("/signin", {
-          replace: true,
-        });
-      })
-
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   const handleOpenEdit = (
     _id,
     category,

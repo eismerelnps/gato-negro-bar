@@ -1,5 +1,5 @@
 import { ArrowPathIcon, TrashIcon } from "@heroicons/react/24/outline";
-import React from "react";
+import React, { useContext } from "react";
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
@@ -9,6 +9,8 @@ import { francois_one } from "@/fonts/francois_one";
 import { quicksand } from "@/fonts/quicksand";
 import { gilda_display } from "@/fonts/gilda_display";
 import { ArrowCircleDown } from "heroicons-react";
+import { AppContext } from "../appContext/AppContext";
+import { useRouter } from "next/navigation";
 
 export default function DeleteProduct({
   open,
@@ -18,31 +20,32 @@ export default function DeleteProduct({
   buttonAction,
   id,
 }) {
- 
-
+  const router = useRouter();
   const cancelButtonRef = useRef(null);
+  const url = "https://gato-negro-backend.onrender.com/api/v1/products"
 
-  
+  const { user } = useContext(AppContext);
+  const { token } = user;
+
   //funcion que hace un peticion al backend para eliminar un producto
   const handleDelete = (id) => {
     setOpen();
 
-    fetch(`https://gato-negro-backend.onrender.com/api/v1/products/${id}`, {
+    fetch(`${url}/${id}`, {
       method: "DELETE",
       body: JSON.stringify({}),
       headers: {
         "Content-Type": "application/json",
         Accept: "*/*",
         "Accept-Encoding": "gzip, deflate, br",
-        Authorization:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YzQwOWRhOTVmMTEzNTUzMTI2ZDY4NiIsInVzZXJuYW1lIjoiRWlzbWVyIiwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE2OTExMTAyNDksImV4cCI6MTY5MTExMzg0OX0.qv3KsPvBXEZZYON4VJrpBWhJJh6nLBYk2loFTtZd9-c",
+        Authorization: token,
       },
       //{headers},
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-
+        router.refresh()
         // setOpenDialog(false);
       })
 
@@ -122,7 +125,7 @@ export default function DeleteProduct({
                   >
                     Aceptar
                   </button>
-                 
+
                   <button
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"

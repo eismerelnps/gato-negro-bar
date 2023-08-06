@@ -6,14 +6,8 @@ import { LockClosed, LockOpen } from "heroicons-react";
 
 import Image from "next/image";
 
-import banner_rounded from "../../../../public/banner_rounded.png";
-import banner_rounded_2 from "../../../../public/banner_rounded_2.png";
-import huella_gato_negro from "../../../../public/huella_gato_negro.png";
-import banner_vertical from "../../../../public/banner_vertical.jpg";
-
 import React from "react";
 import Link from "next/link";
-import { fetchProducts } from "@/helpers/fetchProducts";
 import ServiceClosed from "../service/ServiceClosed";
 import ServiceOpen from "../service/ServiceOpen";
 
@@ -54,21 +48,31 @@ const about_us = [
   },
 ];
 
+import cover from "../../../../public/cover.jpg";
+import banner_rounded from "../../../../public/banner_rounded.png";
+import banner_rounded_2 from "../../../../public/banner_rounded_2.png";
+import huella_gato_negro from "../../../../public/huella_gato_negro.png";
+import banner_vertical from "../../../../public/banner_vertical.jpg";
 import hamburger_bg_black from "../../../../public/wallpapers/hamburger_bg_black.jpg";
+import hamburger_bg_colored from "../../../../public/wallpapers/hamburger_bg_colored.jpg";
+
 import black_cat_bg_white from "../../../../public/wallpapers/black_cat_bg_white.jpg";
 import black_cat_black from "../../../../public/wallpapers/black_cat_black.jpg";
 import black_cat from "../../../../public/wallpapers/black_cat.jpg";
 import black_cat_2 from "../../../../public/wallpapers/black_cat_2.jpg";
 import pizza from "../../../../public/wallpapers/pizza.jpg";
 import pizza_2 from "../../../../public/wallpapers/pizza_2.jpg";
-import InOffer from "../inOffer/InOffer";
 
-export  function HomePage() {
+import InOffer from "../inOffer/InOffer";
+import BackDrop from "../backDrop/BackDrop";
+
+export function HomePage() {
   //const {open} = await fetchProducts('https://gato-negro-backend.onrender.com/api/v1/app', '');
-const open = true;
+  const open = true;
 
   return (
     <>
+    
       <div className=" mt-16 ">
         <div className="bg-black ">
           <Image
@@ -121,10 +125,10 @@ const open = true;
               Haz tu pedido desde casa
             </h4>
             <span className={`${gilda_display.className}  text-slate-800`}>
-              (+53) 50505050{" "}
+              (+53) 5 1946995{" "}
             </span>
             <span className={`${gilda_display.className}  text-slate-800`}>
-              (+53) 50505050{" "}
+              (+53) 5 1946995{" "}
             </span>
           </section>
 
@@ -182,13 +186,13 @@ const open = true;
         </div>
       </div>
 
-      <>
+      {/* <>
         <InOffer />
-      </>
+      </> */}
 
       <div className="p-4 my-4 bg-slate-50">
-        <section className="flex flex-col md:flex-row">
-          <article className="md:basis-1/2 basis-full ">
+        <section className="flex flex-col md:flex-row flex-wrap">
+          <article className="lg:basis-1/3 md:basis-1/2  basis-full ">
             <h1
               className={`${francois_one.className} text-slate-800  text-4xl `}
             >
@@ -214,10 +218,11 @@ const open = true;
               />
             </div>
           </article>
-          <article className="md:basis-1/2 basis-full">
+          <article className="lg:basis-1/3 md:basis-1/2 basis-full">
             <h1
               className={`${francois_one.className} text-slate-800  text-4xl `}
-            >Nuestra Misión
+            >
+              Nuestra Misión
             </h1>
             <i className="fa fa-facebook" aria-hidden="true"></i>
             <p
@@ -232,7 +237,33 @@ const open = true;
             <div className="flex justify-center">
               <Image
                 className="blur-sm hover:blur-none rounded-xl"
-                src={hamburger_bg_black}
+                src={hamburger_bg_colored}
+                width={280}
+                height={280}
+                alt="Gato Negro Cafeteria"
+              />
+            </div>
+          </article>
+          <article className="lg:basis-1/3 md:basis-1/2 basis-full">
+            <h1
+              className={`${francois_one.className} text-slate-800  text-4xl `}
+            >
+              Visítanos
+            </h1>
+            <i className="fa fa-facebook" aria-hidden="true"></i>
+            <p
+              className={`${gilda_display.className} text-lg m-8 text-slate-950`}
+            >
+              Visite nuestra cafetería "Gato Negro", ubicada frente al IPU
+              Lázaro Peña, donde le ofrecemos una variedad de productos: panes
+              en bolsas, galletas, confituras importadas, panes elaborados,
+              pizzas, espaguetis, bebidas y muchas otras opciones que serán de
+              su agrado.
+            </p>
+            <div className="flex justify-center">
+              <Image
+                className="blur-sm hover:blur-none rounded-xl"
+                src={cover}
                 width={280}
                 height={280}
                 alt="Gato Negro Cafeteria"
@@ -240,7 +271,6 @@ const open = true;
             </div>
           </article>
         </section>
-        
       </div>
     </>
   );
