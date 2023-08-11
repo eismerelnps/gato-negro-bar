@@ -20,6 +20,8 @@ import { PubliceRoute } from "../routes/PublicRoute";
 import { types } from "@/types/types";
 import { AppContext } from "../appContext/AppContext";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { logout } from "@/actions/auth";
 
 const navigation = [
   { name: "Inicio", href: "/", current: false },
@@ -33,17 +35,21 @@ function classNames(...classes) {
 }
 
 export default function NavBar() {
-  const { user, dispatch } = useContext(AppContext);
+  const dispatch = useDispatch();
+  //const user = useSelector((state) => state.auth);
+
+ // const { user } = useContext(AppContext);
 
   const handleLogOut = () => {
-    const action = {
-      type: types.logout,
-      payload: {
-        cart: { count: 0, items: [] },
-        wishList: { count: 0, items: [] },
-      },
-    };
-    dispatch(action);
+    // const action = {
+    //   type: types.logout,
+    //   payload: {
+    //     cart: { count: 0, items: [] },
+    //     wishList: { count: 0, items: [] },
+    //   },
+    // };
+    // dispatch(action);
+    dispatch(logout());
   };
 
   return (
@@ -119,7 +125,6 @@ export default function NavBar() {
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                   </button> */}
-                  
 
                   {/* Profile dropdown  */}
                   <Menu as="div" className="relative ml-3">

@@ -79,27 +79,29 @@ export const Footer = () => {
                 <span
                   className={`${quicksand.className} text-slate-50 text-center text-xl`}
                 >
-                  Celular
+                  Telefonos
                 </span>
               </div>
 
-              <div className="flex flex-row justify-center  md:flex-col md:justify-start  ">
+              <div className="flex flex-col md:flex-row  justify-center  md:flex-col md:justify-start  ">
                 <a
                   href="https://api.whatsapp.com/send?phone=5351946995
 "
                   target="_blank"
                   className=" basis-1/2 text-slate-400 text-center text-xl"
                 >
-                  +5351946995
+                  +53 51946995
                 </a>
-                <a
-                  href="https://api.whatsapp.com/send?phone=5351946995
-"
-                  target="_blank"
+                 <p
                   className=" basis-1/2 text-slate-400 text-center text-xl"
                 >
-                  +5351946995
-                </a>
+                  +53 53008869
+                </p> 
+                <p
+                  className=" basis-1/2 text-slate-400 text-center text-xl"
+                >
+                  +53 77645581
+                </p>
               </div>
             </div>
 

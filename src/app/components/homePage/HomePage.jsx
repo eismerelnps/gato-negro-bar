@@ -74,7 +74,6 @@ export function HomePage() {
 
   return (
     <>
-    
       <div className=" mt-16 ">
         <div className="bg-black ">
           <Image
@@ -112,10 +111,16 @@ export function HomePage() {
               NUESTRO HORARIO
             </h2>
             <h4 className={`${quicksand.className}  text-slate-800 `}>
-              Todos los días
+              Domingo a Jueves
             </h4>
             <span className={`${gilda_display.className}  text-slate-800`}>
-              07:30 AM - 11:00 PM
+              08:00 AM - 09:00 PM
+            </span>
+            <h4 className={`${quicksand.className}  text-slate-800 `}>
+              Viernes y Sábado
+            </h4>
+            <span className={`${gilda_display.className}  text-slate-800`}>
+              08:00 AM - 12:00 pM
             </span>
           </section>
 
@@ -130,7 +135,10 @@ export function HomePage() {
               (+53) 5 1946995{" "}
             </span>
             <span className={`${gilda_display.className}  text-slate-800`}>
-              (+53) 5 1946995{" "}
+              (+53) 53008869{" "}
+            </span>
+            <span className={`${gilda_display.className}  text-slate-800`}>
+              (+53) 77645581{" "}
             </span>
           </section>
 
@@ -144,6 +152,10 @@ export function HomePage() {
             </span>
             <span className={`${gilda_display.className}  text-slate-800`}>
               Alamar / La Habana del Este{" "}
+            </span>
+            <span className={`${gilda_display.className}  text-slate-800`}>
+            Frente al
+              IPU Lázaro Peña{" "}
             </span>
           </section>
 
@@ -177,13 +189,25 @@ export function HomePage() {
             </div>
           </div>
           <div className="basis-1/3 border border-slate-50 rounded hover:bg-slate-50 h-auto hover:rounded-full p-1">
-            <Link href={"#"} className="hover:text-black ">
+            <a
+              href="https://api.whatsapp.com/send?phone=5351946995
+                 "
+              target="_blank"
+              className="hover:text-black "
+            >
               <h2
                 className={`${francois_one.className} text-center  text-slate-50 text-xs hover:text-black`}
               >
                 HAZ TU PEDIDO
               </h2>
-            </Link>
+            </a>
+            {/* <Link href={"#"} className="hover:text-black ">
+              <h2
+                className={`${francois_one.className} text-center  text-slate-50 text-xs hover:text-black`}
+              >
+                HAZ TU PEDIDO
+              </h2>
+            </Link> */}
           </div>
         </div>
       </div>
@@ -204,11 +228,11 @@ export function HomePage() {
             <p
               className={`${gilda_display.className} text-lg m-8 text-slate-950`}
             >
-              En Cafetería &quot;Gato Negro&quot; de Alamar, nuestra historia es una mezcla
-              de pasión por la gastronomía y el deseo de crear un espacio
-              acogedor donde cada cliente se sienta como en casa. Desde nuestros
-              humildes comienzos, hemos evolucionado para convertirnos en un
-              destino culinario imprescindible en la comunidad de Alamar.
+              En Cafetería &quot;Gato Negro&quot; de Alamar, nuestra historia es
+              una mezcla de pasión por la gastronomía y el deseo de crear un
+              espacio acogedor donde cada cliente se sienta como en casa. Desde
+              nuestros humildes comienzos, hemos evolucionado para convertirnos
+              en un destino culinario imprescindible en la comunidad de Alamar.
             </p>
             <div className="flex justify-center">
               <Image
@@ -256,11 +280,11 @@ export function HomePage() {
             <p
               className={`${gilda_display.className} text-lg m-8 text-slate-950`}
             >
-              Visite nuestra cafetería &quot;Gato Negro&quot;, ubicada frente al IPU
-              Lázaro Peña, donde le ofrecemos una variedad de productos: panes
-              en bolsas, galletas, confituras importadas, panes elaborados,
-              pizzas, espaguetis, bebidas y muchas otras opciones que serán de
-              su agrado.
+              Visite nuestra cafetería &quot;Gato Negro&quot;, ubicada frente al
+              IPU Lázaro Peña, donde le ofrecemos una variedad de productos:
+              panes en bolsas, galletas, confituras importadas, panes
+              elaborados, pizzas, espaguetis, bebidas y muchas otras opciones
+              que serán de su agrado.
             </p>
             <div className="flex justify-center">
               <Image

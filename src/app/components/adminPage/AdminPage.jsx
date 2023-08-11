@@ -186,7 +186,7 @@ export default function AdminPage({ products }) {
         {categoricedProducts.map((product) => (
           <div key={product.category} className="">
             <div
-              className={`${francois_one.className} sticky top-20  text-2xl text-slate-950 text-center mx-4 mb-4 bg-white border border-slate-300 rounded-b-xl z-20 `}
+              className={`${francois_one.className} sticky top-20  text-2xl text-slate-950 text-center mx-4 mb-4 bg-slate-400 border border-slate-300 rounded-b-xl z-20 `}
             >
               <span
                 className={`${quicksand.className} text-sm text-slate-950 text-center `}
@@ -218,7 +218,7 @@ export default function AdminPage({ products }) {
                 }) => (
                   <div
                     key={_id}
-                    className=" lg:basis-1/2 basis-full m-4 rounded-xl p-5 text-start bg-slate-100"
+                    className=" lg:basis-1/2 basis-full m-4 border border-slate-200 rounded-xl p-5 text-start bg-slate-50"
                   >
                     <div className="flex flex-row mb-4 ">
                       <div className="basis-3/4">
@@ -265,9 +265,9 @@ export default function AdminPage({ products }) {
                         {description}
                       </p>
                     </div>
-                    <div className="flex flex-row justify-end space-x-5">
+                    <div className="flex flex-row justify-end space-x-2">
                       <div
-                        className="basis-1/5 items-center flex flex-col justify-center border border-red-500 rounded-xl bg-red-50  hover:bg-red-100 text-red-500 my-2  px-2 rounded-xl"
+                        className="basis-1/5 items-center   hover:bg-red-100 hover:rounded-full  flex flex-col justify-center text-red-500   "
                         onClick={() =>
                           handleOpenEdit(
                             _id,
@@ -307,7 +307,7 @@ export default function AdminPage({ products }) {
                             itemToDelete: { _id },
                           })
                         }
-                        className="basis-1/5 items-center  border border-red-500 rounded-xl bg-red-50  hover:bg-red-100 flex flex-col justify-center text-red-500 my-2 px-2 rounded-xl"
+                        className="basis-1/5 items-center   hover:bg-red-100 hover:rounded-full  flex flex-col justify-center text-red-500  "
                       >
                         <TrashIcon
                           className="block h-4 w-6  text-center"

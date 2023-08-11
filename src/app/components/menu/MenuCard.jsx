@@ -29,7 +29,15 @@ export const MenuCard = ({ items}) => {
           </p>
           <span className={`${quicksand.className} text-green-950`}>CUP</span>
         </div>
+       
       </div>
+      <div>
+        <p
+            className={`${gilda_display.className}  text-slate-600 text-sm font-bold`}
+          >
+            {description}
+          </p>
+        </div>
       <hr />
     </div>
   );

@@ -10,6 +10,10 @@ import { types } from "@/types/types";
 import BackDrop from "../backDrop/BackDrop";
 import Alert from "../feedBack/Alert";
 import Modal from "../dialog/Modal";
+
+import { useDispatch } from "react-redux";
+import { login, startLoginWithUserAndPassword } from "@/actions/auth";
+import { fisnishLoading, setError, startLoading } from "@/actions/ui";
 /*
   This example requires some changes to your config:
   
@@ -26,10 +30,14 @@ import Modal from "../dialog/Modal";
 */
 
 export default function SignIn() {
+  const dispatch = useDispatch();
+
   const url = "https://gato-negro-backend.onrender.com/api/v1/users/login";
 
   const router = useRouter();
-  const { dispatch } = useContext(AppContext);
+
+  ////dispatch del useContext
+  //const { dispatch } = useContext(AppContext);
 
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({
@@ -57,6 +65,7 @@ export default function SignIn() {
 
   const handleSignIn = (e) => {
     setLoading(true);
+    dispatch( startLoading() );
 
     e.preventDefault();
 
@@ -74,27 +83,23 @@ export default function SignIn() {
     })
       .then((response) => response.json())
       .then((data) => {
+        dispatch( fisnishLoading() );
+
         setLoading(false);
+        if (data.user) {
+          dispatch(login(data.user, data.token));
+          router.replace("/");
+        }
+
         setAlert({
           alertType: "success",
           alertMessage: data.message,
           showAlert: true,
         });
-
-        if (data.user) {
-          const action = {
-            type: types.login,
-            payload: {
-              user: data.user,
-              token: data.token,
-            },
-          };
-          dispatch(action);
-
-          router.replace("/");
-        }
       })
       .catch((error) => {
+        dispatch( fisnishLoading() );
+        dispatch( setError("Se ha producido un error al iniciar sesión."))
         setLoading(false);
         setAlert({
           alertType: "error",
@@ -146,7 +151,7 @@ export default function SignIn() {
                   id="username"
                   name="username"
                   type="text"
-                  autoComplete="off"
+                  autoComplete="true"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   onChange={handdleInputChange}
@@ -176,7 +181,7 @@ export default function SignIn() {
                   id="password"
                   name="password"
                   type="password"
-                  autoComplete="current-password"
+                  autoComplete="true"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   onChange={handdleInputChange}

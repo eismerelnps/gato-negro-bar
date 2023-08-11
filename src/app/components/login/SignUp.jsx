@@ -2,13 +2,20 @@
 
 import { useForm } from "@/hooks/useForm";
 import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { StrictMode, useContext, useState } from "react";
 import { AppContext } from "../appContext/AppContext";
 import Image from "next/image";
 import gato_negro_logo from "../../../../public/gato_negro_logo.png";
 import { types } from "@/types/types";
 import BackDrop from "../backDrop/BackDrop";
 import Modal from "../dialog/Modal";
+
+import validator from "validator";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { setError, removeError } from "@/actions/ui";
+
 /*
   This example requires some changes to your config:
   
@@ -25,11 +32,14 @@ import Modal from "../dialog/Modal";
 */
 
 export default function SignUp() {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.ui);
+  //console.log(state);
+
   const url =
     "https://gato-negro-backend.onrender.com/api/v1/users/create-user";
 
   const router = useRouter();
-  const { dispatch } = useContext(AppContext);
 
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({
@@ -58,72 +68,105 @@ export default function SignUp() {
     wishList: { count: 0, items: [] },
   });
 
-  const {role, logged, username, password, repassword, email, number, cart, wishList } = formValues;
+  const {
+    role,
+    logged,
+    username,
+    password,
+    repassword,
+    email,
+    number,
+    cart,
+    wishList,
+  } = formValues;
 
   const handleSignUp = (e) => {
-    setLoading(true);
+    
     e.preventDefault();
-    console.log(formValues);
+    //console.log(formValues);
 
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        role: role,
-        logged: logged,
-        username: username,
-        password: password,
-        email: email,
-        number: number,
-        cart: cart,
-        wishList: wishList,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-        "Accept-Encoding": "gzip, deflate, br",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setLoading(false);
-        setAlert({
-          alertType: "success",
-          alertMessage: data.message,
-          showAlert: true,
-        });
-
-        if (data.user) {
-          const action = {
-            type: types.login,
-            payload: {
-              user: data.user,
-              token: data.token,
-            },
-          };
-          dispatch(action);
-
-          //const lastPath = localStorage.getItem("lastPath") || "/";
-          router.replace("/");
-        }
-
-        //setOpenDialog(false);
+    if (isFormValid()) {
+      setLoading(true);
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+          role: role,
+          logged: logged,
+          username: username,
+          password: password,
+          email: email,
+          number: number,
+          cart: cart,
+          wishList: wishList,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "*/*",
+          "Accept-Encoding": "gzip, deflate, br",
+        },
       })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-        setAlert({
-          alertType: "error",
-          alertMessage:
-            "Se ha producido un error al crear su cuenta. Por favor, inténtelo de nuevo. Si el problema persiste, póngase en contacto con la administración.",
-          showAlert: true,
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setLoading(false);
+          setAlert({
+            alertType: "success",
+            alertMessage: data.message,
+            showAlert: true,
+          });
+
+          if (data.user) {
+            router.replace("/login");
+          }
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+          setAlert({
+            alertType: "error",
+            alertMessage:
+              "Se ha producido un error al crear su cuenta. Por favor, inténtelo de nuevo. Si el problema persiste, póngase en contacto con la administración.",
+            showAlert: true,
+          });
         });
-      });
+    }
   };
 
+  const isFormValid = () => {
+    if (username.trim().length === 0) {
+      dispatch(setError("El nombre de usuario es requerido"));
+      return false;
+    } else if (username.trim().length < 3) {
+      dispatch(
+        setError("Su nombre de usuario como minimo debe tener 3 caracteres")
+      );
+      return false;
+    } else if (password.length === 0) {
+      dispatch(setError("Introduzca una contraseña por favor"));
+      return false;
+    } else if (repassword.length === 0) {
+      dispatch(setError("Repita su contraseña por favor"));
+      return false;
+    } else if (password.length < 6) {
+      dispatch(setError("Su contraseña debe tener como mínimo 6 caracteres."));
+      return false;
+    } else if (password !== repassword) {
+      dispatch(setError("Sus contrseñas no coinciden"));
+      return false;
+    } else if (!validator.isEmail(email)) {
+      dispatch(setError("Inserte un correo electrónico válido por favor"));
+      return false;
+    } else if (!validator.isMobilePhone(number)) {
+      dispatch(setError("Inserte un numero de telefono valido"));
+      return false;
+    }
+    dispatch(removeError());
+    return true;
+  };
   return (
     <>
-    {loading && <BackDrop />}
+      {loading && <BackDrop />}
       {showAlert && (
         <Modal message={alertMessage} open={showAlert} setOpen={resetAlert} />
       )}
@@ -148,7 +191,8 @@ export default function SignUp() {
             Crear una cuenta
           </h2>
         </div>
-
+        <h1>Errro</h1>
+        <p>{state.msgError}</p>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSignUp}>
             <div>
@@ -163,8 +207,8 @@ export default function SignUp() {
                   id="username"
                   name="username"
                   type="text"
-                  autoComplete="off"
-                  required
+                  autoComplet="off"
+                  // required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   onChange={handdleInputChange}
                 />
@@ -182,8 +226,8 @@ export default function SignUp() {
                   id="password"
                   name="password"
                   type="password"
-                  autoComplete="off"
-                  required
+                  autoComplete
+                  //required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   onChange={handdleInputChange}
                 />
@@ -201,8 +245,8 @@ export default function SignUp() {
                   id="repassword"
                   name="repassword"
                   type="password"
-                  autoComplete="off"
-                  required
+                  autoComplete
+                  //required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   onChange={handdleInputChange}
                 />
@@ -221,8 +265,8 @@ export default function SignUp() {
                   id="email"
                   name="email"
                   type="email"
-                  autoComplete="off"
-                  required
+                  autoComplete
+                  //required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   onChange={handdleInputChange}
                 />
@@ -241,8 +285,8 @@ export default function SignUp() {
                   id="number"
                   name="number"
                   type="number"
-                  autoComplete="off"
-                  required
+                  autoComplete
+                  //required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   onChange={handdleInputChange}
                 />
