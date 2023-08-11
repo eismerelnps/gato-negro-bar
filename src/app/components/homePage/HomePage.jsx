@@ -154,8 +154,7 @@ export function HomePage() {
               Alamar / La Habana del Este{" "}
             </span>
             <span className={`${gilda_display.className}  text-slate-800`}>
-            Frente al
-              IPU Lázaro Peña{" "}
+              Frente al IPU Lázaro Peña{" "}
             </span>
           </section>
 

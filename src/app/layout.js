@@ -1,4 +1,4 @@
-"use client";
+
 import Script from "next/script";
 import { Footer } from "./components/footer/Footer";
 import NavBar from "./components/navbar/NavBar";
@@ -7,24 +7,25 @@ import { Inter } from "next/font/google";
 
 //import ContextProvider from "./components/appContext/AppContext";
 
+ import dynamic from "next/dynamic";
 
+// import { Storage } from "redux-persist";
+// import { persistReducer } from "redux-persist";
+// import { combineReducers } from "@reduxjs/toolkit";
+// import thunk from "redux-thunk";
 
-import dynamic from 'next/dynamic'
+// import { Provider } from "react-redux";
+// import { persistor, store } from "@/store/store";
+// import { PersistGate } from "redux-persist/integration/react";
+//import PersistProvider from "./components/appContext/PersistProvider";
+//import { persistStore } from "redux-persist";
 
-import { Storage } from "redux-persist";
-import { persistReducer } from "redux-persist";
-import { combineReducers } from "@reduxjs/toolkit";
-import thunk from "redux-thunk";
-
-import { Provider } from "react-redux";
-import { persistor, store } from "@/store/store";
-import { PersistGate } from "redux-persist/integration/react";
-import {persistStore} from "redux-persist";
-
-
-// const StoreProvider = dynamic(() => import("./components/appContext/Provider"), {
-//   ssr: false,
-// });
+const StoreProvider = dynamic(() => import("./components/appContext/Provider"), {
+  ssr: false,
+});
+const PersistProvider = dynamic(() => import("./components/appContext/PersistProvider"), {
+  ssr: false,
+});
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +38,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   const id = "js?id=G-YBZYKQ4HNF";
 
-//const persistor
+  //const persistor
 
   return (
     <html lang="es">
@@ -56,24 +57,23 @@ export default function RootLayout({ children }) {
       </head>
 
       <body className={`${inter.className}`}>
+        {/* <Provider store={store}> */}
+          {/* <PersistGate persistor={persistor}> */}
+          <PersistProvider>
+           <StoreProvider> 
+            <header>
+              <NavBar />
+            </header>
 
-        <Provider store={ store }>
-       <PersistGate persistor={persistor}>
-            {/* <StoreProvider> */}
-           <header>
-            <NavBar />
-          </header> 
+            {children}
 
-          {children}
-
-          <footer className="">
-            <Footer />
-          </footer>
-        {/* </StoreProvider> */}
-            
-        </PersistGate>
-        </Provider>
-      
+            <footer className="">
+              <Footer />
+            </footer>
+            </StoreProvider>
+          {/* </PersistGate> */}
+          </PersistProvider>
+        {/* </Provider> */}
       </body>
     </html>
   );
