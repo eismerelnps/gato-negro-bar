@@ -7,14 +7,17 @@ import { AppContext } from "../appContext/AppContext";
 import { useRouter } from "next/navigation";
 import BackDrop from "../backDrop/BackDrop";
 import Modal from "../dialog/Modal";
+import { useSelector } from "react-redux";
 
 export default function AddProduct({ product }) {
   const router = useRouter();
   const url = "https://gato-negro-backend.onrender.com/api/v1/products/";
 
   //obtener el token del usuario desde el contexto
-  const { user } = useContext(AppContext);
-  const { token } = user;
+  //const { user } = useContext(AppContext);
+  const state = useSelector((state) => state.auth);
+ //console.log(user);
+  const { token } = state;
 
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({
