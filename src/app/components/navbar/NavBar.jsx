@@ -1,9 +1,10 @@
 "use client";
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useRef, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
   BellIcon,
+  MagnifyingGlassIcon,
   UserCircleIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -19,9 +20,11 @@ import { PrivateRoute } from "../routes/PrivateRoute";
 import { PubliceRoute } from "../routes/PublicRoute";
 import { types } from "@/types/types";
 import { AppContext } from "../appContext/AppContext";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { logout } from "@/actions/auth";
+import { useForm } from "@/hooks/useForm";
+import 'animate.css';
 
 const navigation = [
   { name: "Inicio", href: "/", current: false },
@@ -36,19 +39,34 @@ function classNames(...classes) {
 
 export default function NavBar() {
   const dispatch = useDispatch();
+  const ref = useRef();
+  const router = useRouter();
   //const user = useSelector((state) => state.auth);
 
- // const { user } = useContext(AppContext);
+
+  const searchParams = useSearchParams()
+ 
+  const searchParam = searchParams.get('search')
+  // const { user } = useContext(AppContext);
+
+  const [searching, setSearching] = useState(false);
+
+  const [formValues, handdleInputChange, reset] = useForm({
+    search: searchParam,
+  });
+
+  const { search } = formValues;
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    router.push(`/menu/?search=${search}`);
+    
+
+    
+  };
 
   const handleLogOut = () => {
-    // const action = {
-    //   type: types.logout,
-    //   payload: {
-    //     cart: { count: 0, items: [] },
-    //     wishList: { count: 0, items: [] },
-    //   },
-    // };
-    // dispatch(action);
     dispatch(logout());
   };
 
@@ -74,7 +92,8 @@ export default function NavBar() {
                   </Disclosure.Button>
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                  <div className="flex flex-shrink-0 items-center">
+                   {!searching && ( 
+                  <div className={`flex flex-shrink-0 items-center animate__animated ${searching ? 'animate__fadeOut' : 'animate__fadeIn'} `}>
                     <Link href={"/"}>
                       <Image
                         src={gato_negro_logo}
@@ -84,6 +103,7 @@ export default function NavBar() {
                       />
                     </Link>
                   </div>
+                   )} 
 
                   <div className="w-full  hidden sm:ml-6 sm:block w-100">
                     <div className="flex justify-end space-x-4 ">
@@ -118,13 +138,34 @@ export default function NavBar() {
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  {/* <button
-                    type="button"
-                    className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button> */}
+                  <div className="flex flex-row">
+                    {searching && (
+                      <div className={`animate__animated ${searching ? 'animate__fadeInRight' : 'animate__fadeOutRight'}  `}>
+                        <form onSubmit={handleSearch}>
+                          <input
+                          value={search}
+                            id="search"
+                            name="search"
+                            type="text"
+                            autoComplete="true"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            onChange={handdleInputChange}
+                          />
+                        </form>
+                      </div>
+                    )}
+                    <button
+                      onClick={() => setSearching(!searching)}
+                      type="button"
+                      className="rounded-full  p-1 text-gray-950  focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    >
+                      <span className="sr-only">View notifications</span>
+                      <MagnifyingGlassIcon
+                        className="h-6 w-6"
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </div>
 
                   {/* Profile dropdown  */}
                   <Menu as="div" className="relative ml-3">

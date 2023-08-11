@@ -68,8 +68,27 @@ import pizza_2 from "../../../../public/wallpapers/pizza_2.jpg";
 import InOffer from "../inOffer/InOffer";
 import BackDrop from "../backDrop/BackDrop";
 
-
+//animation library
 import 'animate.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { icon } from "@fortawesome/fontawesome-svg-core";
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+
+// //Font Awensome Icon library
+
+// // Specify all properties: name, family, style
+ icon({name: 'user', family: 'classic', style: 'solid'})
+// icon({name: 'user', family: 'classic', style: 'regular'})
+//icon({name: 'twitter', family: 'classic', style: 'brands'})
+
+// // 'classic' is the default family, you can leave that off
+// icon({name: 'user', style: 'solid'})
+// icon({name: 'user', style: 'regular'})
+// icon({name: 'twitter', style: 'brands'})
+
+// // 'solid' is the default style, you can leave that off
+// icon({name: 'user'})
+
 
 export function HomePage() {
   //const {open} = await fetchProducts('https://gato-negro-backend.onrender.com/api/v1/app', '');
@@ -92,7 +111,7 @@ export function HomePage() {
             >
               🥐 Delicias Hechas a Mano
             </h4>
-
+            
             <p
               className={`${quicksand.className} animate__animated animate__bounceInUp animate__slower ms-44 me-2 mt-2  text-end  text-xs xl:text-2xl xl:ms-96 text-slate-50`}
             >
@@ -160,8 +179,7 @@ export function HomePage() {
               Frente al IPU Lázaro Peña{" "}
             </span>
           </section>
-
-          <section></section>
+        
         </div>
       </div>
       <div

@@ -2,13 +2,14 @@
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 
-export const PrivateRoute = ({ children }) => {
+export const IsLogged = ({ children }) => {
+    const router = useRouter();
   
   const user = useSelector((state) => state.auth);
 
-  if (user.logged) {
+  if (!user.logged) {
     return children;
   }
-
-  return <></>
+  router.back();
+  
 };

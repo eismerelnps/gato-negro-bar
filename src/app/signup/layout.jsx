@@ -1,3 +1,9 @@
+import { IsLogged } from "../components/routes/IsLogged";
+
 export default async function page({ children }) {
-  return <div className="mt-16">{children}</div>;
+  return (
+    <IsLogged>
+      <div className="mt-16">{children}</div>
+    </IsLogged>
+  );
 }

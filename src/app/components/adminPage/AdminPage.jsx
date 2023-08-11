@@ -179,14 +179,14 @@ export default function AdminPage({ products }) {
       <hr />
       <div className="mt-2 ">
         <h1
-          className={` ${francois_one.className} sticky top-16  text-xl text-slate-950 text-center mx-4  bg-white  border border-slate-300 rounded-t-xl  z-30`}
+          className={` ${francois_one.className} sticky top-16  text-xl text-slate-950 text-center mx-4  bg-white  border border-slate-300 rounded-t-xl`}
         >
           Productos en Oferta
         </h1>
         {categoricedProducts.map((product) => (
           <div key={product.category} className="">
             <div
-              className={`${francois_one.className} sticky top-20  text-2xl text-slate-950 text-center mx-4 mb-4 bg-slate-400 border border-slate-300 rounded-b-xl z-20 `}
+              className={`${francois_one.className} sticky top-16  text-2xl text-slate-950 text-center mx-4 mb-4 bg-slate-100 border border-slate-300 rounded-b-xl z-20 `}
             >
               <span
                 className={`${quicksand.className} text-sm text-slate-950 text-center `}
@@ -200,7 +200,7 @@ export default function AdminPage({ products }) {
               </h1>
             </div>
             <br />
-            <div className="flex flex-wrap sm:flex-col lg:flex-row">
+            <div className="flex flex-wrap sm:flex-col md:flex-row justify-center">
               {product.items.map(
                 ({
                   _id,
@@ -218,7 +218,7 @@ export default function AdminPage({ products }) {
                 }) => (
                   <div
                     key={_id}
-                    className=" lg:basis-1/2 basis-full m-4 border border-slate-200 rounded-xl p-5 text-start bg-slate-50"
+                    className="basis-full bg-slate-50 rounded-xl md:basis-2/5 m-4 p-4"
                   >
                     <div className="flex flex-row mb-4 ">
                       <div className="basis-3/4">
