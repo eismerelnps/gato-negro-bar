@@ -68,6 +68,9 @@ import pizza_2 from "../../../../public/wallpapers/pizza_2.jpg";
 import InOffer from "../inOffer/InOffer";
 import BackDrop from "../backDrop/BackDrop";
 
+
+import 'animate.css';
+
 export function HomePage() {
   //const {open} = await fetchProducts('https://gato-negro-backend.onrender.com/api/v1/app', '');
   const open = true;
@@ -85,13 +88,13 @@ export function HomePage() {
           />
           <div className="  absolute top-16 right-0  ">
             <h4
-              className={`${francois_one.className} mt-2 text-end text-xl text-slate-50`}
+              className={`${francois_one.className} animate__animated animate__bounceInDown animate__slower		 mt-2 text-end text-xl text-slate-50`}
             >
               🥐 Delicias Hechas a Mano
             </h4>
 
             <p
-              className={`${quicksand.className} ms-44 me-2 mt-2  text-end  text-xs xl:text-2xl xl:ms-96 text-slate-50`}
+              className={`${quicksand.className} animate__animated animate__bounceInUp animate__slower ms-44 me-2 mt-2  text-end  text-xs xl:text-2xl xl:ms-96 text-slate-50`}
             >
               Sumérgete en un mundo de sabores y aromas exquisitos en nuestro
               acogedor rincón en Alamar. Nuestra pasión por la buena comida y
@@ -103,7 +106,7 @@ export function HomePage() {
 
         <div>{open ? <ServiceOpen /> : <ServiceClosed />}</div>
 
-        <div className="bg-slate-100  p-6">
+        <div className="animate__animated animate__fadeInLeft bg-slate-100  p-6">
           <section className="m-3 p-3">
             <h2
               className={`${francois_one.className}  text-slate-800 text-xl `}

@@ -1,6 +1,8 @@
 import React from "react";
 import { quicksand } from "@/fonts/quicksand";
 import { gilda_display } from "@/fonts/gilda_display";
+import 'animate.css';
+
 
 export const MenuCard = ({ items}) => {
   const {
@@ -18,7 +20,7 @@ export const MenuCard = ({ items}) => {
   } = items;
   //console.log(name);
   return (
-    <div className=" lg:basis-1/2 basis-full p-5 text-start">
+    <div className="animate__animated animate__backInLeft animate__fast lg:basis-5/12 basis-full mx-3 p-4 my-2 text-start border bg-slate-50 rounded-xl">
       <div className="flex flex-row mb-4">
         <p className={`${quicksand.className} basis-1/2 text-xl`}>{name}</p>
         <div className="basis-1/2 text-end">
@@ -27,18 +29,19 @@ export const MenuCard = ({ items}) => {
           >
             {price}
           </p>
-          <span className={`${quicksand.className} text-green-950`}>CUP</span>
+          <span className={`${quicksand.className} text-green-950 text-bold`}>CUP</span>
         </div>
        
       </div>
-      <div>
+      <hr />
+      <div className="mt-4">
         <p
             className={`${gilda_display.className}  text-slate-600 text-sm font-bold`}
           >
             {description}
           </p>
         </div>
-      <hr />
+      
     </div>
   );
 };
