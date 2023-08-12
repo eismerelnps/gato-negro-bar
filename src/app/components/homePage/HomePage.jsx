@@ -241,7 +241,7 @@ export function HomePage() {
 
       <div className="p-4 my-4 bg-slate-50">
         <section className="flex flex-col md:flex-row flex-wrap">
-          <article className="lg:basis-1/3 md:basis-1/2  basis-full ">
+          <article className="lg:basis-1/3 md:basis-1/2  basis-full my-8">
             <h1
               className={`${francois_one.className} text-slate-800  text-4xl `}
             >
@@ -259,7 +259,7 @@ export function HomePage() {
             </p>
             <div className="flex justify-center">
               <Image
-                className="blur-sm hover:blur-none rounded-xl"
+                className=" hover:blur-none rounded-xl"
                 src={cover}
                 width={280}
                 height={280}
@@ -267,7 +267,7 @@ export function HomePage() {
               />
             </div>
           </article>
-          <article className="lg:basis-1/3 md:basis-1/2 basis-full">
+          <article className="lg:basis-1/3 md:basis-1/2 basis-full my-8">
             <h1
               className={`${francois_one.className} text-slate-800  text-4xl `}
             >
@@ -285,7 +285,7 @@ export function HomePage() {
             </p>
             <div className="flex justify-center">
               <Image
-                className="blur-sm hover:blur-none rounded-xl"
+                className=" hover:blur-none rounded-xl"
                 src={hamburger_bg_colored}
                 width={280}
                 height={280}
@@ -293,7 +293,7 @@ export function HomePage() {
               />
             </div>
           </article>
-          <article className="lg:basis-1/3 md:basis-1/2 basis-full">
+          <article className="lg:basis-1/3 md:basis-1/2 basis-full my-8">
             <h1
               className={`${francois_one.className} text-slate-800  text-4xl `}
             >
