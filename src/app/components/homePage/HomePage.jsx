@@ -153,12 +153,15 @@ export function HomePage() {
             <h4 className={`${quicksand.className}  text-slate-800`}>
               Haz tu pedido desde casa
             </h4>
+            <br/>
             <span className={`${gilda_display.className}  text-slate-800`}>
               (+53) 5 1946995{" "}
             </span>
+            <br/>
             <span className={`${gilda_display.className}  text-slate-800`}>
               (+53) 53008869{" "}
             </span>
+            <br/>
             <span className={`${gilda_display.className}  text-slate-800`}>
               (+53) 77645581{" "}
             </span>
