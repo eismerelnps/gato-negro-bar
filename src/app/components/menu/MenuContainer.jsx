@@ -10,20 +10,25 @@ import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 export const MenuContainer = ({ products }) => {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
   const router = useRouter();
 
-  const search = searchParams.get('search')
+  const search = searchParams.get("search");
+
   
+  const menu = categorizeProducts(
+    search ? getProductByName(products, search) : products
+  );
 
-  const menu = categorizeProducts(search ? getProductByName(products, search) : products)
+  const handleResetSearch = () => {
+    router.push(`/menu`);
+  };
 
- const handleResetSearch =() => {
-  router.push(`/menu`);
- }
+  console.log(menu.length  === 0 ? 'vacio' : 'lleno')
+  console.log(menu);
+  //console.log(categorizeProducts(search))
 
-
-  return !search ? (
+  return menu.length  !== 0 ? (
     <div className=" ">
       {menu.map((product) => (
         <div key={product.category} className="">
@@ -42,21 +47,26 @@ export const MenuContainer = ({ products }) => {
         </div>
       ))}
     </div>
-  ) 
-  :
-  (
-   <div className="text-center">
-    <h1
-            className={`${francois_one.className} z-30 animate__animated animate__flash sticky top-16 text-2xl text-slate-950 text-center m-4 border border-slate-50`}
-          >
-            No hay ningún producto con el nombre de &quot;{search}&quot;
-          </h1>
-          <p className={`${quicksand.className} basis-1/2 text-xl`}>Restablece la <b><button className="text-red-500" onClick={handleResetSearch}>búsqueda</button></b></p>
-          <p
-            className={`${gilda_display.className}  text-slate-600 text-sm font-bold`}
-          >
-            O intenta con otro nombre
-          </p>
-   </div> 
-  )
+  ) : (
+    <div className="text-center">
+      <h1
+        className={`${francois_one.className} z-30 animate__animated animate__flash sticky top-16 text-2xl text-slate-950 text-center m-4 border border-slate-50`}
+      >
+        No hay ningún producto con el nombre de &quot;{search}&quot;
+      </h1>
+      <p className={`${quicksand.className} basis-1/2 text-xl`}>
+        Restablece la{" "}
+        <b>
+          <button className="text-red-500" onClick={handleResetSearch}>
+            búsqueda
+          </button>
+        </b>
+      </p>
+      <p
+        className={`${gilda_display.className}  text-slate-600 text-sm font-bold`}
+      >
+        O intenta con otro nombre
+      </p>
+    </div>
+  );
 };

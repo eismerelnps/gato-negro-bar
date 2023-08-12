@@ -8,4 +8,6 @@ export const getProductByName = (products, name = "") => {
   return products.filter((product) =>
     product.name.toLowerCase().trim().includes(name)
   );
+
+  console.log()
 };
