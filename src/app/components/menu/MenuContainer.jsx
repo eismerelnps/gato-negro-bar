@@ -1,13 +1,20 @@
 "use client";
+//Imports from Next
+import { useParams, usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation"
+
+//Local Imports
 import { categorizeProducts } from "@/helpers/categorizeProducts";
 import { MenuCard } from "./MenuCard";
-import { francois_one } from "@/fonts/francois_one";
 import { getProductByName } from "@/helpers/getProductByName";
+
+  //fonts
+import { francois_one } from "@/fonts/francois_one";
 import { quicksand } from "@/fonts/quicksand";
 import { gilda_display } from "@/fonts/gilda_display";
+
 import "animate.css";
-import { useParams, usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+;
 
 export const MenuContainer = ({ products }) => {
   const searchParams = useSearchParams();
@@ -23,10 +30,6 @@ export const MenuContainer = ({ products }) => {
   const handleResetSearch = () => {
     router.push(`/menu`);
   };
-
-  console.log(menu.length  === 0 ? 'vacio' : 'lleno')
-  console.log(menu);
-  //console.log(categorizeProducts(search))
 
   return menu.length  !== 0 ? (
     <div className=" ">

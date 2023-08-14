@@ -1,11 +1,13 @@
 import { MenuContainer } from "../components/menu/MenuContainer";
-import { categorizeProducts } from "@/helpers/categorizeProducts";
+
+//get the endpoint of the api bd
+const url = process.env.NEXT_PUBLIC_DB_API_PRODUCTS;
+
+const fetchMenu = () => {
+  return fetch(url, { cache: "no-store" }).then((res) => res.json());
+};
 
 export default async function page() {
-  const url = "https://gato-negro-backend.onrender.com/api/v1/products";
-  const fetchMenu = () => {
-    return fetch(url, { cache: "no-store" }).then((res) => res.json());
-  };
   const products = await fetchMenu();
 
   return <MenuContainer products={products} />;

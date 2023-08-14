@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 //get the endpoint of the api bd
 const url=process.env.NEXT_PUBLIC_DB_API_PRODUCTS
-console.log(url);
+
 
 export default function AddProduct({ product }) {
   const { name, category, price } = product;
