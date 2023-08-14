@@ -15,9 +15,16 @@ import {
 ////images
 import gato_negro_logo from "../../../../public/gato_negro_logo.png";
 import { login } from "@/actions/auth";
+import { useState } from "react";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+
+//Imports of local fonts
+import { francois_one } from "@/fonts/francois_one";
+import { quicksand } from "@/fonts/quicksand";
+import { gilda_display } from "@/fonts/gilda_display";
 
 //get the endpoint of the api bd
-const url=process.env.NEXT_PUBLIC_DB_API_USERS_LOGIN
+const url = process.env.NEXT_PUBLIC_DB_API_USERS_LOGIN;
 
 export const SignIn = () => {
   const dispatch = useDispatch();
@@ -29,7 +36,16 @@ export const SignIn = () => {
 
   const { username, password } = formValues;
 
+  // to show & hide password field
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const handleSignIn = (e) => {
+    e.preventDefault();
+  };
+
+  const handleSignIn1 = (e) => {
     e.preventDefault();
 
     if (isFormValid()) {
@@ -84,9 +100,11 @@ export const SignIn = () => {
           src={gato_negro_logo}
           alt="Your Company"
         />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        <h1
+          className={`${francois_one.className} mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900`}
+        >
           Iniciar Sesión
-        </h2>
+        </h1>
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -94,7 +112,7 @@ export const SignIn = () => {
           <div>
             <label
               htmlFor="username"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className={`${gilda_display.className} block text-sm font-medium leading-6 text-gray-900`}
             >
               Nombre de usuario
             </label>
@@ -105,46 +123,84 @@ export const SignIn = () => {
                 type="text"
                 autoComplet="off"
                 // required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className={`${quicksand.className}  bg-white
+                outline  outline-1 outline-slate-300
+                focus:outline-2 hover:bg-slate-50 
+                duration-100 block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
+                placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}
                 onChange={handdleInputChange}
               />
             </div>
           </div>
+
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className={`${gilda_display.className} block text-sm font-medium leading-6 text-gray-900`}
             >
               Contraseña
             </label>
-            <div className="mt-2">
+            <div className="relative mt-2 rounded-md shadow-sm">
               <input
                 id="password"
                 name="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 autoComplete
                 //required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className={`${quicksand.className} 
+                bg-white
+                outline  outline-1 outline-slate-300
+                focus:outline-2 hover:bg-slate-50 
+                duration-100
+                
+                block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
+                placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}
                 onChange={handdleInputChange}
               />
+              <div className="absolute inset-y-0 right-0 flex items-center">
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="h-full rounded-md bg-transparent py-0 p-2 text-gray-500  sm:text-sm"
+                >
+                  {showPassword ? (
+                    <EyeSlashIcon
+                      className="block h-4 w-4 duration-200 text-slate-500 "
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <EyeIcon
+                      className="block h-4 w-4  duration-200 text-slate-500"
+                      aria-hidden="true"
+                    />
+                  )}
+                </button>
+              </div>
             </div>
           </div>
 
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className={`${francois_one.className} 
+               duration-200 flex w-full justify-center rounded-md bg-slate-950 px-3 py-1.5 text-sm font-semibold leading-6
+                bg-slate-950 text-slate-100 hover:text-slate-950
+                outline  outline-1 outline-slate-300
+                focus:outline-4 hover:bg-slate-50 
+                duration-100`}
             >
               Iniciar Sesión
             </button>
           </div>
         </form>
 
-        <p className="mt-10  text-center text-sm text-gray-500">
+        <p
+          className={`${gilda_display.className} mt-10  text-center text-sm text-gray-400`}
+        >
           No tienes cuenta
           <Link
             href="/signup"
-            className="font-semibold ms-2 leading-6 text-indigo-600 hover:text-indigo-500"
+            className={`${quicksand.className}  ms-2 leading-6 text-blue-800 hover:text-blue-600`}
           >
             Crear una
           </Link>

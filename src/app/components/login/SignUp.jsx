@@ -20,6 +20,11 @@ import { useDispatch } from "react-redux";
 //Other imports
 import validator from "validator";
 
+//Imports of local fonts
+import { francois_one } from "@/fonts/francois_one";
+import { quicksand } from "@/fonts/quicksand";
+import { gilda_display } from "@/fonts/gilda_display";
+
 /*
   This example requires some changes to your config:
   
@@ -173,8 +178,11 @@ export default function SignUp() {
                 type="text"
                 autoComplet="off"
                 // required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                onChange={handdleInputChange}
+                className={`${quicksand.className}  bg-white
+                outline  outline-1 outline-slate-300
+                focus:outline-2 hover:bg-slate-50 
+                duration-100 block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
+                placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}                onChange={handdleInputChange}
               />
             </div>
           </div>
@@ -192,8 +200,11 @@ export default function SignUp() {
                 type="password"
                 autoComplete
                 //required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                onChange={handdleInputChange}
+                className={`${quicksand.className}  bg-white
+                outline  outline-1 outline-slate-300
+                focus:outline-2 hover:bg-slate-50 
+                duration-100 block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
+                placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}                onChange={handdleInputChange}
               />
             </div>
           </div>
@@ -211,8 +222,11 @@ export default function SignUp() {
                 type="password"
                 autoComplete
                 //required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                onChange={handdleInputChange}
+                className={`${quicksand.className}  bg-white
+                outline  outline-1 outline-slate-300
+                focus:outline-2 hover:bg-slate-50 
+                duration-100 block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
+                placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}                onChange={handdleInputChange}
               />
             </div>
           </div>
@@ -231,8 +245,11 @@ export default function SignUp() {
                 type="email"
                 autoComplete
                 //required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                onChange={handdleInputChange}
+                className={`${quicksand.className}  bg-white
+                outline  outline-1 outline-slate-300
+                focus:outline-2 hover:bg-slate-50 
+                duration-100 block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
+                placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}                onChange={handdleInputChange}
               />
             </div>
           </div>
@@ -251,8 +268,11 @@ export default function SignUp() {
                 type="number"
                 autoComplete
                 //required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                onChange={handdleInputChange}
+                className={`${quicksand.className}  bg-white
+                outline  outline-1 outline-slate-300
+                focus:outline-2 hover:bg-slate-50 
+                duration-100 block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
+                placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}                onChange={handdleInputChange}
               />
             </div>
           </div>
@@ -260,18 +280,22 @@ export default function SignUp() {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
+              className={`${francois_one.className} 
+              duration-200 flex w-full justify-center rounded-md bg-slate-950 px-3 py-1.5 text-sm font-semibold leading-6
+               bg-slate-950 text-slate-100 hover:text-slate-950
+               outline  outline-1 outline-slate-300
+               focus:outline-4 hover:bg-slate-50 
+               duration-100`}            >
               Crear Cuenta
             </button>
           </div>
         </form>
 
-        <p className="mt-10  text-center text-sm text-gray-500">
+        <p className="mt-10  text-center text-sm text-gray-400">
           Ya tienes cuenta
           <Link
             href="/login"
-            className="font-semibold ms-2 leading-6 text-indigo-600 hover:text-indigo-500"
+            className={`${quicksand.className}  ms-2 leading-6 text-blue-800 hover:text-blue-600  `}
           >
             Inicia Sesión
           </Link>
