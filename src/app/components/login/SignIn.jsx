@@ -16,11 +16,11 @@ import {
 import gato_negro_logo from "../../../../public/gato_negro_logo.png";
 import { login } from "@/actions/auth";
 
+//get the endpoint of the api bd
+const url=process.env.NEXT_PUBLIC_DB_API_USERS_LOGIN
+
 export const SignIn = () => {
   const dispatch = useDispatch();
-
-  //const url = "https://gato-negro-backend.onrender.com/api/v1/users/login";
-  const url = "http://localhost:8787/api/v1/users/login";
 
   const [formValues, handdleInputChange] = useForm({
     username: "",

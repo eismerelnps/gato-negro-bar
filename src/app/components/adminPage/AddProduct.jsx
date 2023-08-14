@@ -1,97 +1,107 @@
-import { PlusCircleIcon } from "@heroicons/react/24/outline";
-import React, { useContext, useState } from "react";
+"use client";
+//Imports from React
+
+//Local Project Imports
+import {
+  finishLoading,
+  removeError,
+  setError,
+  startLoading,
+} from "@/actions/ui";
+
+//fonts
 import { francois_one } from "@/fonts/francois_one";
 import { quicksand } from "@/fonts/quicksand";
 import { gilda_display } from "@/fonts/gilda_display";
-import { AppContext } from "../appContext/AppContext";
+
+//Imports from Next
 import { useRouter } from "next/navigation";
-import BackDrop from "../backDrop/BackDrop";
-import Modal from "../dialog/Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+//get the endpoint of the api bd
+const url=process.env.NEXT_PUBLIC_DB_API_PRODUCTS
+console.log(url);
 
 export default function AddProduct({ product }) {
+  const { name, category, price } = product;
+
   const router = useRouter();
-  const url = "https://gato-negro-backend.onrender.com/api/v1/products/";
+  const dispatch = useDispatch();
 
   //obtener el token del usuario desde el contexto
-  //const { user } = useContext(AppContext);
-  const state = useSelector((state) => state.auth);
- //console.log(user);
-  const { token } = state;
+  const { token } = useSelector((state) => state.auth);
 
-  const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState({
-    alertType: "",
-    alertMessage: "",
-    showAlert: false,
-  });
-  const resetAlert = () => {
-    setAlert({
-      alertType: "",
-      alertMessage: "",
-      showAlert: false,
-    });
+  const handleAdd1 = (e) => {
+    e.preventDefault();
+    dispatch(startLoading());
+    //console.log(product);
+    //isFormValid();
   };
-  const { alertType, alertMessage, showAlert } = alert;
-
-
 
   const handleAdd = (e) => {
-    setLoading(true);
     e.preventDefault();
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify(product),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-        "Accept-Encoding": "gzip, deflate, br",
-        Authorization: token,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-       // console.log(data);
-        router.refresh();
-        setLoading(false);
-        setAlert({
-          alertType: "success",
-          alertMessage: data.message,
-          showAlert: true,
-        });
-        // setOpenDialog(false);
+    if (isFormValid()) {
+      dispatch(startLoading());
+
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify(product),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "*/*",
+          "Accept-Encoding": "gzip, deflate, br",
+          Authorization: token,
+        },
       })
+        .then((response) => response.json())
+        .then((data) => {
+          dispatch(finishLoading());
+          dispatch(setError(data.message));
+          router.refresh();
+        })
 
-      // .then(() => {
-      //   navigate("/signin", {
-      //     replace: true,
-      //   });
-      // })
-
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-        setAlert({
-          alertType: "error",
-          alertMessage:
-            "Se ha producido un error al crear el producto. Por favor, inténtelo de nuevo. Si el problema persiste, póngase en contacto con la administración.",
-          showAlert: true,
+        .catch((error) => {
+          dispatch(finishLoading());
+          dispatch(
+            setError(
+              "Se ha producido un error al crear el producto. Por favor, inténtelo de nuevo."
+            )
+          );
         });
-      });
+    }
   };
+  const isFormValid = () => {
+    if (name.trim().length === 0) {
+      dispatch(setError("El nombre del producto es requerido"));
+      return false;
+    } else if (category.length === 0) {
+      dispatch(setError("La categoría del producto es requerida"));
+      return false;
+    } else if (price.length === 0) {
+      dispatch(setError("El precio del producto es requerido"));
+      return false;
+    } else if (description.length > 50) {
+      dispatch(setError("Inserte una descripcion más corta por favor"));
+      return false;
+    } else if (price > offerPrice) {
+      dispatch(
+        setError("El precio de rebaja no puede ser mayor que el precio fijado")
+      );
+      return false;
+    }
+    dispatch(removeError());
+    return true;
+  };
+  // };
+
   return (
     <>
-     {loading && <BackDrop />}
-      {showAlert && (
-        <Modal message={alertMessage} open={showAlert} setOpen={resetAlert} />
-      )}
-    <button
-      onClick={handleAdd}
-      className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-    >
-      Agregar
-    </button>
+      <button
+        onClick={handleAdd}
+        className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      >
+        Agregar
+      </button>
     </>
-    
   );
 }

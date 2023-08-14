@@ -1,11 +1,18 @@
 //ESTE COMPONENTE HAY QUE REESTRUCTURARLO Y DIVIDIR LA LOGICA DEL JSX
 "use client";
-import React from "react";
+//Imports from React
+import { useState } from "react";
+
+//local imports
+import { categorizeProducts } from "@/helpers/categorizeProducts";
+import Example from "../dialog/Dialog";
+import Form from "../dialog/Form";
+import DeleteProduct from "./DeleteProduct";
+
+//Imports of local fonts
 import { francois_one } from "@/fonts/francois_one";
 import { quicksand } from "@/fonts/quicksand";
 import { gilda_display } from "@/fonts/gilda_display";
-
-import { categorizeProducts } from "@/helpers/categorizeProducts";
 
 import {
   PencilSquareIcon,
@@ -13,37 +20,12 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 
-import { useState } from "react";
-import Example from "../dialog/Dialog";
-import Form from "../dialog/Form";
-import DeleteProduct from "./DeleteProduct";
-import BackDrop from "../backDrop/BackDrop";
-import Modal from "../dialog/Modal";
-
 export default function AdminPage({ products }) {
-
-  
-  const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState({
-    alertType: "",
-    alertMessage: "",
-    showAlert: false,
-  });
-  const resetAlert = () => {
-    setAlert({
-      alertType: "",
-      alertMessage: "",
-      showAlert: false,
-    });
-  };
-  const { alertType, alertMessage, showAlert } = alert;
-
-
-
   const [showDialog, setOpenDialog] = useState({
     showDialogOpen: false,
     operation: "",
   });
+
   const resetDialog = () => {
     setOpenDialog({
       showDialog: false,
@@ -80,21 +62,6 @@ export default function AdminPage({ products }) {
     reviews: [""],
   });
 
-  // useEffect(() => {
-  //   async function fetchProducts() {
-  //     const response = await fetch(
-  //       "https://gato-negro-backend.onrender.com/api/v1/products"
-  //     );
-  //     const data = await response.json();
-  //     setProducts(data);
-  //   }
-
-  //   fetchProducts();
-  // }, []);
-
-  // const fetchMenu = (url) => {
-  //   return fetch(url, { method: "GET" }).then((response) => response.json());
-  // };
   const categoricedProducts = categorizeProducts(products);
 
   const handleOpenEdit = (
@@ -128,7 +95,7 @@ export default function AdminPage({ products }) {
     setOpenDialog({
       showDialogOpen: true,
       operation: "EDIT",
-    })
+    });
   };
   const handleAddProduct = () => {
     setItem({
@@ -148,34 +115,48 @@ export default function AdminPage({ products }) {
     setOpenDialog({
       showDialogOpen: true,
       operation: "ADD",
-    })
+    });
   };
 
   return (
-    <div className="mt-16  ">
-      {loading && <BackDrop />}
-      {showAlert && (
-        <Modal message={alertMessage} open={showAlert} setOpen={resetAlert} />
+    <div className="mt-16">
+      {showDialogOpen && (
+        <Example
+          showDialog={showDialogOpen}
+          setOpenDialog={resetDialog}
+          item={item}
+          operation={operation}
+        />
       )}
-      <div
-        className=" border border-red-500 rounded-xl bg-red-50  hover:bg-red-100 text-red-500  flex flex-col items-center justify-center m-4  "
-        onClick={handleAddProduct}
-      >
-        <div className="">
-          <PlusCircleIcon
-            id="plusCircleIcon"
-            className="block h-8 w-8  "
-            aria-hidden="true"
-          />
-        </div>
-        <div className="">
-          <p
-            className={`${gilda_display.className} text-sm text-center text-center `}
-          >
-            Crear Producto Nuevo
-          </p>
+      {openDelete && (
+        <DeleteProduct
+          open={openDelete}
+          setOpen={resetDeleteDialog}
+          id={itemToDelete._id}
+        />
+      )}
+      <div className="flex justify-center m-4">
+        <div
+          className=" border border-red-500 rounded-xl bg-red-50  hover:bg-red-100 text-red-500  flex flex-col items-center justify-center m-2 p-2  "
+          onClick={handleAddProduct}
+        >
+          <div className="">
+            <PlusCircleIcon
+              id="plusCircleIcon"
+              className="block h-8 w-8  "
+              aria-hidden="true"
+            />
+          </div>
+          <div className="">
+            <p
+              className={`${gilda_display.className} text-sm text-center text-center `}
+            >
+              Crear Producto Nuevo
+            </p>
+          </div>
         </div>
       </div>
+
       <hr />
       <div className="mt-2 ">
         <h1
@@ -186,7 +167,7 @@ export default function AdminPage({ products }) {
         {categoricedProducts.map((product) => (
           <div key={product.category} className="">
             <div
-              className={`${francois_one.className} sticky top-16  text-2xl text-slate-950 text-center mx-4 mb-4 bg-slate-100 border border-slate-300 rounded-b-xl z-20 `}
+              className={`${francois_one.className} sticky top-16  text-2xl text-slate-950 text-center mx-4 mb-4 bg-slate-100 border border-slate-300 rounded-b-xl z-10 `}
             >
               <span
                 className={`${quicksand.className} text-sm text-slate-950 text-center `}
@@ -282,10 +263,7 @@ export default function AdminPage({ products }) {
                             image,
                             rating,
                             reviews,
-                            <Form
-                              item={item}
-                             
-                            />
+                            <Form item={item} />
                           )
                         }
                       >
@@ -330,21 +308,6 @@ export default function AdminPage({ products }) {
           </div>
         ))}
       </div>
-      {showDialogOpen && (
-        <Example
-          showDialog={showDialogOpen}
-          setOpenDialog={resetDialog}
-          item={item}
-          operation={operation}
-        />
-      )}
-      {openDelete && (
-        <DeleteProduct
-          open={openDelete}
-          setOpen={resetDeleteDialog}
-          id={itemToDelete._id}
-        />
-      )}
     </div>
   );
 }

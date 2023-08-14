@@ -1,19 +1,26 @@
+"use client";
 import { ArrowPathIcon, TrashIcon } from "@heroicons/react/24/outline";
-import React, { useContext } from "react";
+//Imports from React
+import { useContext } from "react";
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
-// fuentes usadas en el componente
+//fonts
 import { francois_one } from "@/fonts/francois_one";
 import { quicksand } from "@/fonts/quicksand";
 import { gilda_display } from "@/fonts/gilda_display";
 import { ArrowCircleDown } from "heroicons-react";
-import { AppContext } from "../appContext/AppContext";
 import { useRouter } from "next/navigation";
 import BackDrop from "../backDrop/BackDrop";
 import Modal from "../dialog/Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  finishLoading,
+  removeError,
+  setError,
+  startLoading,
+} from "@/actions/ui";
 
 export default function DeleteProduct({
   open,
@@ -23,35 +30,20 @@ export default function DeleteProduct({
   buttonAction,
   id,
 }) {
+  
+ //get the endpoint of the api bd
+const url=process.env.NEXT_PUBLIC_DB_API_PRODUCTS
+
   const router = useRouter();
+  const dispatch = useDispatch();
   const cancelButtonRef = useRef(null);
-  const url = "https://gato-negro-backend.onrender.com/api/v1/products"
 
-  const state = useSelector((state) => state.auth);
- //console.log(user);
-  const { token } = state;
-
-  const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState({
-    alertType: "",
-    alertMessage: "",
-    showAlert: false,
-  });
-  const resetAlert = () => {
-    setAlert({
-      alertType: "",
-      alertMessage: "",
-      showAlert: false,
-    });
-  };
-  const { alertType, alertMessage, showAlert } = alert;
+  const { token } = useSelector((state) => state.auth);
 
 
-
-  //funcion que hace un peticion al backend para eliminar un producto
   const handleDelete = (id) => {
     setOpen();
-    setLoading(true);
+    dispatch(startLoading());
     fetch(`${url}/${id}`, {
       method: "DELETE",
       body: JSON.stringify({}),
@@ -65,42 +57,21 @@ export default function DeleteProduct({
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        router.refresh()
-        setLoading(false);
-        setAlert({
-          alertType: "success",
-          alertMessage: data.message,
-          showAlert: true,
-        });
-        // setOpenDialog(false);
+        dispatch(finishLoading());
+        dispatch(setError(data.message));
+        router.refresh();
       })
-
-      // .then(() => {
-      //   navigate("/signin", {
-      //     replace: true,
-      //   });
-      // })
-
       .catch((error) => {
-        console.log(error);
-        setLoading(false);
-        setAlert({
-          alertType: "error",
-          alertMessage:
-            "Se ha producido un error al crear el producto. Por favor, inténtelo de nuevo. Si el problema persiste, póngase en contacto con la administración.",
-          showAlert: true,
-        });
+        dispatch(finishLoading());
+        dispatch(
+          setError(
+            "Se ha producido un error al crear el producto. Por favor, inténtelo de nuevo."
+          )
+        );
       });
   };
 
   return (
-    <>
-     {loading && <BackDrop />}
-      {showAlert && (
-        <Modal message={alertMessage} open={showAlert} setOpen={resetAlert} />
-      )}
-    
     <Transition.Root show={open} as={Fragment}>
       <Dialog
         as="div"
@@ -181,6 +152,5 @@ export default function DeleteProduct({
         </div>
       </Dialog>
     </Transition.Root>
-    </>
   );
 }

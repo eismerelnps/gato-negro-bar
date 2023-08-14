@@ -2,8 +2,9 @@ import React from "react";
 import AdminPage from "../components/adminPage/AdminPage";
 
 export default async function DashboardPage() {
-  const url = "https://gato-negro-backend.onrender.com/api/v1/products";
-  
+  //get the endpoint of the api bd
+  const url = process.env.NEXT_PUBLIC_DB_API_PRODUCTS;
+
   const fetchMenu = () => {
     return fetch(url, { cache: "no-store" }).then((res) => res.json());
   };

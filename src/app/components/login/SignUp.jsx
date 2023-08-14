@@ -39,8 +39,8 @@ export default function SignUp() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const url =
-    "https://gato-negro-backend.onrender.com/api/v1/users/create-user";
+  //get the endpoint of the api bd
+  const url = process.env.NEXT_PUBLIC_DB_API_USERS_SIGNUP;
 
   const [formValues, handdleInputChange] = useForm({
     role: "user",
