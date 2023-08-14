@@ -24,7 +24,7 @@ import AddProduct from "../adminPage/AddProduct";
 import EditProduct from "../adminPage/EditProduct";
 
 export default function Form({ item, setOpenDialog, operation }) {
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
   const [formValues, handdleInputChange] = useForm(item);
 
   const {
@@ -42,49 +42,9 @@ export default function Form({ item, setOpenDialog, operation }) {
     _id,
   } = formValues;
 
-  const handleSignUp = (e) => {
-    e.preventDefault();
-
-    //console.log(formValues);
-
-    fetch(url, {
-      method: "PUT",
-      body: JSON.stringify({
-        role: "user",
-        logged: false,
-        username: username,
-        password: password,
-        email: email,
-        number: number,
-        cart: { count: 0, items: [] },
-        wishList: { count: 0, items: [] },
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-        "Accept-Encoding": "gzip, deflate, br",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data);
-
-        setOpenDialog(false);
-      })
-
-      .then(() => {
-        navigate("/signin", {
-          replace: true,
-        });
-      })
-
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   return (
-    <>
+    
       <form>
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
@@ -145,7 +105,7 @@ export default function Form({ item, setOpenDialog, operation }) {
                       id="category"
                       autoComplete="off"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder="Ccategoría del producto"
+                      placeholder="Categoría del producto"
                       onChange={handdleInputChange}
                     />
                   </div>
@@ -188,6 +148,7 @@ export default function Form({ item, setOpenDialog, operation }) {
                             name="inOffer"
                             type="checkbox"
                             value={inOffer}
+                           // checked={inOffer}
                             onChange={handdleInputChange}
                             className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                           />
@@ -213,6 +174,7 @@ export default function Form({ item, setOpenDialog, operation }) {
                             name="stocked"
                             type="checkbox"
                             value={stocked}
+                            //checked={stocked}
                             onChange={handdleInputChange}
                             className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                           />
@@ -358,7 +320,7 @@ export default function Form({ item, setOpenDialog, operation }) {
           )}
         </div>
       </form>
-      {/* { showModal && <Modal />} */}
-    </>
+   
+   
   );
 }
