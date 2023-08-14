@@ -11,7 +11,6 @@ import { persistStore } from "redux-persist";
 //app's reducers
 import { authReducer } from "@/reducers/authReducer";
 import { uiReducer } from "@/reducers/uiReducer";
-import { configureStore } from "@reduxjs/toolkit";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -21,7 +20,7 @@ const composeEnhancers =
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth", "ui"],
+  whitelist: ["auth"], // Solo se persistirá el estado "auth"
 };
 
 const reducers = combineReducers({
@@ -36,10 +35,4 @@ export const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
-export const persistor = persistStore(store)
-
-// export default  () => {
-//   let store = createStore(persistedReducer)
-//   let persistor = persistStore(store)
-//   return { store, persistor }
-// }
+export const persistor = persistStore(store);

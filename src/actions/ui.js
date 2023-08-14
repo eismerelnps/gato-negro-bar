@@ -1,5 +1,5 @@
 import { types } from "@/types/types";
-import { type } from "os";
+
 
 export const setError = ( msg ) => ({
   type: types.uiSetError,
@@ -13,6 +13,6 @@ export const removeError= () => ({
 export const startLoading = () => ({
   type: types.uiStartLoading
 })
-export const fisnishLoading = () => ({
+export const finishLoading = () => ({
   type: types.uiFinishLoading
 })
