@@ -10,19 +10,21 @@ returns a array of values
   1st: State value
   2nd: a function for changing the state
 */
-export const useForm = (initialState = {} ) => {
-  const [ values, setValues ] = useState(initialState);
-  
-  const reset = ( ) => {
+export const useForm = (initialState = {}) => {
+  const [values, setValues] = useState(initialState);
+
+  const reset = () => {
     setValues(initialState);
-  }
+  };
 
   const handleInputChange = ({ target }) => {
-    
+    const value = target.type === "checkbox" ? target.checked : target.value;
+
     setValues({
-        ...values,
-        [ target.name ]: target.value
+      ...values,
+      [target.name]: value,
     });
-  }
-  return [ values, handleInputChange, reset ]; 
-}
+  };
+
+  return [values, handleInputChange, reset];
+};
