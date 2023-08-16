@@ -137,8 +137,8 @@ export default function AdminPage({ products }) {
       )}
       <div className="flex justify-center m-4">
         <div
-          className=" border border-red-500 rounded-xl bg-red-50  hover:bg-red-100 text-red-500  flex flex-col items-center justify-center m-2 p-2  "
-          onClick={handleAddProduct}
+          className="focus:outline-none focus:ring focus:ring-slate-950 border border-red-500 rounded-xl  hover:bg-red-100 text-red-500  flex flex-col items-center justify-center m-2 p-2  "
+          //onClick={""}
         >
           <div className="">
             <PlusCircleIcon
@@ -151,7 +151,7 @@ export default function AdminPage({ products }) {
             <p
               className={`${gilda_display.className} text-sm text-center text-center `}
             >
-              Crear Producto Nuevo
+              Añadir nuevo
             </p>
           </div>
         </div>
