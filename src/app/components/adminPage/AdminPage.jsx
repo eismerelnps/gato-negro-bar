@@ -138,7 +138,7 @@ export default function AdminPage({ products }) {
       <div className="flex justify-center m-4">
         <div
           className="focus:outline-none focus:ring focus:ring-slate-950 border border-red-500 rounded-xl  hover:bg-red-100 text-red-500  flex flex-col items-center justify-center m-2 p-2  "
-          //onClick={""}
+          onClick={handleAddProduct}
         >
           <div className="">
             <PlusCircleIcon

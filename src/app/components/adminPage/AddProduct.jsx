@@ -31,12 +31,12 @@ export default function AddProduct({ product }) {
   //obtener el token del usuario desde el contexto
   const { token } = useSelector((state) => state.auth);
 
-  const handleAdd1 = (e) => {
-    e.preventDefault();
-    dispatch(startLoading());
-    //console.log(product);
-    //isFormValid();
-  };
+  // const handleAdd1 = (e) => {
+  //   e.preventDefault();
+  //   dispatch(startLoading());
+  //   //console.log(product);
+  //   //isFormValid();
+  // };
 
   const handleAdd = (e) => {
     e.preventDefault();

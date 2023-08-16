@@ -41,11 +41,11 @@ export const SignIn = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  const handleSignIn = (e) => {
-    e.preventDefault();
-  };
+  // const handleSignIn = (e) => {
+  //   e.preventDefault();
+  // };
 
-  const handleSignIn1 = (e) => {
+  const handleSignIn = (e) => {
     e.preventDefault();
 
     if (isFormValid()) {
