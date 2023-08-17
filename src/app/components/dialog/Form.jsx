@@ -22,9 +22,14 @@ import Modal from "./Modal";
 import { useState } from "react";
 import AddProduct from "../adminPage/AddProduct";
 import EditProduct from "../adminPage/EditProduct";
+import Image from "next/image";
+import { useDispatch } from "react-redux";
+
+//local imports
+import {startUploadingPhoto} from "@/actions/product"
 
 export default function Form({ item, setOpenDialog, operation }) {
-  // const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
   const [formValues, handdleInputChange] = useForm(item);
 
   const {
@@ -42,9 +47,15 @@ export default function Form({ item, setOpenDialog, operation }) {
     _id,
   } = formValues;
 
+  const test = (e) => {
+    console.log(formValues);
+  };
   const handleFileChange = (e) => {
-    //e.preventDefault();
-    console.log(e);
+    const file = e.target.files[0];
+    if (file) {
+      dispatch(startUploadingPhoto(file));
+    }
+    //console.log(file);
   };
 
   return (
@@ -265,6 +276,14 @@ export default function Form({ item, setOpenDialog, operation }) {
                   defaultValue={description}
                 />
               </div>
+              <Image
+                width={250}
+                height={250}
+                src={
+                  "https://res.cloudinary.com/de3tluzbk/image/upload/v1692221314/wudmx0kccnmpmdgbwwxa.jpg"
+                }
+                alt="image"
+              />
 
               <div class="col-span-full">
                 <label
@@ -289,12 +308,12 @@ export default function Form({ item, setOpenDialog, operation }) {
                     </svg>
                     <div class="mt-4 flex text-sm leading-6 text-gray-600">
                       <label
-                        for="file-upload"
+                        for="image"
                         class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                       >
                         <span>Seleccionar foto</span>
                         <input
-                          id="file-upload"
+                          id="image"
                           name="image"
                           type="file"
                           onChange={handleFileChange}
@@ -304,57 +323,21 @@ export default function Form({ item, setOpenDialog, operation }) {
                       <p class="pl-1">o arrastra y suelta</p>
                     </div>
                     <p class="text-xs leading-5 text-gray-600">
-                      PNG, JPG, GIF hasta 1MB
+                      PNG, JPG hasta 1MB
                     </p>
                   </div>
                 </div>
               </div>
               {/* <p className="mt-3 text-sm leading-6 text-gray-600">{description}</p> */}
             </div>
-
-            {/* <div className="col-span-full">
-              <label htmlFor="photo" className="block text-sm font-medium leading-6 text-gray-900">
-                Photo
-              </label>
-              <div className="mt-2 flex items-center gap-x-3">
-                <UserCircleIcon className="h-12 w-12 text-gray-300" aria-hidden="true" />
-                <button
-                  type="button"
-                  className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                >
-                  Change
-                </button>
-              </div>
-            </div> */}
-
-            {/* <div className="col-span-full">
-              <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
-                Cover photo
-              </label>
-              <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                <div className="text-center">
-                  <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
-                  <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                    <label
-                      htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                    >
-                      <span>Upload a file</span>
-                      <input id="file-upload" name="file-upload" type="file" className="sr-only" />
-                    </label>
-                    <p className="pl-1">or drag and drop</p>
-                  </div>
-                  <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
         <button
-          onClick={() => setOpenDialog(false)}
+          //onClick={() => setOpenDialog(false)}
+          onClick={test}
           type="button"
           className="text-sm font-semibold leading-6 text-gray-900"
         >
