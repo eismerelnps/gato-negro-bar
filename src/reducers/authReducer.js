@@ -2,8 +2,6 @@ import { types } from "../types/types";
 
 const initialState = {
   logged: false,
-  cart: { count: 0, items: [] },
-  wishList: { count: 0, items: [] },
 };
 
 export const authReducer = (state = initialState, action) => {

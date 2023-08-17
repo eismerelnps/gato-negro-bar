@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useContext, useRef, useState } from "react";
+import { Fragment,  useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -18,13 +18,11 @@ import AdminPage from "../adminPage/AdminPage";
 import { AdminRoute } from "../routes/AdminRoute";
 import { PrivateRoute } from "../routes/PrivateRoute";
 import { PubliceRoute } from "../routes/PublicRoute";
-import { types } from "@/types/types";
-import { AppContext } from "../appContext/AppContext";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { logout } from "@/actions/auth";
 import { useForm } from "@/hooks/useForm";
 import 'animate.css';
+import { useRouter, useSearchParams } from "next/navigation";
 
 const navigation = [
   { name: "Inicio", href: "/", current: false },
@@ -39,7 +37,6 @@ function classNames(...classes) {
 
 export default function NavBar() {
   const dispatch = useDispatch();
-  const ref = useRef();
   const router = useRouter();
   //const user = useSelector((state) => state.auth);
 
@@ -47,7 +44,7 @@ export default function NavBar() {
   const searchParams = useSearchParams()
  
   const searchParam = searchParams.get('search')
-  // const { user } = useContext(AppContext);
+  
 
   const [searching, setSearching] = useState(false);
 
@@ -71,7 +68,7 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="fixed top-0 w-full bg-slate-50  z-40">
+    <nav className="fixed top-0 w-full bg-slate-50  z-20">
       <Disclosure as="nav" className="">
         {({ open }) => (
           <>

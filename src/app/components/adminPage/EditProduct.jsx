@@ -1,43 +1,36 @@
+"use client";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import React, { useContext, useState } from "react";
 
 import { francois_one } from "@/fonts/francois_one";
 import { quicksand } from "@/fonts/quicksand";
 import { gilda_display } from "@/fonts/gilda_display";
-import { AppContext } from "../appContext/AppContext";
 import { useRouter } from "next/navigation";
 import BackDrop from "../backDrop/BackDrop";
 import Modal from "../dialog/Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  finishLoading,
+  removeError,
+  setError,
+  startLoading,
+} from "@/actions/ui";
+
+//get the endpoint of the api bd
+const url=process.env.NEXT_PUBLIC_DB_API_PRODUCTS
 
 export default function EditProduct({ product }) {
+  
+
+  const dispatch = useDispatch();
   const router = useRouter();
-  const url = "https://gato-negro-backend.onrender.com/api/v1/products";
 
-  const state = useSelector((state) => state.auth);
-  //console.log(user);
-   const { token } = state;
-
-  const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState({
-    alertType: "",
-    alertMessage: "",
-    showAlert: false,
-  });
-  const resetAlert = () => {
-    setAlert({
-      alertType: "",
-      alertMessage: "",
-      showAlert: false,
-    });
-  };
-  const { alertType, alertMessage, showAlert } = alert;
-
+  const { token } = useSelector((state) => state.auth);
 
   const handleEdit = (e) => {
-    setLoading(true);
     e.preventDefault();
-    const { _id } = product;
+   dispatch(startLoading());
+     const { _id } = product;
 
     fetch(`${url}/${_id}`, {
       method: "PUT",
@@ -51,48 +44,26 @@ export default function EditProduct({ product }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        router.refresh()
-        setLoading(false);
-        setAlert({
-          alertType: "success",
-          alertMessage: data.message,
-          showAlert: true,
-        });
-        //setShowModal(true);
-        // setOpenDialog(false);
+        dispatch(finishLoading());
+        dispatch(setError(data.message));
+        router.refresh();
       })
 
-      // .then(() => {
-      //   navigate("/signin", {
-      //     replace: true,
-      //   });
-      // })
-
       .catch((error) => {
-        console.log(error);
-        setLoading(false);
-        setAlert({
-          alertType: "error",
-          alertMessage:
-            "Se ha producido un error al crear el producto. Por favor, inténtelo de nuevo. Si el problema persiste, póngase en contacto con la administración.",
-          showAlert: true,
-        });
+        dispatch(finishLoading());
+        dispatch(
+          setError(
+            "Se ha producido un error al crear el producto. Por favor, inténtelo de nuevo. "
+          )
+        );
       });
   };
   return (
-    <>
-     <button
+    <button
       onClick={handleEdit}
       className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
     >
       Editar
     </button>
-    {loading && <BackDrop />}
-      {showAlert && (
-        <Modal message={alertMessage} open={showAlert} setOpen={resetAlert} />
-      )}
-    </>
-   
   );
 }

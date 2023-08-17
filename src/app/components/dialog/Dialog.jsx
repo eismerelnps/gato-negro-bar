@@ -19,13 +19,18 @@ export default function Example({
 
   //   const cancelButtonRef = useRef(null)
 
+  //this funtion avoids the dialog close when user click out of it
+  const closeFake = () => {
+
+  }
+
   return (
-    <div className="mt-16 z-30">
+    <div className="mt-16 ">
       <Transition.Root show={showDialog} as={Fragment}>
         <Dialog
           as="div"
-          className="relative z-50 "
-          onClose={() => setOpenDialog(false)}
+          className="relative  z-30 "
+          onClose={closeFake}
         >
           <Transition.Child
             as={Fragment}

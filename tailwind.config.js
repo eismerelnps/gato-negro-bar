@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}", // Note the addition of the `app` directory.
@@ -9,7 +10,12 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      'xs': '374px',
+      ...defaultTheme.screens
+    },
     extend: {
+     
       animation: {
         'spin': 'spin 3s linear infinite',
       },

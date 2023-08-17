@@ -1,59 +1,51 @@
 import { types } from "@/types/types";
+//import { setMessage, startLoading } from "./ui";
 
-export const startLoginWithUserAndPassword = (username, password) => {
-  return (dispatch) => {
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-        "Accept-Encoding": "gzip, deflate, br",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        //setLoading(false);
-        // setAlert({
-        //   alertType: "success",
-        //   alertMessage: data.message,
-        //   showAlert: true,
-        // });
+//const url = "https://gato-negro-backend.onrender.com/api/v1/users/login";
 
-        if (data.user) {
-          dispatch(login(data.user, data.token));
-          //   console.log(data.user);
-          //   // const action = {
-          //   //   type: types.login,
-          //   //   payload: {
-          //   //     user: data.user,
-          //   //     token: data.token,
-          //   //   },
-        }
+// export const startLoginWithUserAndPassword = (username, password) => {
 
-        //   //dispatch(startLogin(data.user, data.token));
+//   return (dispatch) => {
+//     dispatch(startLoading())
+//     fetch(url, {
+//       method: "POST",
+//       body: JSON.stringify({
+//         username: username,
+//         password: password,
+//       }),
+//       headers: {
+//         "Content-Type": "application/json",
+//         Accept: "*/*",
+//         "Accept-Encoding": "gzip, deflate, br",
+//       },
+//     })
+//       .then((response) => response.json())
+//       .then((data) => {
 
-        router.replace("/");
-        // }
-      })
-      .catch((error) => {
-        console.log(error);
-        //setLoading(false);
-        // setAlert({
-        //   alertType: "error",
-        //   alertMessage: "Se ha producido un error al iniciar sesión.",
-        //   showAlert: true,
-        // });
-      });
+//         dispatch(setMessage(data.message));
+//         if (data.user) {
+//           dispatch(login(data.user, data.token));
 
-    // setTimeout(() => {
-    //   dispatch(login(username, "4541qwqwqw"));
-    // }, 3500);
-  };
-};
+//         }
+
+//         router.replace("/");
+//         // }
+//       })
+//       .catch((error) => {
+//         dispatch(
+//           setError(
+//             "Se ha producido un error al crear su cuenta. Por favor, inténtelo de nuevo. Si el problema persiste, póngase en contacto con la administración."
+//           )
+//         );
+//         console.log(error);
+
+//       });
+//       // dispatch(fisnishLoading());
+//       // dispatch(removeError());
+//       // dispatch(removeMessage());
+
+//   };
+// };
 
 export const login = (user, token) => ({
   type: types.login,
@@ -62,12 +54,17 @@ export const login = (user, token) => ({
     token,
   },
 });
+export const signin = (user, token) => ({
+  type: types.login,
+  payload: {
+    user,
+    token
+  }
+})
 
 export const logout = () => ({
   type: types.logout,
   payload: {
     logged: false,
-    cart: { count: 0, items: [] },
-    wishList: { count: 0, items: [] },
   },
 });

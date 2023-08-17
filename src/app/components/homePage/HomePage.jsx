@@ -2,7 +2,7 @@ import { francois_one } from "@/fonts/francois_one";
 import { gilda_display } from "@/fonts/gilda_display";
 import { quicksand } from "@/fonts/quicksand";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
-import { LockClosed, LockOpen } from "heroicons-react";
+// import { LockClosed, LockOpen } from "heroicons-react";
 
 import Image from "next/image";
 
@@ -11,68 +11,32 @@ import Link from "next/link";
 import ServiceClosed from "../service/ServiceClosed";
 import ServiceOpen from "../service/ServiceOpen";
 
-const about_us = [
-  {
-    name: "Sobre Nosotros",
-    description:
-      "En Cafetería Gato Negro de Alamar, nuestra historia es una mezcla de pasión por la gastronomía y el deseo de crear un espacio acogedor donde cada cliente se sienta como en casa. Desde nuestros humildes comienzos, hemos evolucionado para convertirnos en un destino culinario imprescindible en la comunidad de Alamar.",
-    id: "001",
-  },
-  {
-    name: "Nuestra Misión",
-    description:
-      "Nuestra misión es simple: deleitar los paladares de nuestros clientes con sabores auténticos y experiencias inolvidables. Nos esforzamos por superar las expectativas en cada plato que servimos, utilizando ingredientes frescos y de la más alta calidad para crear delicias que enamoren a todos.",
-    id: "002",
-  },
-  {
-    name: "Compromiso con la Calidad",
-    description:
-      "En Cafetería Gato Negro de Alamar, la calidad es nuestra máxima prioridad. Cada uno de nuestros panes, pizzas, confituras, dulces y tragos es preparado con esmero y cuidado, manteniendo los estándares más altos en cada paso del proceso. Queremos que cada visita sea una experiencia excepcional y un recordatorio de que la pasión por la buena comida se puede sentir en cada bocado.",
-    id: "003",
-  },
-  {
-    name: "Nuestro Equipo",
-    href: "Detrás de cada plato delicioso se encuentra un equipo de profesionales apasionados por lo que hacen. Nuestros talentosos chefs, panaderos y baristas son el corazón de Cafetería Gato Negro de Alamar, y su dedicación se refleja en la calidad de cada creación. Trabajamos juntos para asegurarnos de que cada cliente se vaya con una sonrisa y el deseo de volver pronto.",
-    id: "004",
-  },
-  {
-    name: "Comunidad y Hospitalidad",
-    description:
-      "Para nosotros, Cafetería Gato Negro de Alamar es más que un negocio; es un lugar donde construimos conexiones con nuestra comunidad. Nos enorgullecemos de brindar un ambiente cálido y acogedor, donde amigos y familiares pueden reunirse, compartir momentos especiales y disfrutar de una excelente comida juntos.",
-    id: "005",
-  },
-  {
-    name: "Ven a Conocernos",
-    href: "Te invitamos a visitar nuestra cafetería y experimentar por ti mismo lo que nos hace especiales. Nuestro equipo te recibirá con una sonrisa y te guiará a través de un mundo de sabores y aromas que te dejarán con ganas de regresar una y otra vez.",
-    id: "006",
-  },
-];
+
 
 import cover from "../../../../public/cover.jpg";
 import home_gato_negro from "../../../../public/home_gato_negro.jpeg";
 
-import banner_rounded from "../../../../public/banner_rounded.png";
-import banner_rounded_2 from "../../../../public/banner_rounded_2.png";
-import huella_gato_negro from "../../../../public/huella_gato_negro.png";
-import banner_vertical from "../../../../public/banner_vertical.jpg";
-import hamburger_bg_black from "../../../../public/wallpapers/hamburger_bg_black.jpg";
-import hamburger_bg_colored from "../../../../public/wallpapers/hamburger_bg_colored.jpg";
+// import banner_rounded from "../../../../public/banner_rounded.png";
+// import banner_rounded_2 from "../../../../public/banner_rounded_2.png";
+// import huella_gato_negro from "../../../../public/huella_gato_negro.png";
+// import banner_vertical from "../../../../public/banner_vertical.jpg";
+// import hamburger_bg_black from "../../../../public/wallpapers/hamburger_bg_black.jpg";
+ import hamburger_bg_colored from "../../../../public/wallpapers/hamburger_bg_colored.jpg";
 
-import black_cat_bg_white from "../../../../public/wallpapers/black_cat_bg_white.jpg";
-import black_cat_black from "../../../../public/wallpapers/black_cat_black.jpg";
-import black_cat from "../../../../public/wallpapers/black_cat.jpg";
-import black_cat_2 from "../../../../public/wallpapers/black_cat_2.jpg";
-import pizza from "../../../../public/wallpapers/pizza.jpg";
-import pizza_2 from "../../../../public/wallpapers/pizza_2.jpg";
+// import black_cat_bg_white from "../../../../public/wallpapers/black_cat_bg_white.jpg";
+// import black_cat_black from "../../../../public/wallpapers/black_cat_black.jpg";
+// import black_cat from "../../../../public/wallpapers/black_cat.jpg";
+ import black_cat_2 from "../../../../public/wallpapers/black_cat_2.jpg";
+// import pizza from "../../../../public/wallpapers/pizza.jpg";
+// import pizza_2 from "../../../../public/wallpapers/pizza_2.jpg";
 
-import InOffer from "../inOffer/InOffer";
-import BackDrop from "../backDrop/BackDrop";
+// import InOffer from "../inOffer/InOffer";
+// import BackDrop from "../backDrop/BackDrop";
 
 //animation library
 import 'animate.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { icon } from "@fortawesome/fontawesome-svg-core";
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import SlideshowADS from "../Slideshow/SlideshowWIthControls";
 
 // //Font Awensome Icon library
 
@@ -88,6 +52,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 // // 'solid' is the default style, you can leave that off
 // icon({name: 'user'})
+
 
 
 export function HomePage() {
@@ -122,6 +87,7 @@ export function HomePage() {
             </p>
           </div>
         </div>
+        <SlideshowADS />
 
         <div>{open ? <ServiceOpen /> : <ServiceClosed />}</div>
 
