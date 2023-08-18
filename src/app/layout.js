@@ -32,7 +32,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const id = "js?id=G-YBZYKQ4HNF";
+  const id = process.env.NEXT_PUBLIC_ANALYTICS_ID;
 
   //const persistor
 

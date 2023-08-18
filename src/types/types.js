@@ -9,7 +9,8 @@ export const types = {
     
     addProduct: '[admin] AddProduct',
     editProduct: '[admin] EditProduct',
-    deleteProduct: '[admin] DeleteProduct', 
+    deleteProduct: '[admin] DeleteProduct',
+    resetProduct: '[admin] ResetProduct', 
 
     uiSetError: '[UI] uiSetError',
     uiRemoveError: '[UI] uiRemoveError',

@@ -23,14 +23,16 @@ import { useState } from "react";
 import AddProduct from "../adminPage/AddProduct";
 import EditProduct from "../adminPage/EditProduct";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 //local imports
-import {startUploadingPhoto} from "@/actions/product"
+import { resetProduct, startUploadingPhoto } from "@/actions/product";
 
 export default function Form({ item, setOpenDialog, operation }) {
   const dispatch = useDispatch();
-  const [formValues, handdleInputChange] = useForm(item);
+  const product = useSelector((state) => state.product);
+
+  const [formValues, handdleInputChange, reset] = useForm(product);
 
   const {
     category,
@@ -49,7 +51,9 @@ export default function Form({ item, setOpenDialog, operation }) {
 
   const test = (e) => {
     console.log(formValues);
+    console.log(product);
   };
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -57,6 +61,10 @@ export default function Form({ item, setOpenDialog, operation }) {
     }
     //console.log(file);
   };
+  const handdleCancel = () => {
+     setOpenDialog(false);
+     dispatch(resetProduct())
+  }
 
   return (
     <form>
@@ -276,14 +284,14 @@ export default function Form({ item, setOpenDialog, operation }) {
                   defaultValue={description}
                 />
               </div>
-              <Image
+              {/* <Image
                 width={250}
                 height={250}
                 src={
                   "https://res.cloudinary.com/de3tluzbk/image/upload/v1692221314/wudmx0kccnmpmdgbwwxa.jpg"
                 }
                 alt="image"
-              />
+              /> */}
 
               <div class="col-span-full">
                 <label
@@ -336,18 +344,14 @@ export default function Form({ item, setOpenDialog, operation }) {
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
         <button
-          //onClick={() => setOpenDialog(false)}
-          onClick={test}
+          onClick={handdleCancel}
+          //onClick={test}
           type="button"
           className="text-sm font-semibold leading-6 text-gray-900"
         >
           Cancelar
         </button>
-        {operation === "ADD" ? (
-          <AddProduct product={formValues} />
-        ) : (
-          <EditProduct product={formValues} />
-        )}
+        {operation === "ADD" ? <AddProduct /> : <EditProduct />}
       </div>
     </form>
   );

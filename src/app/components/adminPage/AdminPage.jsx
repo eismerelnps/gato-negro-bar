@@ -19,8 +19,11 @@ import {
   PlusCircleIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
+import { useDispatch } from "react-redux";
+import { addProduct, resetProduct } from "@/actions/product";
 
-export default function AdminPage({ products }) {
+export default function AdminPage({ products = [] }) {
+  const dispatch = useDispatch();
   const [showDialog, setOpenDialog] = useState({
     showDialogOpen: false,
     operation: "",
@@ -64,54 +67,18 @@ export default function AdminPage({ products }) {
 
   const categoricedProducts = categorizeProducts(products);
 
-  const handleOpenEdit = (
-    _id,
-    category,
-    name,
-    description,
-    currency,
-    price,
-    offerPrice,
-    stocked,
-    inOffer,
-    image,
-    rating,
-    reviews
-  ) => {
-    setItem({
-      _id: _id,
-      category: category,
-      name: name,
-      description: description,
-      currency: currency,
-      price: price,
-      offerPrice: offerPrice,
-      stocked: stocked,
-      inOffer: inOffer,
-      image: image,
-      rating: rating,
-      reviews: reviews,
-    });
+  const handleOpenEdit = (current) => {
+    dispatch( addProduct(current))
+    
     setOpenDialog({
       showDialogOpen: true,
       operation: "EDIT",
     });
   };
   const handleAddProduct = () => {
-    setItem({
-      _id: "",
-      category: "",
-      name: "",
-      description: "",
-      currency: "CUP",
-      price: "",
-      offerPrice: "",
-      stocked: false,
-      inOffer: false,
-      image: [""],
-      rating: null,
-      reviews: [""],
-    });
+    dispatch(resetProduct());
+    
+
     setOpenDialog({
       showDialogOpen: true,
       operation: "ADD",
@@ -124,7 +91,6 @@ export default function AdminPage({ products }) {
         <Example
           showDialog={showDialogOpen}
           setOpenDialog={resetDialog}
-          item={item}
           operation={operation}
         />
       )}
@@ -132,7 +98,7 @@ export default function AdminPage({ products }) {
         <DeleteProduct
           open={openDelete}
           setOpen={resetDeleteDialog}
-          id={itemToDelete._id}
+          id={itemToDelete}
         />
       )}
       <div className="flex justify-center m-4">
@@ -182,127 +148,96 @@ export default function AdminPage({ products }) {
             </div>
             <br />
             <div className="flex flex-wrap sm:flex-col md:flex-row justify-center">
-              {product.items.map(
-                ({
-                  _id,
-                  category,
-                  name,
-                  description,
-                  currency,
-                  price,
-                  offerPrice,
-                  stocked,
-                  inOffer,
-                  image,
-                  rating,
-                  reviews,
-                }) => (
-                  <div
-                    key={_id}
-                    className="basis-full bg-slate-50 rounded-xl md:basis-2/5 m-4 p-4"
-                  >
-                    <div className="flex flex-row mb-4 ">
-                      <div className="basis-3/4">
-                        <p
-                          className={`${quicksand.className}  text-xl text-blue-950`}
-                        >
-                          {name}
-                        </p>
-                        {/* <p>{_id}</p> */}
-                        <p
-                          className={`${gilda_display.className} text-md text-gray-900`}
-                        >
-                          {product.category}
-                        </p>
-
-                        {/* <span>{stockAmount}</span> */}
-                        {inOffer && <span>En Oferta</span>}
-                        <span>{rating}</span>
-                      </div>
-
-                      <div className="basis-1/4 text-end">
-                        <p
-                          className={`${gilda_display.className}  text-green-600 text-lg font-bold`}
-                        >
-                          {price}
-                        </p>
-                        <span
-                          className={`${quicksand.className} text-green-950`}
-                        >
-                          {currency}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div>
+              {product.items.map((current) => (
+                <div
+                  key={current._id}
+                  className="basis-full bg-slate-50 rounded-xl md:basis-2/5 m-4 p-4"
+                >
+                  <div className="flex flex-row mb-4 ">
+                    <div className="basis-3/4">
                       <p
-                        className={`${gilda_display.className} text-sm text-start text-slate-950 text-center `}
+                        className={`${quicksand.className}  text-xl text-blue-950`}
                       >
-                        Descripción:
+                        {current.name}
                       </p>
+                      {/* <p>{_id}</p> */}
                       <p
-                        className={`${quicksand.className} text-lg text-start text-slate-950 text-center `}
+                        className={`${gilda_display.className} text-md text-gray-900`}
                       >
-                        {description}
+                        {product.category}
                       </p>
-                    </div>
-                    <div className="flex flex-row justify-end space-x-2">
-                      <div
-                        className="basis-1/5 items-center   hover:bg-red-100 hover:rounded-full  flex flex-col justify-center text-red-500   "
-                        onClick={() =>
-                          handleOpenEdit(
-                            _id,
-                            category,
-                            name,
-                            description,
-                            currency,
-                            price,
-                            offerPrice,
-                            stocked,
-                            inOffer,
-                            image,
-                            rating,
-                            reviews,
-                            <Form item={item} />
-                          )
-                        }
-                      >
-                        <PencilSquareIcon
-                          className="block h-4 w-4  "
-                          aria-hidden="true"
-                        />
-                        <p
-                          className={`${gilda_display.className} text-sm text-center `}
-                        >
-                          Editar
-                        </p>
-                      </div>
-                      <div
-                        // onClick={ () => handleDeleteProduct(_id)}
-                        onClick={() =>
-                          setOpenDeleteDialog({
-                            openDelete: true,
-                            itemToDelete: { _id },
-                          })
-                        }
-                        className="basis-1/5 items-center   hover:bg-red-100 hover:rounded-full  flex flex-col justify-center text-red-500  "
-                      >
-                        <TrashIcon
-                          className="block h-4 w-6  text-center"
-                          aria-hidden="true"
-                        />
-                        <p
-                          className={`${gilda_display.className} text-sm text-center  text-center `}
-                        >
-                          Eliminar
-                        </p>
-                      </div>
+
+                      {/* <span>{stockAmount}</span> */}
+                      {current.inOffer && <span>En Oferta</span>}
+                      <span>{current.rating}</span>
                     </div>
 
-                    <hr />
+                    <div className="basis-1/4 text-end">
+                      <p
+                        className={`${gilda_display.className}  text-green-600 text-lg font-bold`}
+                      >
+                        {current.price}
+                      </p>
+                      <span className={`${quicksand.className} text-green-950`}>
+                        {current.currency}
+                      </span>
+                    </div>
                   </div>
-                )
-              )}
+
+                  <div>
+                    <p
+                      className={`${gilda_display.className} text-sm text-start text-slate-950 text-center overflow-hidden whitespace-normal`}
+                    >
+                      Descripción:
+                    </p>
+                    <p
+                      className={`${quicksand.className} text-lg text-start text-slate-950 text-center whitespace-normal max-w-sm `}
+                    >
+                      {current.description}
+                    </p>
+                  </div>
+                  <div className="flex flex-row justify-end space-x-2">
+                    <div
+                      className="basis-1/5 items-center   hover:bg-red-100 hover:rounded-full  flex flex-col justify-center text-red-500   "
+                      onClick={() =>
+                        handleOpenEdit(current)
+                      }
+                    >
+                      <PencilSquareIcon
+                        className="block h-4 w-4  "
+                        aria-hidden="true"
+                      />
+                      <p
+                        className={`${gilda_display.className} text-sm text-center `}
+                      >
+                        Editar
+                      </p>
+                    </div>
+                    <div
+                      // onClick={ () => handleDeleteProduct(_id)}
+                      onClick={() =>
+                        setOpenDeleteDialog({
+                          openDelete: true,
+                          itemToDelete:  current._id,
+                        })
+                      }
+                      className="basis-1/5 items-center   hover:bg-red-100 hover:rounded-full  flex flex-col justify-center text-red-500  "
+                    >
+                      <TrashIcon
+                        className="block h-4 w-6  text-center"
+                        aria-hidden="true"
+                      />
+                      <p
+                        className={`${gilda_display.className} text-sm text-center  text-center `}
+                      >
+                        Eliminar
+                      </p>
+                    </div>
+                  </div>
+
+                  <hr />
+                </div>
+              ))}
               <br className="bg-white" />
             </div>
           </div>

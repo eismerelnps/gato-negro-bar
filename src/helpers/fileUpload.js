@@ -1,6 +1,5 @@
 export const fileUpload = async (file) => {
-  const cloudURL = "https://api.cloudinary.com/v1_1/de3tluzbk/upload";
-
+  const cloudURL = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_API
   const formData = new FormData();
   formData.append("upload_preset","gatonegro");
   formData.append("file",file);
