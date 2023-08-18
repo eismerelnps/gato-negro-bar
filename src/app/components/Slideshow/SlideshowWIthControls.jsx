@@ -5,19 +5,25 @@ import PropTypes from "prop-types";
 import Image from "next/image";
 
 //Slideshow Images
-import chupa_chupa from "../../../../public/slideshow/chupa_chupa.jpeg";
-import havana_club_3_annos from "../../../../public/slideshow/havana_club_3_annos.jpeg";
-import havana_club_profundo from "../../../../public/slideshow/havana_club_profundo.jpeg";
-import mani_grano from "../../../../public/slideshow/mani_grano.jpeg";
-import mantequilla_mani from "../../../../public/slideshow/mantequilla_mani.jpeg";
-import pizza from "../../../../public/slideshow/pizza.jpeg";
+import cocacola from "../../../../public/slideshow/cocacola.jpg";
+
+import maripitas from "../../../../public/slideshow/maripitas.jpeg";
+import havana_club_3_annos from "../../../../public/slideshow/havana_club_3_annos.jpg";
+import havana_club_profundo from "../../../../public/slideshow/havana_club_profundo.jpg";
+import mani_grano from "../../../../public/slideshow/mani_grano.jpg";
+import mantequilla_mani from "../../../../public/slideshow/mantequilla_mani.jpg";
+import pizza from "../../../../public/slideshow/pizza.jpg";
 import rothmans_morado from "../../../../public/slideshow/rothmans_morado.jpeg";
 import turron_panfilo from "../../../../public/slideshow/turron_panfilo.jpeg";
 import { useRouter } from "next/navigation";
 
 const slides = [
   {
-    image: chupa_chupa,
+    image: cocacola,
+    alt: "",
+  },
+  {
+    image: maripitas,
     alt: "",
   },
   {
@@ -75,8 +81,8 @@ const SlideshowADS = () => {
   }
   return (
     <div
-    onClick={handleToMenu}
-      className={`slideshow mt-1 relative overflow-hidden w-full h-[150px] xs:h-[200px] sm:h-[400px] lg:h-[500px] xl:h-screen`}
+   
+      className={`slideshow mt-1 relative overflow-hidden w-full h-[150px] xs:h-[200px] sm:h-[400px] lg:h-[500px] xl:h-[800]`}
     >
       {slides.map(({ image, alt }, i) => (
         <Image
