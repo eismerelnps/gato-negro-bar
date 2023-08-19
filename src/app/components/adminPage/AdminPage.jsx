@@ -187,7 +187,7 @@ export default function AdminPage({ products = [] }) {
                           />
                         ) : (
                           <svg
-                            class="mx-auto h-20 w-20 text-white"
+                            class="mx-auto h-20 w-20 text-neutral-300"
                             viewBox="0 0 24 24"
                             fill="currentColor"
                             aria-hidden="true"
