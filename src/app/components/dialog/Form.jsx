@@ -27,10 +27,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 //local imports
 import { resetProduct, startUploadingPhoto } from "@/actions/product";
+import {finishUpLoadingImage, startUpLoadingImage} from "@/actions/ui";
 
 export default function Form({ item, setOpenDialog, operation }) {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product);
+  const { uploadingImage } = useSelector((state) => state.ui);
+  //console.log(uploadingImage)
 
   const [formValues, handdleInputChange, reset] = useForm(product);
 
@@ -57,11 +60,16 @@ export default function Form({ item, setOpenDialog, operation }) {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      //modifica la UI en el formulario para mostrar un spinner indicando que la imagen se esta subiendo
+      dispatch(startUpLoadingImage());
+      //llama a la funcion que se encarga de subir la imagen
       dispatch(startUploadingPhoto(file));
+      
     }
     //console.log(file);
   };
   const handdleCancel = () => {
+  
     setOpenDialog(false);
     dispatch(resetProduct());
   };
@@ -285,60 +293,109 @@ export default function Form({ item, setOpenDialog, operation }) {
                 />
               </div>
 
-              <div class="col-span-full">
+              <div className="col-span-full">
                 <label
                   for="cover-photo"
-                  class="block text-sm font-medium leading-6 text-gray-900"
+                  className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Foto
                 </label>
-                <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                  <div class="">
+                <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                  <div className="">
                     <div className="flex justify-center">
-                    {image[0] ? (
-                      <Image
-                        className="rounded-lg text-center"
-                        width={70}
-                        height={50}
-                        src={image[0]}
-                        alt={"alt"}
-                      />
-                    ) : (
-                      <svg
-                        class="mx-auto h-20 w-20 text-white"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                    )}
-                    </div>
+                      {uploadingImage ? (
+                        <div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                            stroke="currentColor"
+                            className="w-20 h-20 animate-spin text-neutral-500"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                            />
+                          </svg>
+                          <h2 className=" mt-4 text-center text-xs leading-5 text-gray-600">
+                            Subiendo foto...
+                              </h2>
+                        </div>
+                      ) : (
+                        <div className="">
+                          {image[0] ? (
+                            <div >
+                              <div className="flex justify-center">
+                                <Image
+                              className="rounded-lg text-center"
+                              width={70}
+                              height={50}
+                              src={image[0]}
+                              alt={"alt"}
+                            />
+                              </div>
+                              
+                            
+                              <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                                <label
+                                  for="image"
+                                  className=" text-center relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                                >
+                                  <span className=" text-center">Cambiar foto</span>
+                                  <input
+                                    id="image"
+                                    name="image"
+                                    type="file"
+                                    onChange={handleFileChange}
+                                    className="sr-only "
+                                  />
+                                </label>
+                              </div>
+                              <p className="text-xs text-center leading-5 text-gray-600">
+                                PNG, JPG hasta 1MB
+                              </p>
+                            </div>
 
-                   
-                    <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                      <label
-                        for="image"
-                        class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                      >
-                        <span>Seleccionar foto</span>
-                        <input
-                          id="image"
-                          name="image"
-                          type="file"
-                          onChange={handleFileChange}
-                          class="sr-only"
-                        />
-                      </label>
-                     
+                            
+                          ) : (
+                            <div>
+                              <svg
+                                className="mx-auto h-20 w-20 text-neutral-300 animate-pulse"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+                                  clip-rule="evenodd"
+                                />
+                              </svg>
+                              <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                                <label
+                                  for="image"
+                                  className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                                >
+                                  <span>Seleccionar foto</span>
+                                  <input
+                                    id="image"
+                                    name="image"
+                                    type="file"
+                                    onChange={handleFileChange}
+                                    className="sr-only"
+                                  />
+                                </label>
+                              </div>
+                              <p className="text-xs leading-5 text-gray-600">
+                                PNG, JPG hasta 1MB
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
-                    <p class="text-xs leading-5 text-gray-600">
-                      PNG, JPG hasta 1MB
-                    </p>
                   </div>
                 </div>
               </div>

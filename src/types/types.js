@@ -16,5 +16,8 @@ export const types = {
     uiRemoveError: '[UI] uiRemoveError',
 
     uiStartLoading: '[UI] Start Loading',
-    uiFinishLoading: '[UI] Finish Loading'
+    uiFinishLoading: '[UI] Finish Loading',
+
+    uiStartUpLoadingImage: '[UI] Start UpLoading Image',
+    uiFinishUpLoadingImage : '[UI] Finish UpLoading Image'
 }

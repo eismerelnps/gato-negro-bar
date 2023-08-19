@@ -31,7 +31,7 @@ export const MenuCard = ({ items }) => {
               width={50}
               height={50}
               src={image[0]}
-              alt={"alt"}
+              alt={name}
             />
           ) : (
             <svg

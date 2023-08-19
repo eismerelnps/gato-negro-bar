@@ -4,6 +4,8 @@ const initialState = {
   loading: false,
   showFeedback: false,
   msgError: null,
+  uploadingImage: false,
+  cloudImageMessage: ''
 };
 
 export const uiReducer = (state = initialState, action) => {
@@ -30,6 +32,16 @@ export const uiReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+      };
+      case types.uiStartUpLoadingImage:
+      return {
+        ...state,
+        uploadingImage: true,
+      };
+    case types.uiFinishUpLoadingImage:
+      return {
+        ...state,
+        uploadingImage: false,
       };
     default:
       return state;

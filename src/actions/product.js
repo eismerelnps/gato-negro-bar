@@ -1,6 +1,11 @@
 import { fileUpload } from "@/helpers/fileUpload";
 import { types } from "@/types/types";
-import { finishLoading, setError, startLoading } from "./ui";
+import {
+  finishLoading,
+  finishUpLoadingImage,
+  setError,
+  startLoading,
+} from "./ui";
 import { useRouter } from "next/navigation";
 
 //get the endpoint of the api bd
@@ -79,8 +84,7 @@ export const startDeletingProduct = (id) => {
   return async (dispatch, getState) => {
     const { token } = getState().auth;
     //const product = getState().product;
-   
-  
+
     dispatch(startLoading());
     fetch(`${url}/${id}`, {
       method: "DELETE",
@@ -107,9 +111,8 @@ export const startDeletingProduct = (id) => {
           )
         );
       });
-  
-  }
-}
+  };
+};
 
 //accion para agregar un nuevo producto
 export const addProduct = (product) => ({
@@ -150,6 +153,7 @@ export const startUploadingPhoto = (file) => {
     //   "https://res.cloudinary.com/de3tluzbk/image/upload/v1692321453/llqovdfcsjtwzxemwv1e.jpg";
     if (fileUrl) {
       dispatch(editProduct("image", fileUrl));
+      dispatch(finishUpLoadingImage());
     }
   };
 };
