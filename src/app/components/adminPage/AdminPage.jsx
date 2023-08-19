@@ -21,6 +21,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
 import { addProduct, resetProduct } from "@/actions/product";
+import Image from "next/image";
+import { MenuCard } from "../menu/MenuCard";
 
 export default function AdminPage({ products = [] }) {
   const dispatch = useDispatch();
@@ -68,8 +70,8 @@ export default function AdminPage({ products = [] }) {
   const categoricedProducts = categorizeProducts(products);
 
   const handleOpenEdit = (current) => {
-    dispatch( addProduct(current))
-    
+    dispatch(addProduct(current));
+
     setOpenDialog({
       showDialogOpen: true,
       operation: "EDIT",
@@ -77,7 +79,6 @@ export default function AdminPage({ products = [] }) {
   };
   const handleAddProduct = () => {
     dispatch(resetProduct());
-    
 
     setOpenDialog({
       showDialogOpen: true,
@@ -125,120 +126,112 @@ export default function AdminPage({ products = [] }) {
 
       <hr />
       <div className="mt-2 ">
-        <h1
-          className={` ${francois_one.className} sticky top-16  text-xl text-slate-950 text-center mx-4  bg-white  border border-slate-300 rounded-t-xl`}
-        >
-          Productos en Oferta
-        </h1>
         {categoricedProducts.map((product) => (
           <div key={product.category} className="">
-            <div
-              className={`${francois_one.className} sticky top-16  text-2xl text-slate-950 text-center mx-4 mb-4 bg-slate-100 border border-slate-300 rounded-b-xl z-10 `}
-            >
-              <span
-                className={`${quicksand.className} text-sm text-slate-950 text-center `}
-              >
-                Categoría:
-              </span>
-              <h1
-                className={`${francois_one.className} text-xl text-slate-950 text-center `}
-              >
+            <div className=" animate__animated animate__flash bg-gradient-to-r from-white rounded-br-3xl  text-2xl text-slate-950 text-start md:text-center mt-4  pt-4 sticky top-16  z-10">
+              <h1 className={`${francois_one.className}  `}>
                 {product.category}
               </h1>
             </div>
             <br />
-            <div className="flex flex-wrap sm:flex-col md:flex-row justify-center">
+            <div className="flex flex-wrap flex-col md:flex-row justify-center">
               {product.items.map((current) => (
-                <div
-                  key={current._id}
-                  className="basis-full bg-slate-50 rounded-xl md:basis-2/5 m-4 p-4"
-                >
-                  <div className="flex flex-row mb-4 ">
-                    <div className="basis-3/4">
-                      <p
-                        className={`${quicksand.className}  text-xl text-blue-950`}
+                <>
+                  <div className="   animate__animated animate__backInLeft animate__fast duration-400 max-w-sm basis-1/2  md:basis-2/5  bg-gradient-to-r from-white to-neutral-300 hover:bg-gradient-to-t hover:from-neutral-50  mx-3 px-4 pt-2 pb-4 my-2 text-start border  rounded-xl shadow-xl outline-2  ">
+                    <div className="flex flex-row justify-center  m-0.5 mb-4">
+                      <div
+                        className="basis-1/5 items-center hover:bg-red-100 hover:rounded-3xl  flex flex-col justify-center text-red-500   "
+                        onClick={() => handleOpenEdit(current)}
                       >
-                        {current.name}
-                      </p>
-                      {/* <p>{_id}</p> */}
-                      <p
-                        className={`${gilda_display.className} text-md text-gray-900`}
-                      >
-                        {product.category}
-                      </p>
-
-                      {/* <span>{stockAmount}</span> */}
-                      {current.inOffer && <span>En Oferta</span>}
-                      <span>{current.rating}</span>
-                    </div>
-
-                    <div className="basis-1/4 text-end">
-                      <p
-                        className={`${gilda_display.className}  text-green-600 text-lg font-bold`}
-                      >
-                        {current.price}
-                      </p>
-                      <span className={`${quicksand.className} text-green-950`}>
-                        {current.currency}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div>
-                    <p
-                      className={`${gilda_display.className} text-sm text-start text-slate-950 text-center overflow-hidden whitespace-normal`}
-                    >
-                      Descripción:
-                    </p>
-                    <p
-                      className={`${quicksand.className} text-lg text-start text-slate-950 text-center whitespace-normal max-w-sm `}
-                    >
-                      {current.description}
-                    </p>
-                  </div>
-                  <div className="flex flex-row justify-end space-x-2">
-                    <div
-                      className="basis-1/5 items-center   hover:bg-red-100 hover:rounded-full  flex flex-col justify-center text-red-500   "
-                      onClick={() =>
-                        handleOpenEdit(current)
-                      }
-                    >
-                      <PencilSquareIcon
-                        className="block h-4 w-4  "
-                        aria-hidden="true"
-                      />
-                      <p
+                        <PencilSquareIcon
+                          className="block h-6 w-5 hover:w-6 "
+                          aria-hidden="true"
+                        />
+                        {/* <p
                         className={`${gilda_display.className} text-sm text-center `}
                       >
                         Editar
-                      </p>
-                    </div>
-                    <div
-                      // onClick={ () => handleDeleteProduct(_id)}
-                      onClick={() =>
-                        setOpenDeleteDialog({
-                          openDelete: true,
-                          itemToDelete:  current._id,
-                        })
-                      }
-                      className="basis-1/5 items-center   hover:bg-red-100 hover:rounded-full  flex flex-col justify-center text-red-500  "
-                    >
-                      <TrashIcon
-                        className="block h-4 w-6  text-center"
-                        aria-hidden="true"
-                      />
-                      <p
+                      </p> */}
+                      </div>
+                      <div
+                        // onClick={ () => handleDeleteProduct(_id)}
+                        onClick={() =>
+                          setOpenDeleteDialog({
+                            openDelete: true,
+                            itemToDelete: current._id,
+                          })
+                        }
+                        className="basis-1/5 items-center hover:bg-red-100 hover:rounded-full  flex flex-col justify-center text-red-500  "
+                      >
+                        <TrashIcon
+                          className="block h-5 w-5 hover:w-6 text-center"
+                          aria-hidden="true"
+                        />
+                        {/* <p
                         className={`${gilda_display.className} text-sm text-center  text-center `}
                       >
                         Eliminar
-                      </p>
+                      </p> */}
+                      </div>
+                    </div>
+                    <hr className=" bg-slate-950" />
+                    <div className="flex flex-row mt-4 mb-4">
+                      <div className="basis-1/3 flex justify-center  ">
+                        {current.image[0] ? (
+                          <Image
+                            className="rounded-lg"
+                            width={50}
+                            height={50}
+                            src={current.image[0]}
+                            alt={"alt"}
+                          />
+                        ) : (
+                          <svg
+                            class="mx-auto h-20 w-20 text-white"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+                              clip-rule="evenodd"
+                            />
+                          </svg>
+                        )}
+                      </div>
+                      <div className="basis-2/3">
+                        <div className="text-end">
+                          <p className={`${quicksand.className}text-xl `}>
+                            {current.name}
+                          </p>
+                        </div>
+                        <div className="text-end">
+                          <p
+                            className={`${gilda_display.className}  text-green-600 text-xl font-bold`}
+                          >
+                            {current.price}
+                          </p>
+                          <span
+                            className={`${quicksand.className} text-green-950 text-bold`}
+                          >
+                            CUP
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="mt-4 whitespace-normal ">
+                      {current.description}
+                      {/* <p
+          className={`${gilda_display.className} text-slate-600 text-sm font-bold whitespace-normal`}
+        >
+          {description}
+        </p> */}
                     </div>
                   </div>
-
-                  <hr />
-                </div>
+                </>
               ))}
-              <br className="bg-white" />
             </div>
           </div>
         ))}
