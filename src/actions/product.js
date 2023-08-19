@@ -145,9 +145,9 @@ export const editProduct = (item, value) => ({
 //accion para subir la foto
 export const startUploadingPhoto = (file) => {
   return async (dispatch) => {
-    //const fileUrl = await fileUpload(file);
-    const fileUrl =
-      "https://res.cloudinary.com/de3tluzbk/image/upload/v1692321453/llqovdfcsjtwzxemwv1e.jpg";
+    const fileUrl = await fileUpload(file);
+    // const fileUrl =
+    //   "https://res.cloudinary.com/de3tluzbk/image/upload/v1692321453/llqovdfcsjtwzxemwv1e.jpg";
     if (fileUrl) {
       dispatch(editProduct("image", fileUrl));
     }
