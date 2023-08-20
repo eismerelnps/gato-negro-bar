@@ -23,9 +23,8 @@ import { addProduct, startAddingNewProduct } from "@/actions/product";
 const url = process.env.NEXT_PUBLIC_DB_API_PRODUCTS;
 
 export default function AddProduct() {
-  //obtener el token del usuario desde el contexto
-  const { token } = useSelector((state) => state.auth);
   const product = useSelector((state) => state.product);
+  const { uploadingImage } = useSelector((state) => state.ui);
 
   const { name, category, price, description } = product;
 
@@ -66,7 +65,7 @@ export default function AddProduct() {
     <>
       <button
         onClick={handleAdd}
-        className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        className={` ${uploadingImage ? 'disable' : ''} rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
       >
         Agregar
       </button>

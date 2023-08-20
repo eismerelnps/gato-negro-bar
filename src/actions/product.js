@@ -3,8 +3,10 @@ import { types } from "@/types/types";
 import {
   finishLoading,
   finishUpLoadingImage,
+  setCloudImageMessage,
   setError,
   startLoading,
+  startUpLoadingImage,
 } from "./ui";
 import { useRouter } from "next/navigation";
 
@@ -133,13 +135,13 @@ export const resetProduct = () => ({
     offerPrice: "",
     stocked: false,
     inOffer: false,
-    image: [""],
+    image: [],
     rating: null,
-    reviews: [""],
+    reviews: [],
   },
 });
 
-//accion para agregar un nuevo producto
+//accion para editar un producto en el contexto
 export const editProduct = (item, value) => ({
   type: types.editProduct,
   payload: { item, value },
@@ -148,12 +150,15 @@ export const editProduct = (item, value) => ({
 //accion para subir la foto
 export const startUploadingPhoto = (file) => {
   return async (dispatch) => {
+    dispatch(startUpLoadingImage());
+    dispatch(setCloudImageMessage("Subiendo imagen..."));
     const fileUrl = await fileUpload(file);
     // const fileUrl =
     //   "https://res.cloudinary.com/de3tluzbk/image/upload/v1692321453/llqovdfcsjtwzxemwv1e.jpg";
     if (fileUrl) {
-      dispatch(editProduct("image", fileUrl));
+      dispatch(editProduct("image", [fileUrl]));
       dispatch(finishUpLoadingImage());
+      dispatch(setCloudImageMessage("Imagen agregada con éxito"));
     }
   };
 };

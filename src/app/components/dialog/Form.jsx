@@ -16,25 +16,26 @@ import { francois_one } from "@/fonts/francois_one";
 import { quicksand } from "@/fonts/quicksand";
 import { gilda_display } from "@/fonts/gilda_display";
 
-import { useForm } from "@/hooks/useForm";
-import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-import Modal from "./Modal";
-import { useState } from "react";
-import AddProduct from "../adminPage/AddProduct";
-import EditProduct from "../adminPage/EditProduct";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 
 //local imports
 import { resetProduct, startUploadingPhoto } from "@/actions/product";
-import { finishUpLoadingImage, startUpLoadingImage } from "@/actions/ui";
-import UpLoadingImage from "../feedBack/UpLoadingImage";
+import {
+  finishUpLoadingImage,
+  setCloudImageMessage,
+  startUpLoadingImage,
+} from "@/actions/ui";
+import { UpLoadingImage } from "../feedBack/UpLoadingImage";
+import { useForm } from "@/hooks/useForm";
+import AddProduct from "../adminPage/AddProduct";
+import EditProduct from "../adminPage/EditProduct";
 
-export default function Form({ item, setOpenDialog, operation }) {
+export default function Form({ setOpenDialog, operation }) {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product);
   const { uploadingImage } = useSelector((state) => state.ui);
-  //console.log(uploadingImage)
+  const { cloudImageMessage } = useSelector((state) => state.ui);
 
   const [formValues, handdleInputChange, reset] = useForm(product);
 
@@ -53,17 +54,9 @@ export default function Form({ item, setOpenDialog, operation }) {
     _id,
   } = formValues;
 
-  const test = (e) => {
-    console.log(formValues);
-    console.log(product);
-  };
-
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      //modifica la UI en el formulario para mostrar un spinner indicando que la imagen se esta subiendo
-      dispatch(startUpLoadingImage());
-      dispatch(set);
       //llama a la funcion que se encarga de subir la imagen
       dispatch(startUploadingPhoto(file));
     }
@@ -337,9 +330,7 @@ export default function Form({ item, setOpenDialog, operation }) {
                     <div className="flex justify-center">
                       {uploadingImage ? (
                         <UpLoadingImage />
-                      ) 
-                      : 
-                      (
+                      ) : (
                         <div className="">
                           {image[0] ? (
                             <>
@@ -374,9 +365,7 @@ export default function Form({ item, setOpenDialog, operation }) {
                                 PNG, JPG hasta 1MB
                               </p>
                             </>
-                          ) 
-                          : 
-                          (
+                          ) : (
                             <div>
                               <svg
                                 className="mx-auto h-20 w-20 text-neutral-300 animate-pulse"
@@ -408,8 +397,13 @@ export default function Form({ item, setOpenDialog, operation }) {
                               <p className="text-xs leading-5 text-gray-600">
                                 PNG, JPG hasta 1MB
                               </p>
+                              
                             </div>
                           )}
+                          <h2 className=" mt-4 text-center text-xs leading-5 text-gray-600">
+                                {cloudImageMessage}
+                              </h2>
+                             720786
                         </div>
                       )}
                     </div>

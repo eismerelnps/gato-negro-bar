@@ -23,8 +23,8 @@ const url = process.env.NEXT_PUBLIC_DB_API_PRODUCTS;
 export default function EditProduct() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const product = useSelector((state) => state.product);
-  const { token } = useSelector((state) => state.auth);
+  const { uploadingImage } = useSelector((state) => state.ui);
+
 
   const handleEdit = (e) => {
     e.preventDefault();
@@ -34,8 +34,9 @@ export default function EditProduct() {
   return (
     <button
       onClick={handleEdit}
-      className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-    >
+      className={` disabled:opacity-40 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+      disabled={uploadingImage}
+      >
       Editar
     </button>
   );

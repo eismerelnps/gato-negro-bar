@@ -10,9 +10,9 @@ const initialState = {
   offerPrice: "",
   stocked: false,
   inOffer: false,
-  image: [""],
+  image: [],
   rating: null,
-  reviews: [""],
+  reviews: [],
 };
 
 export const productReducer = (state = initialState, action) => {
