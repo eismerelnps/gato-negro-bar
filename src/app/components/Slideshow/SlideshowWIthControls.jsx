@@ -5,7 +5,13 @@ import PropTypes from "prop-types";
 import Image from "next/image";
 
 //Slideshow Images
+import banner_home from "../../../../public/slideshow/banner_home.jpg";
 import cocacola from "../../../../public/slideshow/cocacola.jpg";
+import pizza2 from "../../../../public/slideshow/pizza2.jpg";
+import rones from "../../../../public/slideshow/rones.jpg";
+import banner_confituras from "../../../../public/slideshow/banner_confituras.jpg";
+import heineken from "../../../../public/slideshow/heineken.jpg";
+
 
 import maripitas from "../../../../public/slideshow/maripitas.jpeg";
 import havana_club_3_annos from "../../../../public/slideshow/havana_club_3_annos.jpg";
@@ -15,31 +21,33 @@ import mantequilla_mani from "../../../../public/slideshow/mantequilla_mani.jpg"
 import pizza from "../../../../public/slideshow/pizza.jpg";
 import rothmans_morado from "../../../../public/slideshow/rothmans_morado.jpeg";
 import turron_panfilo from "../../../../public/slideshow/turron_panfilo.jpeg";
+
 import { useRouter } from "next/navigation";
 
+
 const slides = [
+  {
+    image: banner_home,
+    alt: "",
+  },
+  {
+    image: banner_confituras,
+    alt: "",
+  },
   {
     image: cocacola,
     alt: "",
   },
   {
-    image: maripitas,
+    image: pizza2,
     alt: "",
   },
   {
-    image: havana_club_3_annos,
+    image: heineken,
     alt: "",
   },
   {
-    image: havana_club_profundo,
-    alt: "",
-  },
-  {
-    image: mani_grano,
-    alt: "",
-  },
-  {
-    image: mantequilla_mani,
+    image: rones,
     alt: "",
   },
   {
@@ -47,14 +55,12 @@ const slides = [
     alt: "",
   },
   {
-    image: rothmans_morado,
-    alt: "",
-  },
-  {
-    image: turron_panfilo,
+    image: maripitas,
     alt: "",
   },
 ];
+
+
 
 const SlideshowADS = () => {
   const router = useRouter();
@@ -82,7 +88,7 @@ const SlideshowADS = () => {
   return (
     <div
    
-      className={`slideshow mt-1 relative overflow-hidden w-full h-[150px] xs:h-[200px] sm:h-[400px] lg:h-[500px] xl:h-[800]`}
+      className={`slideshow mt-1 relative overflow-hidden w-full h-[80px] xs:h-[110px] 400:h-[120px] sm:h-[230px] md:h-[240px] lg:h-[280px] xl:h-[380px]`}
     >
       {slides.map(({ image, alt }, i) => (
         <Image
@@ -90,15 +96,15 @@ const SlideshowADS = () => {
           ${
             index === i ? " animate__fadeInRight z-[1]  " : " opacity-0"
           }  `}
-          fill
-          sizes="100vw"
+         width={1200}
+         height={450}
           key={i}
           src={image}
           alt={alt}
         />
       ))}
 
-      <div className=" absolute bottom-0 left-0 right-0 bg-slate-950 opacity-60 text-white p-2.5 text-center z-[2]">
+      <div className=" absolute bottom-0 left-0 right-0  opacity-60 text-white  text-center z-[2]">
         {/* If you want to add caption to photos use this slot */}
         {slides.map((slide, i) => (
           <span
@@ -114,13 +120,13 @@ const SlideshowADS = () => {
       </div>
 
       <nav
-        className=" absolute cursor-pointer top-1/2 w-auto mt-[-22px] p-4 text-white font-bold text-lg transition duration-600 ease rounded-tr rounded-br  select-none  hover:bg-slate-950 hover:opacity-40 hover:text-white z-[2]"
+        className=" absolute cursor-pointer top-1/2 w-auto  mt-[-22px] p-2 sm:p-4 text-white font-bold text-lg transition duration-600 ease rounded-tr rounded-br  select-none  hover:bg-slate-950 hover:opacity-40 hover:text-white z-[2]"
         onClick={handlePrevSlide}
       >
         &#10094;
       </nav>
       <nav
-        className="absolute cursor-pointer top-1/2 right-0 w-auto mt-[-22px] p-4 text-white font-bold text-lg transition duration-600 ease rounded-tl rounded-bl  select-none  hover:bg-slate-950 hover:opacity-40 hover:text-white z-[2]"
+        className="absolute cursor-pointer top-1/2 right-0 w-auto  mt-[-22px] p-2 sm:p-4 text-white font-bold text-lg transition duration-600 ease rounded-tl rounded-bl  select-none  hover:bg-slate-950 hover:opacity-40 hover:text-white z-[2]"
         onClick={handleNextSlide}
       >
         &#10095;

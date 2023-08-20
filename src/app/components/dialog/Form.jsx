@@ -339,7 +339,7 @@ export default function Form({ setOpenDialog, operation }) {
                                   className="rounded-lg text-center"
                                   width={70}
                                   height={50}
-                                  src={image[0]}
+                                  src={product.image[0]}
                                   alt={"alt"}
                                 />
                               </div>
@@ -397,13 +397,11 @@ export default function Form({ setOpenDialog, operation }) {
                               <p className="text-xs leading-5 text-gray-600">
                                 PNG, JPG hasta 1MB
                               </p>
-                              
                             </div>
                           )}
                           <h2 className=" mt-4 text-center text-xs leading-5 text-gray-600">
-                                {cloudImageMessage}
-                              </h2>
-                             720786
+                            {cloudImageMessage}
+                          </h2>
                         </div>
                       )}
                     </div>

@@ -78,7 +78,7 @@ export function HomePage() {
             </h4>
             
             <p
-              className={`${quicksand.className} animate__animated animate__bounceInUp animate__slower ms-44 me-2 mt-2  text-end  text-xs xl:text-2xl xl:ms-96 text-slate-50`}
+              className={`${quicksand.className} animate__animated animate__bounceInUp animate__slower ms-44 me-2 mt-2  text-end  text-xs xl:text-2xl xl:ms-96 text-slate-50  overflow-auto max-h-60`}
             >
               Sumérgete en un mundo de sabores y aromas exquisitos en nuestro
               acogedor rincón en Alamar. Nuestra pasión por la buena comida y
@@ -213,7 +213,7 @@ export function HomePage() {
             >
               SOBRE NOSOTROS
             </h1>
-            <i className="fa fa-facebook" aria-hidden="true"></i>
+            
             <p
               className={`${gilda_display.className} text-lg m-8 text-slate-950`}
             >
@@ -239,7 +239,7 @@ export function HomePage() {
             >
               Nuestra Misión
             </h1>
-            <i className="fa fa-facebook" aria-hidden="true"></i>
+          
             <p
               className={`${gilda_display.className} text-lg m-8 text-slate-950`}
             >
@@ -265,7 +265,7 @@ export function HomePage() {
             >
               Visítanos
             </h1>
-            <i className="fa fa-facebook" aria-hidden="true"></i>
+           
             <p
               className={`${gilda_display.className} text-lg m-8 text-slate-950`}
             >
