@@ -27,7 +27,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 //local imports
 import { resetProduct, startUploadingPhoto } from "@/actions/product";
-import {finishUpLoadingImage, startUpLoadingImage} from "@/actions/ui";
+import { finishUpLoadingImage, startUpLoadingImage } from "@/actions/ui";
+import UpLoadingImage from "../feedBack/UpLoadingImage";
 
 export default function Form({ item, setOpenDialog, operation }) {
   const dispatch = useDispatch();
@@ -62,14 +63,13 @@ export default function Form({ item, setOpenDialog, operation }) {
     if (file) {
       //modifica la UI en el formulario para mostrar un spinner indicando que la imagen se esta subiendo
       dispatch(startUpLoadingImage());
+      dispatch(set);
       //llama a la funcion que se encarga de subir la imagen
       dispatch(startUploadingPhoto(file));
-      
     }
     //console.log(file);
   };
   const handdleCancel = () => {
-  
     setOpenDialog(false);
     dispatch(resetProduct());
   };
@@ -109,7 +109,11 @@ export default function Form({ item, setOpenDialog, operation }) {
                     name="name"
                     id="name"
                     autoComplete="off"
-                    className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                    className={`${quicksand.className}  bg-white
+                    outline  outline-1 outline-slate-300
+                    focus:outline-2 hover:bg-slate-50 
+                    duration-100 block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
+                    placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}
                     placeholder="Nombre del producto"
                     onChange={handdleInputChange}
                   />
@@ -134,7 +138,11 @@ export default function Form({ item, setOpenDialog, operation }) {
                     name="category"
                     id="category"
                     autoComplete="off"
-                    className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                    className={`${quicksand.className}  bg-white
+                    outline  outline-1 outline-slate-300
+                    focus:outline-2 hover:bg-slate-50 
+                    duration-100 block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
+                    placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}
                     placeholder="Categoría del producto"
                     onChange={handdleInputChange}
                   />
@@ -159,7 +167,11 @@ export default function Form({ item, setOpenDialog, operation }) {
                     name="price"
                     id="price"
                     autoComplete="off"
-                    className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                    className={`${quicksand.className}  bg-white
+                    outline  outline-1 outline-slate-300
+                    focus:outline-2 hover:bg-slate-50 
+                    duration-100 block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
+                    placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}
                     placeholder="Precio del producto"
                     onChange={handdleInputChange}
                   />
@@ -180,7 +192,11 @@ export default function Form({ item, setOpenDialog, operation }) {
                           value={inOffer}
                           // checked={inOffer}
                           onChange={handdleInputChange}
-                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                          className={`${quicksand.className}  bg-white
+                          outline  outline-1 outline-slate-300
+                          focus:outline-2 hover:bg-slate-50 
+                          duration-100 block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
+                          placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}
                         />
                       </div>
                       <div className="text-sm leading-6">
@@ -206,7 +222,11 @@ export default function Form({ item, setOpenDialog, operation }) {
                           value={stocked}
                           //checked={stocked}
                           onChange={handdleInputChange}
-                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                          className={`${quicksand.className}  bg-white
+                          outline  outline-1 outline-slate-300
+                          focus:outline-2 hover:bg-slate-50 
+                          duration-100 block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
+                          placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}
                         />
                       </div>
                       <div className="text-sm leading-6">
@@ -245,7 +265,11 @@ export default function Form({ item, setOpenDialog, operation }) {
                     name="offerPrice"
                     id="offerPrice"
                     autoComplete="off"
-                    className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                    className={`${quicksand.className}  bg-white
+                    outline  outline-1 outline-slate-300
+                    focus:outline-2 hover:bg-slate-50 
+                    duration-100 block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
+                    placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}
                     placeholder="Precio de rebaja del producto"
                     onChange={handdleInputChange}
                   />
@@ -265,11 +289,15 @@ export default function Form({ item, setOpenDialog, operation }) {
                   id="currency"
                   name="currency"
                   autoComplete="Moneda"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                  className={`${quicksand.className}  bg-white
+                  outline  outline-1 outline-slate-300
+                  focus:outline-2 hover:bg-slate-50 
+                  duration-100 block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
+                  placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}
                 >
                   <option>CUP</option>
                   {/* <option>USD</option> */}
-                  {/* <option>Mexico</option> */}
+                  {/* <option>MLC</option> */}
                 </select>
               </div>
             </div>
@@ -288,7 +316,11 @@ export default function Form({ item, setOpenDialog, operation }) {
                   id="description"
                   name="description"
                   rows={3}
-                  className="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className={`${quicksand.className}  bg-white
+                  outline  outline-1 outline-slate-300
+                  focus:outline-2 hover:bg-slate-50 
+                  duration-100 block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
+                  placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}
                   defaultValue={description}
                 />
               </div>
@@ -304,46 +336,31 @@ export default function Form({ item, setOpenDialog, operation }) {
                   <div className="">
                     <div className="flex justify-center">
                       {uploadingImage ? (
-                        <div>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={2}
-                            stroke="currentColor"
-                            className="w-20 h-20 animate-spin text-neutral-500"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                            />
-                          </svg>
-                          <h2 className=" mt-4 text-center text-xs leading-5 text-gray-600">
-                            Subiendo foto...
-                              </h2>
-                        </div>
-                      ) : (
+                        <UpLoadingImage />
+                      ) 
+                      : 
+                      (
                         <div className="">
                           {image[0] ? (
-                            <div >
+                            <>
                               <div className="flex justify-center">
                                 <Image
-                              className="rounded-lg text-center"
-                              width={70}
-                              height={50}
-                              src={image[0]}
-                              alt={"alt"}
-                            />
+                                  className="rounded-lg text-center"
+                                  width={70}
+                                  height={50}
+                                  src={image[0]}
+                                  alt={"alt"}
+                                />
                               </div>
-                              
-                            
+
                               <div className="mt-4 flex text-sm leading-6 text-gray-600">
                                 <label
                                   for="image"
                                   className=" text-center relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                                 >
-                                  <span className=" text-center">Cambiar foto</span>
+                                  <span className=" text-center">
+                                    Cambiar foto
+                                  </span>
                                   <input
                                     id="image"
                                     name="image"
@@ -356,10 +373,10 @@ export default function Form({ item, setOpenDialog, operation }) {
                               <p className="text-xs text-center leading-5 text-gray-600">
                                 PNG, JPG hasta 1MB
                               </p>
-                            </div>
-
-                            
-                          ) : (
+                            </>
+                          ) 
+                          : 
+                          (
                             <div>
                               <svg
                                 className="mx-auto h-20 w-20 text-neutral-300 animate-pulse"
