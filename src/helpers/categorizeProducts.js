@@ -1,4 +1,8 @@
 export const categorizeProducts = (products) => {
+  if (!Array.isArray(products)) {
+    console.error("Input is not an array of products.");
+    return []; // Otra acción adecuada en caso de que los productos no sean un array
+  }
   const categorizedProducts = products.reduce((acc, product) => {
     const category = product.category;
     if (!acc[category]) {

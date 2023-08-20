@@ -154,6 +154,8 @@ export const Footer = () => {
           </div>
         </article>
       </section>
+      {/* <p>        2023 Gato Negro Todos los derechos reservados
+</p> */}
       <h4
         className={`${gilda_display.className} text-slate-50 text-center text-xl`}
       >

@@ -9,6 +9,6 @@ const fetchMenu = () => {
 
 export default async function page() {
   const products = await fetchMenu();
-
+  
   return <MenuContainer products={products} />;
 }

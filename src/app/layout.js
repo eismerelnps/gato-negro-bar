@@ -32,7 +32,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const id = "js?id=G-YBZYKQ4HNF";
+  const id = process.env.NEXT_PUBLIC_ANALYTICS_ID;
 
   //const persistor
 
@@ -50,13 +50,17 @@ export default function RootLayout({ children }) {
           gtag('config', 'G-YBZYKQ4HNF');
         `}
         </Script>
+        <Script
+          src="https://kit.fontawesome.com/b88354b395.js"
+          crossorigin="anonymous"
+        ></Script>
       </head>
 
       <body className={`${inter.className}`}>
         <PersistProvider>
           <StoreProvider>
-          <Modal/>
-          <BackDrop />
+            <Modal />
+            <BackDrop />
 
             <header>
               <NavBar />

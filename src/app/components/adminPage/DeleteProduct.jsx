@@ -21,6 +21,7 @@ import {
   setError,
   startLoading,
 } from "@/actions/ui";
+import { startDeletingProduct } from "@/actions/product";
 
 export default function DeleteProduct({
   open,
@@ -30,9 +31,8 @@ export default function DeleteProduct({
   buttonAction,
   id,
 }) {
-  
- //get the endpoint of the api bd
-const url=process.env.NEXT_PUBLIC_DB_API_PRODUCTS
+  //get the endpoint of the api bd
+  const url = process.env.NEXT_PUBLIC_DB_API_PRODUCTS;
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -40,35 +40,9 @@ const url=process.env.NEXT_PUBLIC_DB_API_PRODUCTS
 
   const { token } = useSelector((state) => state.auth);
 
-
   const handleDelete = (id) => {
     setOpen();
-    dispatch(startLoading());
-    fetch(`${url}/${id}`, {
-      method: "DELETE",
-      body: JSON.stringify({}),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-        "Accept-Encoding": "gzip, deflate, br",
-        Authorization: token,
-      },
-      //{headers},
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        dispatch(finishLoading());
-        dispatch(setError(data.message));
-        router.refresh();
-      })
-      .catch((error) => {
-        dispatch(finishLoading());
-        dispatch(
-          setError(
-            "Se ha producido un error al crear el producto. Por favor, inténtelo de nuevo."
-          )
-        );
-      });
+    dispatch(startDeletingProduct(id));
   };
 
   return (

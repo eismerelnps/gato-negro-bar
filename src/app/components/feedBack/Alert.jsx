@@ -10,7 +10,7 @@ export default function Alert({ type, message, show, setShow }) {
     }, 10000);
     // Limpiar el timeout cuando el componente se desmonta
     return () => clearTimeout(timeout);
-  }, []);
+  }, [setShow]);
 
   // Define las clases de Tailwind CSS según el tipo de alerta
   let alertClasses = "px-4 py-2 rounded-lg ";

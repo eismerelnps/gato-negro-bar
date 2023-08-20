@@ -11,6 +11,7 @@ import { persistStore } from "redux-persist";
 //app's reducers
 import { authReducer } from "@/reducers/authReducer";
 import { uiReducer } from "@/reducers/uiReducer";
+import { productReducer } from "@/reducers/productReducer";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -26,6 +27,7 @@ const persistConfig = {
 const reducers = combineReducers({
   auth: authReducer,
   ui: uiReducer,
+  product: productReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

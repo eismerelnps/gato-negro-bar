@@ -33,10 +33,8 @@ export const MenuContainer = ({ products }) => {
     <div className="  ">
       {menu.map((product) => (
         <div key={product.category} className="">
-          <div className=" animate__animated animate__flash bg-gradient-to-r from-white  text-2xl text-slate-950 text-start md:text-center my-4    p-4 sticky top-16  z-10">
-            <h1
-              className={`${francois_one.className}  `}
-            >
+          <div className=" animate__animated animate__flash bg-gradient-to-r from-white rounded-br-3xl  text-2xl text-slate-950 text-start md:text-center my-4    p-4 sticky top-16  z-10">
+            <h1 className={`${francois_one.className}  `}>
               {product.category}
             </h1>
           </div>
