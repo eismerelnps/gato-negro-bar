@@ -71,7 +71,6 @@ export default function Example({
                         ></Dialog.Title>
                         <div className="mt-2">
                           <Form
-                            item={item}
                             setOpenDialog={setOpenDialog}
                             operation={operation}
                           />
