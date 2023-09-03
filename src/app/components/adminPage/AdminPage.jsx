@@ -115,9 +115,7 @@ export default function AdminPage({ products = [] }) {
             />
           </div>
           <div className="">
-            <p
-              className={`${gilda_display.className} text-sm text-center text-center `}
-            >
+            <p className={`${gilda_display.className} text-sm text-center  `}>
               Añadir nuevo
             </p>
           </div>
@@ -128,7 +126,7 @@ export default function AdminPage({ products = [] }) {
       <div className="mt-2 ">
         {categoricedProducts.map((product) => (
           <div key={product.category} className="">
-            <div className=" animate__animated animate__flash bg-gradient-to-r from-white rounded-br-3xl  text-2xl text-slate-950 text-start md:text-center mt-4  pt-4 sticky top-16  z-10">
+            <div className={` animate__animated animate__flash bg-gradient-to-r from-white  rounded-br-3xl  text-2xl text-slate-950 text-start md:text-center mt-4  pt-4 sticky top-16  z-10`}>
               <h1 className={`${francois_one.className}  `}>
                 {product.category}
               </h1>
@@ -137,7 +135,17 @@ export default function AdminPage({ products = [] }) {
             <div className="flex flex-wrap flex-col md:flex-row justify-center">
               {product.items.map((current) => (
                 <>
-                  <div className="   animate__animated animate__backInLeft animate__fast duration-400 max-w-sm basis-1/2  md:basis-2/5  bg-gradient-to-r from-white to-neutral-300 hover:bg-gradient-to-t hover:from-neutral-50  mx-3 px-4 pt-2 pb-4 my-2 text-start border  rounded-xl shadow-xl outline-2  ">
+                  <div className={`   animate__animated animate__backInLeft animate__fast duration-400 max-w-sm basis-1/2  md:basis-2/5 ${ current.stocked ? 'bg-gradient-to-r from-white to-neutral-300' : 'bg-gradient-to-r from-white to-red-200'}    hover:bg-gradient-to-t hover:from-neutral-50  mx-3 px-4 pt-2 pb-4 my-2 text-start border  rounded-xl shadow-xl outline-2  `}>
+                    {!current.stocked && (
+                      <div>
+                        <span
+                          className={`${francois_one.className} text-red-500 text-bold`}
+                        >
+                          No disponible
+                        </span>
+                        <hr />
+                      </div>
+                    )}
                     <div className="flex flex-row justify-center  m-0.5 mb-4">
                       <div
                         className="basis-1/5 items-center hover:bg-red-100 hover:rounded-3xl  flex flex-col justify-center text-red-500   "
@@ -147,14 +155,8 @@ export default function AdminPage({ products = [] }) {
                           className="block h-6 w-5 hover:w-6 "
                           aria-hidden="true"
                         />
-                        {/* <p
-                        className={`${gilda_display.className} text-sm text-center `}
-                      >
-                        Editar
-                      </p> */}
                       </div>
                       <div
-                        // onClick={ () => handleDeleteProduct(_id)}
                         onClick={() =>
                           setOpenDeleteDialog({
                             openDelete: true,
@@ -223,11 +225,6 @@ export default function AdminPage({ products = [] }) {
                     <hr />
                     <div className="mt-4 whitespace-normal ">
                       {current.description}
-                      {/* <p
-          className={`${gilda_display.className} text-slate-600 text-sm font-bold whitespace-normal`}
-        >
-          {description}
-        </p> */}
                     </div>
                   </div>
                 </>

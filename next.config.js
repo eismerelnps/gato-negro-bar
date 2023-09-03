@@ -15,4 +15,3 @@ module.exports = {
     ],
   },
 };
-//https://res.cloudinary.com/de3tluzbk/image/upload/v1692221314/wudmx0kccnmpmdgbwwxa.jpg

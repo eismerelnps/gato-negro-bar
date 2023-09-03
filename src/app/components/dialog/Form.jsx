@@ -182,8 +182,8 @@ export default function Form({ setOpenDialog, operation }) {
                           id="inOffer"
                           name="inOffer"
                           type="checkbox"
-                          value={inOffer}
-                          // checked={inOffer}
+                         
+                          checked={inOffer}
                           onChange={handdleInputChange}
                           className={`${quicksand.className}  bg-white
                           outline  outline-1 outline-slate-300
@@ -212,14 +212,9 @@ export default function Form({ setOpenDialog, operation }) {
                           id="stocked"
                           name="stocked"
                           type="checkbox"
-                          value={stocked}
-                          //checked={stocked}
+                          checked={stocked}
                           onChange={handdleInputChange}
-                          className={`${quicksand.className}  bg-white
-                          outline  outline-1 outline-slate-300
-                          focus:outline-2 hover:bg-slate-50 
-                          duration-100 block w-full rounded-md  py-1.5 ps-1.5 text-slate-950 shadow  
-                          placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}
+                          className={`${"quicksand.className"}  bg-white  outline  outline-1 outline-slate-300   focus:outline-2 hover:bg-slate-50   duration-100 block w-full rounded-md   text-slate-950 shadow  placeholder:text-gray-400 f   sm:text-sm sm:leading-6`}
                         />
                       </div>
                       <div className="text-sm leading-6">
@@ -227,10 +222,10 @@ export default function Form({ setOpenDialog, operation }) {
                           htmlFor="stocked"
                           className="font-medium text-gray-900"
                         >
-                          Sin Stock
+                          En Stock
                         </label>
                         <p className="text-gray-500">
-                          Si activas esta opción, el producto se mostrará como
+                          Si desactivas esta opción, el producto se mostrará como
                           no disponible o agotado.
                         </p>
                       </div>

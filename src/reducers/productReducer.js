@@ -8,7 +8,7 @@ const initialState = {
   currency: "CUP",
   price: "",
   offerPrice: "",
-  stocked: false,
+  stocked: true,
   inOffer: false,
   image: [],
   rating: null,
