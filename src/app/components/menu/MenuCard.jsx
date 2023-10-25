@@ -3,6 +3,8 @@ import { quicksand } from "@/fonts/quicksand";
 import { gilda_display } from "@/fonts/gilda_display";
 import "animate.css";
 import Image from "next/image";
+import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { francois_one } from "@/fonts/francois_one";
 
 //import huella from '../../../../public/huella_gato_negro.png'
 
@@ -12,8 +14,9 @@ export const MenuCard = ({ items }) => {
     description,
     price,
     currency,
-    stockAmount,
+    stocked,
     inOffer,
+    offerPrice,
     rating,
     image,
     reviews,
@@ -22,8 +25,21 @@ export const MenuCard = ({ items }) => {
 
   //bg-[url('/public/huella_gato_negro.png')]
   return (
-    <div className="   animate__animated animate__backInLeft animate__fast duration-400 max-w-sm basis-1/2  md:basis-2/5  bg-gradient-to-r from-white to-neutral-300 hover:bg-gradient-to-t hover:from-neutral-50  mx-3 px-4 pt-2 pb-4 my-2 text-start border  rounded-xl shadow-xl outline-2  ">
-      <div className="flex flex-row mb-4">
+    <div
+      className={` ${
+        !stocked && "border-red-500"
+      }   animate__animated animate__backInLeft animate__fast delay-200 transition-color max-w-sm basis-1/2  md:basis-2/5  bg-gradient-to-r from-white to-neutral-300 hover:bg-gradient-to-t hover:from-neutral-50  mx-3 px-4 pt-2 pb-4 my-2 text-start border  rounded-xl shadow-xl outline-2  `}
+    >
+      {!stocked && (
+        <div>
+          <span className={`${francois_one.className} text-red-500 text-bold`}>
+            No disponible
+          </span>
+          <hr />
+        </div>
+      )}
+
+      <div className="flex flex-row my-4">
         <div className="basis-1/3 flex justify-center  ">
           {image[0] ? (
             <Image
@@ -35,7 +51,7 @@ export const MenuCard = ({ items }) => {
             />
           ) : (
             <svg
-              class="mx-auto h-20 w-20 text-neutral-300"
+              className="mx-auto h-20 w-20 text-neutral-300"
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden="true"
@@ -50,21 +66,39 @@ export const MenuCard = ({ items }) => {
         </div>
         <div className="basis-2/3">
           <div className="text-end">
-            <p className={`${quicksand.className}text-xl `}>{name}</p>
+            <p className={`${quicksand.className} text-2xl `}>{name}</p>
           </div>
           <div className="text-end">
+            <div className="flex flex-row items-center justify-end space-x-1">
             <p
-              className={`${gilda_display.className}  text-green-600 text-xl font-bold`}
-            >
-              {price}
-            </p>
+                className={`${gilda_display.className} ${
+                  inOffer
+                    ? "line-through decoration-red-500 text-gray-700 text-sm"
+                    : "text-green-600 no-underline  text-xl"
+                }   font-bold`}
+              >
+                {price}
+              </p>
+            <p
+                className={`${gilda_display.className} ${
+                  inOffer ? "block text-2xl " : " text-xl hidden"
+                } text-green-600    font-bold`}
+              >
+                {offerPrice}
+              </p>
+              
+              
+            </div>
+
             <span className={`${quicksand.className} text-green-950 text-bold`}>
               CUP
             </span>
           </div>
         </div>
       </div>
+
       <hr />
+
       <div className="text-center mt-4 whitespace-normal ">
         {description}
         {/* <p

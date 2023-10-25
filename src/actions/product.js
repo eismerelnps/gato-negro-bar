@@ -8,11 +8,12 @@ import {
   startLoading,
   startUpLoadingImage,
 } from "./ui";
-import { useRouter } from "next/navigation";
+//import { useRouter } from "next/navigation";
 
 //get the endpoint of the api bd
 const url = process.env.NEXT_PUBLIC_DB_API_PRODUCTS;
 
+//Para agregar un nuevo producto a la base de datos
 export const startAddingNewProduct = () => {
   return async (dispatch, getState) => {
     const { token } = getState().auth;
@@ -47,6 +48,7 @@ export const startAddingNewProduct = () => {
   };
 };
 
+//Para editar un producto de la base de datos por su id
 export const startEditingProduct = () => {
   return async (dispatch, getState) => {
     const { token } = getState().auth;
@@ -82,6 +84,7 @@ export const startEditingProduct = () => {
   };
 };
 
+//Para borrar un producto de la base de datos por su id
 export const startDeletingProduct = (id) => {
   return async (dispatch, getState) => {
     const { token } = getState().auth;
@@ -133,7 +136,7 @@ export const resetProduct = () => ({
     currency: "CUP",
     price: "",
     offerPrice: "",
-    stocked: false,
+    stocked: true,
     inOffer: false,
     image: [],
     rating: null,
@@ -147,14 +150,12 @@ export const editProduct = (item, value) => ({
   payload: { item, value },
 });
 
-//accion para subir la foto
+//accion para subir una foto a la nube
 export const startUploadingPhoto = (file) => {
   return async (dispatch) => {
     dispatch(startUpLoadingImage());
     dispatch(setCloudImageMessage("Subiendo imagen..."));
     const fileUrl = await fileUpload(file);
-    // const fileUrl =
-    //   "https://res.cloudinary.com/de3tluzbk/image/upload/v1692321453/llqovdfcsjtwzxemwv1e.jpg";
     if (fileUrl) {
       dispatch(editProduct("image", [fileUrl]));
       dispatch(finishUpLoadingImage());

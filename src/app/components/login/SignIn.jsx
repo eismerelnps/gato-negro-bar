@@ -14,7 +14,7 @@ import {
 } from "@/actions/ui";
 ////images
 import gato_negro_logo from "../../../../public/gato_negro_logo.png";
-import { login } from "@/actions/auth";
+import { login, startLoginWithUserAndPassword } from "@/actions/auth";
 import { useState } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
@@ -23,8 +23,6 @@ import { francois_one } from "@/fonts/francois_one";
 import { quicksand } from "@/fonts/quicksand";
 import { gilda_display } from "@/fonts/gilda_display";
 
-//get the endpoint of the api bd
-const url = process.env.NEXT_PUBLIC_DB_API_USERS_LOGIN;
 
 export const SignIn = () => {
   const dispatch = useDispatch();
@@ -49,33 +47,7 @@ export const SignIn = () => {
     e.preventDefault();
 
     if (isFormValid()) {
-      dispatch(startLoading());
-
-      fetch(url, {
-        method: "POST",
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "*/*",
-          "Accept-Encoding": "gzip, deflate, br",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          dispatch(finishLoading());
-
-          if (data.user) {
-            return dispatch(login(data.user, data.token));
-          }
-          dispatch(setError(data.message));
-        })
-        .catch((error) => {
-          dispatch(finishLoading());
-          dispatch(setError("Se ha producido un error al iniciar sesión."));
-        });
+      dispatch(startLoginWithUserAndPassword(username, password));
     }
   };
   const isFormValid = () => {

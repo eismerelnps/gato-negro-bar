@@ -17,12 +17,9 @@ import {
 } from "@/actions/ui";
 import { startEditingProduct } from "@/actions/product";
 
-//get the endpoint of the api bd
-const url = process.env.NEXT_PUBLIC_DB_API_PRODUCTS;
 
 export default function EditProduct() {
   const dispatch = useDispatch();
-  const router = useRouter();
   const { uploadingImage } = useSelector((state) => state.ui);
 
 
